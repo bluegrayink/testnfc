@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with NFC</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to detect if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        }
+
+        // Redirect if not on a mobile device
+        if (!isMobileDevice()) {
+            document.write("<h2>Login only accessible via mobile device</h2>");
+            document.close();
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h2>Login with NFC</h2>
+        <p>Please scan your NFC card to log in.</p>
+        <button id="nfcLoginButton">Scan NFC Card</button>
+        <p id="errorMessage" style="color: red;"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
