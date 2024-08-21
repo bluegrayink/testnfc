@@ -1,30 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login with NFC</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Web NFC Login</title>
     <script>
-        // Function to detect if the device is mobile
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        window.addEventListener('error', function(error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
+        });
+    </script>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <h1>Web NFC Login</h1>
+
+    <button id="scanButton">Scan NFC Card</button>
+
+    <div id="output" class="output">
+        <div id="status"></div>
+        <pre id="log"></pre>
+    </div>
+
+    <script>
+        var ChromeSamples = {
+            log: function() {
+                var line = Array.prototype.slice.call(arguments).map(function(argument) {
+                    return typeof argument === 'string' ? argument : JSON.stringify(argument);
+                }).join(' ');
+                document.querySelector('#log').textContent += line + '\n';
+            },
+            setStatus: function(status) {
+                document.querySelector('#status').textContent = status;
+            }
+        };
+    </script>
+
+    <script>
+        log = ChromeSamples.log;
+
+        if (!("NDEFReader" in window)) {
+            ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
         }
 
-        // Redirect if not on a mobile device
-        if (!isMobileDevice()) {
-            document.write("<h2>Login only accessible via mobile device</h2>");
-            document.close();
-        }
+        const validUID = "64019CB0"; // UID without colons
+
+        scanButton.addEventListener("click", async () => {
+            log("User clicked scan button");
+
+            try {
+                const ndef = new NDEFReader();
+                await ndef.scan();
+                log("> Scan started");
+
+                ndef.addEventListener("readingerror", () => {
+                    log("Cannot read data from the NFC tag. Try another one?");
+                });
+
+                ndef.addEventListener("reading", ({ serialNumber }) => {
+                    log(`> Serial Number: ${serialNumber}`);
+                    const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
+                        .map(b => b.toString(16).padStart(2, '0'))
+                        .join('').toUpperCase();
+
+                    if (scannedUID === validUID) {
+                        window.location.href = "/profile.html"; // Updated target page
+                    } else {
+                        document.getElementById('status').textContent = "Access Denied: Invalid NFC card.";
+                    }
+                });
+            } catch (error) {
+                log("Error: " + error);
+            }
+        });
     </script>
-</head>
-<body>
-    <div class="login-container" id="loginContainer">
-        <h2>Login with NFC</h2>
-        <p>Please scan your NFC card to log in.</p>
-        <button id="nfcLoginButton">Scan NFC Card</button>
-        <p id="errorMessage" style="color: red;"></p>
-    </div>
-    <script src="app.js"></script>
 </body>
 </html>
