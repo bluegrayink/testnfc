@@ -42,7 +42,7 @@ document.getElementById("scanButton").addEventListener("click", async () => {
                 .join('').toUpperCase();
 
             if (scannedUID === validUID) {
-                window.location.href = "testnfc/profile.html"; // Redirect to profile page
+                window.location.href = "/profile.html"; // Redirect to profile page
             } else {
                 document.getElementById('status').textContent = "Access Denied: Invalid NFC card.";
             }
