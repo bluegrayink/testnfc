@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Profile Page</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in
+            if (!localStorage.getItem("isLoggedIn")) {
+                // Redirect to login page if not logged in
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 </head>
+
 <body>
-    <div class="profile-container">
-        <h2>Welcome, <span id="usernameDisplay"></span>!</h2>
-        <p>This is your profile page.</p>
-        <button id="logoutButton">Logout</button>
-    </div>
-    <script src="app.js"></script>
+    <h1>Welcome to the Profile Page</h1>
+    <p>This page is only accessible if you have logged in through NFC.</p>
+    <button id="logoutButton">Logout</button>
+
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            // Clear login status
+            localStorage.removeItem("isLoggedIn");
+            // Redirect to login page
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>
