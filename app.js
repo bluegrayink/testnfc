@@ -21,7 +21,7 @@ if (!isMobileDevice()) {
                     if (nfcId === validNFCID) {
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("nfcId", nfcId);
-                        window.location.href = "profile.html";
+                        window.location.href = "testnfc/profile.html";
                     } else {
                         document.getElementById("errorMessage").textContent = "NFC card not recognized.";
                     }
