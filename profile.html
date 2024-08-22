@@ -7,38 +7,15 @@
     
     <title>Profile Page</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <script>
-        window.addEventListener('error', function(error) {
-            if (ChromeSamples && ChromeSamples.setStatus) {
-                console.error(error);
-                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-                error.preventDefault();
-            }
-        });
-    </script>
-    <script>
-        // Function to check if the device is mobile
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in and device is mobile
-            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
-                window.location.href = "index.html";
-            }
-        });
-    </script>
-     <script src="app.js"></script>
+    
 </head>
 
 <body>
     <h1>Welcome to the Profile Page</h1>
     <p>This page is only accessible if you have logged in through NFC and are using a mobile device.</p>
-    	<img src="testnfc/Photo/PC1.jpg">
-	<img src="testnfc/Photo/PC2.jpg">
-	<img src="testnfc/Photo/PC3.jpg">
+    	<img src="/testnfc/Photo/PC1.jpg">
+	<img src="/testnfc/Photo/PC2.jpg">
+	<img src="/testnfc/Photo/PC3.jpg">
     <button id="logoutButton">Logout</button>
 
     <script>
