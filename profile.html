@@ -8,6 +8,15 @@
     <title>Profile Page</title>
     <link rel="stylesheet" href="../styles/main.css">
     <script>
+        window.addEventListener('error', function(error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
+        });
+    </script>
+    <script>
         // Function to check if the device is mobile
         function isMobileDevice() {
             return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
