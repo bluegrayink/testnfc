@@ -19,11 +19,11 @@ if (!("NDEFReader" in window)) {
     ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
 }
 
-// Valid NFC UIDs and their corresponding redirect pages
+// Lists of valid NFC UIDs for each page
 const uidToPageMap = {
-    "64019CB0": "miyuki.html",
-    "64019CB1": "rune.html",
-    "64019CB2": "gita.html"
+    "miyuki.html": ["64019CB0", "65019CB0"],
+    "rune.html": ["64019CB1"],
+    "gita.html": ["64019CB2"]
 };
 
 // Event listener for scan button
@@ -45,10 +45,18 @@ document.getElementById("scanButton").addEventListener("click", async () => {
                 .map(b => b.toString(16).padStart(2, '0'))
                 .join('').toUpperCase();
 
-            // Check if the scanned UID matches any in the map and redirect accordingly
-            if (uidToPageMap[scannedUID]) {
+            // Find the corresponding page based on the scanned UID
+            let redirectTo = null;
+            for (const [page, uids] of Object.entries(uidToPageMap)) {
+                if (uids.includes(scannedUID)) {
+                    redirectTo = page;
+                    break;
+                }
+            }
+
+            if (redirectTo) {
                 localStorage.setItem("isLoggedIn", "true"); // Set login status
-                window.location.href = uidToPageMap[scannedUID]; // Redirect to the respective page
+                window.location.href = redirectTo; // Redirect to the respective page
             } else {
                 document.getElementById('status').textContent = "Access Denied: Invalid NFC card.";
             }
