@@ -23,7 +23,7 @@ if (!("NDEFReader" in window)) {
 const uidToPageMap = {
     "miyuki.html": ["64019CB0", "65019CB0"],
     "rune.html": ["B405A0B0"],
-    "gita.html": ["E423A2B0"]
+    "gita.html": ["B4C3A1B0"]
 };
 
 // Event listener for scan button
