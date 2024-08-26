@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+H<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,7 +7,30 @@
     
     <title>Profile Page</title>
     <link rel="stylesheet" href="../styles/main.css">
-    
+    <script>
+        window.addEventListener('error', function(error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        // Function to check if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.loacation.href = "index.html";
+            }
+        });
+    </script>
+<script src="app.js"></script>
 <style>
 img {
   width: 90%;
@@ -16,7 +39,7 @@ img {
 </head>
 
 <body>
-    <h1 style="text-align:center">Welcome to the Miyuki Photo Collection Page</h1>
+    <h1 style="text-align:center">Welcome to the Rune Hato Photo Collection Page</h1>
     <p style="text-align:center">This is my Exclusive Photo just for you.</p>
     	<p style="text-align:center"><img src="/testnfc/Photo/Rune/PC1.jpg"></p>
 	<p style="text-align:center"><img src="/testnfc/Photo/Rune/PC2.jpg"></p>
