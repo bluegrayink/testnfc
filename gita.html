@@ -7,7 +7,30 @@
     
     <title>Profile Page</title>
     <link rel="stylesheet" href="../styles/main.css">
-    
+    <script>
+        window.addEventListener('error', function(error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        // Function to check if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.loacation.href = "index.html";
+            }
+        });
+    </script>
+<script src="app.js"></script>
 <style>
 img {
   width: 90%;
