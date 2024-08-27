@@ -40,7 +40,7 @@ document.getElementById("scanButton").addEventListener("click", async () => {
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            log(`> Serial Number: ${serialNumber}`);
+            // log(`> Serial Number: ${serialNumber}`);
             const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
                 .map(b => b.toString(16).padStart(2, '0'))
                 .join('').toUpperCase();
