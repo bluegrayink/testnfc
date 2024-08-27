@@ -28,12 +28,12 @@ const uidToPageMap = {
 
 // Event listener for scan button
 document.getElementById("scanButton").addEventListener("click", async () => {
-    log("User clicked scan button");
+    log("Silahkan Scan kartu anda");
 
     try {
         const ndef = new NDEFReader();
         await ndef.scan();
-        log("> Scan started");
+       log("<i>> Scan started <</i>");
 
         ndef.addEventListener("readingerror", () => {
             log("Cannot read data from the NFC tag. Try another one?");
