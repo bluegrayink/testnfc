@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Profile Page</title>
-    <link rel="stylesheet" href="../styles/main.css">
+     <title>Rune Hato Photo Collection</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
         // Function to check if the device is mobile
         function isMobileDevice() {
@@ -21,19 +21,18 @@
             }
         });
     </script>
-    <style>
-        img {
-            width: 90%;
-        }
-    </style>
 </head>
 
 <body>
-    <h1 style="text-align:center">Welcome to the Rune Hato Photo Collection Page</h1>
-    <p style="text-align:center">This is my Exclusive Photo just for you.</p>
-    <p style="text-align:center"><img src="/testnfc/Photo/Rune/PC1.jpg"></p>
-    <p style="text-align:center"><img src="/testnfc/Photo/Rune/PC2.jpg"></p>
-    <p style="text-align:center"><button id="logoutButton">Logout</button></p>
+    <h1>Welcome to the Rune Hato Photo Collection Page</h1>
+    <p class="description">This is my exclusive photo collection just for you.</p>
+    
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Rune/PC1.jpg" alt="Rune Photo 1">
+        <img src="/testnfc/Photo/Rune/PC2.jpg" alt="Rune Photo 2">
+    </div>
+
+    <button id="logoutButton">Logout</button>
 
     <script>
         document.getElementById("logoutButton").addEventListener("click", () => {
