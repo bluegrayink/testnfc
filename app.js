@@ -22,7 +22,7 @@ if (!("NDEFReader" in window)) {
 // Lists of valid NFC UIDs for each page
 const uidToPageMap = {
     "miyuki.html": ["64019CB0", "175647BF", "F22F47BF"],
-    "rune.html": ["B405A0B0", "54B0A4B0"],
+    "rune.html": ["B405A0B0", "CB9B4ABF", "1D044BBF"],
     "gita.html": ["B4C3A1B0"]
 };
 
