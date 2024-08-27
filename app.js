@@ -4,7 +4,7 @@ var ChromeSamples = {
         var line = Array.prototype.slice.call(arguments).map(function(argument) {
             return typeof argument === 'string' ? argument : JSON.stringify(argument);
         }).join(' ');
-        document.querySelector('#log').textContent += line + '\n';
+        document.querySelector('#log').innerHTML += line + '<br>'; // Changed to innerHTML and added <br>
     },
     setStatus: function(status) {
         document.querySelector('#status').textContent = status;
@@ -33,7 +33,7 @@ document.getElementById("scanButton").addEventListener("click", async () => {
     try {
         const ndef = new NDEFReader();
         await ndef.scan();
-       log("<i>> Scan started <</i>");
+        log("<i>&gt; Scan started &lt;</i>"); // Changed to innerHTML compatible log
 
         ndef.addEventListener("readingerror", () => {
             log("Cannot read data from the NFC tag. Try another one?");
