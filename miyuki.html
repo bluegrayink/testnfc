@@ -4,23 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Miyuki Photo Collection</title>
-    <link rel="stylesheet" href="../testnfc/styles/main.css">
     
+     <title>Miyuki Photo Collection</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+   
 </head>
-<body> 
-    <h1>Welcome to the Miyuki Photo Collection Page</h1>
-    <p>This is my Exclusive Photo just for you.</p>
 
-    <div class="image-container">
+<body>
+    <h1>Welcome to the Miyuki Photo Collection Page</h1>
+    <p class="description">This is my exclusive photo collection just for you.</p>
+    
+    <div class="photo-gallery">
         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1">
         <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2">
     </div>
 
     <button id="logoutButton">Logout</button>
+
     <script>
         document.getElementById("logoutButton").addEventListener("click", () => {
+            // Clear login status
             localStorage.removeItem("isLoggedIn");
+            // Redirect to login page
             window.location.href = "index.html";
         });
     </script>
