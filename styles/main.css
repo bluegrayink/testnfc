@@ -1,17 +1,14 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f5f5f5; /* Menggunakan background-color dari kode pertama */
+    background-color: #f5f5f5;
     margin: 0;
-    padding: 20px; /* Menggunakan padding dari kode pertama */
+    padding: 20px;
 }
 
 h1 {
-    margin-top: 50px; /* Menggunakan margin-top dari kode kedua */
     color: #333;
-    font-size: 2em; /* Menggunakan font-size dari kode kedua */
-    margin-bottom: 10px; /* Menggunakan margin-bottom dari kode pertama */
+    margin-bottom: 10px;
 }
 
 p.description {
@@ -33,58 +30,16 @@ p.description {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Button styles */
-button {
-    background-color: #4CAF50; /* Menggunakan background-color dari kode kedua */
-    color: white;
-    border: none;
-    padding: 15px 30px; /* Menggunakan padding dari kode kedua */
-    text-align: center;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049; /* Menggunakan background-color dari kode kedua */
-}
-
 #logoutButton {
     margin-top: 20px;
-    padding: 10px 20px; /* Jika ingin tetap menggunakan padding dari kode pertama, maka bisa menggunakan ini. */
-    background-color: #333; /* Menggunakan background-color dari kode pertama */
-    color: #fff; /* Menggunakan warna teks dari kode pertama */
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #logoutButton:hover {
-    background-color: #555; /* Menggunakan background-color dari kode pertama */
-}
-
-/* Image container */
-.image-container {
-    position: relative;
-    display: inline-block;
-}
-
-.protected-img {
-    user-select: none; /* Prevent text selection */
-    -webkit-user-drag: none; /* Prevent drag */
-}
-
-/* Overlay to prevent right-click */
-.protected-img::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-    z-index: 2; /* Layer above image */
-    pointer-events: none; /* Allow pointer events */
+    background-color: #555;
 }
