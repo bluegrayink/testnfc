@@ -7,16 +7,27 @@
     
      <title>Rune Hato Photo Collection</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    
+    <script>
+document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        // Menonaktifkan drag dan drop untuk semua gambar
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+    </script>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
     <h1>Welcome to the Rune Hato Photo Collection Page</h1>
     <p class="description">Magical Moment</p>
     
     <div class="photo-gallery">
-        <img src="/testnfc/Photo/Rune/PC1.jpg" alt="Rune Photo 1">
-        <img src="/testnfc/Photo/Rune/PC2.jpg" alt="Rune Photo 2">
+        <img src="/testnfc/Photo/Rune/PC1.jpg" alt="Rune Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Rune/PC2.jpg" alt="Rune Photo 2" class="protected-img">
     </div>
 
     <button id="logoutButton">Logout</button>
