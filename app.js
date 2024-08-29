@@ -67,3 +67,26 @@ document.getElementById("scanButton").addEventListener("click", async () => {
         log("Error: " + error);
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery = document.querySelector('.photo-gallery');
+            const videoGallery = document.querySelector('.video-gallery');
+            
+            // Function to show specific content
+            function showContent(contentType) {
+                if (contentType === 'photo') {
+                    photoGallery.classList.remove('hidden');
+                    videoGallery.classList.add('hidden');
+                } else if (contentType === 'video') {
+                    photoGallery.classList.add('hidden');
+                    videoGallery.classList.remove('hidden');
+                }
+            }
+
+            document.getElementById("photoButton").addEventListener("click", () => {
+                showContent('photo');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video');
+            });
