@@ -31,18 +31,6 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Output container styles */
-#output {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-    text-align: left; /* Align text to the left by default */
-    max-width: 400px;
-    width: 80%;
-}
 
 /* Status and log styles */
 #status {
@@ -55,9 +43,5 @@ button:hover {
     font-family: monospace;
     color: #333;
     white-space: pre-wrap;
-}
-
-/* Center text within the log container */
-.center-text {
-    text-align: center;
+    text-align: center
 }
