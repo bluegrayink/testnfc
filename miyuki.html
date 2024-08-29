@@ -7,7 +7,47 @@
     
      <title>Miyuki Photo Collection</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-   
+   <script>
+        // Function to check if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.location.href = "index.html";
+            }
+        });
+
+        var tenth = ''; 
+        
+            function ninth() { 
+                if (document.all) { 
+                    (tenth); 
+                    // alert("Right Click Disable"); 
+                    return false; 
+                } 
+            } 
+        
+            function twelfth(e) { 
+                if (document.layers || (document.getElementById && !document.all)) { 
+                    if (e.which == 2 || e.which == 3) { 
+                        (tenth); 
+                        return false; 
+                    } 
+                } 
+            } 
+            if (document.layers) { 
+                document.captureEvents(Event.MOUSEDOWN); 
+                document.onmousedown = twelfth; 
+            } else { 
+                document.onmouseup = twelfth; 
+                document.oncontextmenu = ninth; 
+            } 
+            
+    </script>
 </head>
 
 <body>
