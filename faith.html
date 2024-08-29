@@ -19,18 +19,55 @@
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', event => event.preventDefault());
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery = document.querySelector('.photo-gallery');
+            const videoGallery = document.querySelector('.video-gallery');
+            
+            // Function to show specific content
+            function showContent(contentType) {
+                if (contentType === 'photo') {
+                    photoGallery.classList.remove('hidden');
+                    videoGallery.classList.add('hidden');
+                } else if (contentType === 'video') {
+                    photoGallery.classList.add('hidden');
+                    videoGallery.classList.remove('hidden');
+                }
+            }
+
+            document.getElementById("photoButton").addEventListener("click", () => {
+                showContent('photo');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video');
+            });
+
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
+                localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
+                window.location.href = "index.html";
+            });
+
+            // Initial setup: Show photo gallery by default
+            showContent('photo');
+        });
     </script>
 </head>
 
 <body oncontextmenu="return false;">
     <h1>FaithCNS Profile</h1>
     <div>
-        <button id="logoutButton">Photo</button>
-        <button id="logoutButton">Video</button>
+        <button id="photoButton">Photo</button>
+        <button id="videoButton">Video</button>
     </div>
     
     <div class="photo-gallery">
         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+    </div>
+
+    <div class="video-gallery hidden">
         <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
     </div>
 
