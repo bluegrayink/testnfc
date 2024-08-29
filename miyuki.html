@@ -4,41 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-     <title>Miyuki Photo Collection</title>
-    <link rel="stylesheet" href="../testnfc/styles/main.css">
-    <script>
-        // Function to check if the device is mobile
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in and device is mobile
-            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
-                window.location.href = "index.html";
-            }
-        });
-    </script>
+    <title>Miyuki Photo Collection</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js"></script>
 </head>
-
-<body>
+<body oncontextmenu="return false;"> <!-- Disable right-click for the whole page -->
     <h1>Welcome to the Miyuki Photo Collection Page</h1>
-    <p class="description">This is my exclusive photo collection just for you.</p>
-    
-    <div class="photo-gallery">
-        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1">
-        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2">
+    <p>This is my Exclusive Photo just for you.</p>
+
+    <div class="image-container">
+        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
     </div>
 
     <button id="logoutButton">Logout</button>
-
     <script>
         document.getElementById("logoutButton").addEventListener("click", () => {
-            // Clear login status
             localStorage.removeItem("isLoggedIn");
-            // Redirect to login page
             window.location.href = "index.html";
         });
     </script>
