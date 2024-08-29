@@ -8,43 +8,22 @@
      <title>Miyuki Photo Collection</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
    <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
 
-        var tenth = ''; 
-        
-            function ninth() { 
-                if (document.all) { 
-                    (tenth); 
-                    // alert("Right Click Disable"); 
-                    return false; 
-                } 
-            } 
-        
-            function twelfth(e) { 
-                if (document.layers || (document.getElementById && !document.all)) { 
-                    if (e.which == 2 || e.which == 3) { 
-                        (tenth); 
-                        return false; 
-                    } 
-                } 
-            } 
-            if (document.layers) { 
-                document.captureEvents(Event.MOUSEDOWN); 
-                document.onmousedown = twelfth; 
-            } else { 
-                document.onmouseup = twelfth; 
-                document.oncontextmenu = ninth; 
-            } 
-            
+// Disable drag and drop for all images
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', event => event.preventDefault());
+});
     </script>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
     <h1>Welcome to the Miyuki Photo Collection Page</h1>
     <p class="description">This is my exclusive photo collection just for you.</p>
     
     <div class="photo-gallery">
-        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1">
-        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2">
+        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
     </div>
 
     <button id="logoutButton">Logout</button>
