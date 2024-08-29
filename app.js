@@ -17,7 +17,7 @@ log = ChromeSamples.log;
 // Check if NDEFReader is available
 if (!("NDEFReader" in window)) {
     alert("Not Available on PC or Desktop browser");
-    ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
+    // ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
 }
 
 // Lists of valid NFC UIDs for each page
