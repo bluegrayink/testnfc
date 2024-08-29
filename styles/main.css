@@ -61,3 +61,20 @@ p.description {
 #logoutButton:hover {
     background-color: #555;
 }
+
+/* Styles for hiding and showing sections */
+        .hidden {
+            display: none;
+        }
+
+        .photo-gallery, .video-gallery {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .video-gallery video {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
