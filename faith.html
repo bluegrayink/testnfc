@@ -53,11 +53,32 @@
             // Initial setup: Show photo gallery by default
             showContent('photo');
         });
+  
+        // Function to toggle theme
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            // Apply the new theme
+            body.classList.remove(currentTheme + '-theme');
+            body.classList.add(newTheme + '-theme');
+
+            // Save the user's preference in localStorage
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Initialize theme based on user's preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.classList.add(savedTheme + '-theme');
+        });
     </script>
 </head>
 
 <body oncontextmenu="return false;">
     <h1>FaithCNS Profile</h1>
+<button class="theme-toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <div>
         <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
