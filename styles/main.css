@@ -21,6 +21,10 @@ p.description {
     margin-bottom: 30px;
 }
 
+.hidden {
+            display: none;
+        }
+
 /* Photo and Video Gallery Styles */
 .photo-gallery,
 .video-gallery {
