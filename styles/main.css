@@ -21,9 +21,10 @@ p.description {
     margin-bottom: 30px;
 }
 
+/* Hidden Class for Toggling Content Visibility */
 .hidden {
-            display: none;
-        }
+    display: none;
+}
 
 /* Photo and Video Gallery Styles */
 .photo-gallery,
@@ -39,7 +40,7 @@ p.description {
 .photo-gallery img,
 .video-gallery video {
     width: 90%;
-    max-width: 400px; /* Max width for photos */
+    max-width: 400px; /* Max width for photos and videos */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     user-select: none; /* Prevent text selection */
