@@ -5,17 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-     <title>Miyuki Photo Collection</title>
+    <title>Miyuki Photo Collection</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-   <script>
-       
+    <script>
         document.addEventListener('contextmenu', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // Menonaktifkan drag dan drop untuk semua gambar
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', event => event.preventDefault());
         });
@@ -24,7 +22,6 @@
             const photoGallery = document.querySelector('.photo-gallery');
             const videoGallery = document.querySelector('.video-gallery');
             
-            // Function to show specific content
             function showContent(contentType) {
                 if (contentType === 'photo') {
                     photoGallery.classList.remove('hidden');
@@ -44,31 +41,24 @@
             });
 
             document.getElementById("logoutButton").addEventListener("click", () => {
-                // Clear login status
                 localStorage.removeItem("isLoggedIn");
-                // Redirect to login page
                 window.location.href = "index.html";
             });
 
             // Initial setup: Show photo gallery by default
             showContent('photo');
         });
-  
-        // Function to toggle theme
+
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-            // Apply the new theme
             body.classList.remove(currentTheme + '-theme');
             body.classList.add(newTheme + '-theme');
-
-            // Save the user's preference in localStorage
             localStorage.setItem('theme', newTheme);
         }
 
-        // Initialize theme based on user's preference
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.body.classList.add(savedTheme + '-theme');
@@ -78,7 +68,7 @@
 
 <body oncontextmenu="return false;">
     <h1>FaithCNS Profile</h1>
-<button class="theme-toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="theme-toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <div>
         <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
@@ -89,18 +79,9 @@
     </div>
 
     <div class="video-gallery hidden">
-        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+        <video src="/testnfc/Video/Miyuki/VC1.mp4" controls class="protected-img"></video>
     </div>
 
     <button id="logoutButton">Logout</button>
-
-    <script>
-        document.getElementById("logoutButton").addEventListener("click", () => {
-            // Clear login status
-            localStorage.removeItem("isLoggedIn");
-            // Redirect to login page
-            window.location.href = "index.html";
-        });
-    </script>
 </body>
 </html>
