@@ -71,7 +71,8 @@ button:hover {
     display: inline-block;
 }
 
-.protected-img {
+.protected-img,
+.protected-video {
     user-select: none; /* Prevent text selection */
     -webkit-user-drag: none; /* Prevent drag */
 }
