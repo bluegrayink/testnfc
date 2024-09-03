@@ -8,11 +8,11 @@
     <title>FaithCNS Profile</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        });
+         document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                    e.preventDefault();
+                }
+            });
 
         // Menonaktifkan drag dan drop untuk semua gambar
         document.querySelectorAll('img').forEach(img => {
