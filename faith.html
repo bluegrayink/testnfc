@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Miyuki Photo Collection</title>
+    <title>FaithCNS Profile</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
         document.addEventListener('contextmenu', function(e) {
@@ -14,6 +14,7 @@
             }
         });
 
+        // Menonaktifkan drag dan drop untuk semua gambar
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', event => event.preventDefault());
         });
@@ -22,6 +23,7 @@
             const photoGallery = document.querySelector('.photo-gallery');
             const videoGallery = document.querySelector('.video-gallery');
             
+            // Function to show specific content
             function showContent(contentType) {
                 if (contentType === 'photo') {
                     photoGallery.classList.remove('hidden');
@@ -41,34 +43,20 @@
             });
 
             document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
                 localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
                 window.location.href = "index.html";
             });
 
             // Initial setup: Show photo gallery by default
             showContent('photo');
         });
-
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-            body.classList.remove(currentTheme + '-theme');
-            body.classList.add(newTheme + '-theme');
-            localStorage.setItem('theme', newTheme);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.classList.add(savedTheme + '-theme');
-        });
     </script>
 </head>
 
 <body oncontextmenu="return false;">
     <h1>FaithCNS Profile</h1>
-    <button class="theme-toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <div>
         <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
@@ -76,10 +64,18 @@
     
     <div class="photo-gallery">
         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
     </div>
 
     <div class="video-gallery hidden">
-        <video src="/testnfc/Video/Miyuki/VC1.mp4" controls class="protected-img"></video>
+        <video controls>
+            <source src="/testnfc/Video/sample1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video controls>
+            <source src="/testnfc/Video/sample2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <button id="logoutButton">Logout</button>
