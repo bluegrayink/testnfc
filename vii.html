@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Vii Cos</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+    <script>
+         document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                    e.preventDefault();
+                }
+            });
+
+        // Menonaktifkan drag dan drop untuk semua gambar
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery = document.querySelector('.photo-gallery');
+            const videoGallery = document.querySelector('.video-gallery');
+            
+            // Function to show specific content
+            function showContent(contentType) {
+                if (contentType === 'photo') {
+                    photoGallery.classList.remove('hidden');
+                    videoGallery.classList.add('hidden');
+                } else if (contentType === 'video') {
+                    photoGallery.classList.add('hidden');
+                    videoGallery.classList.remove('hidden');
+                }
+            }
+
+            document.getElementById("photoButton").addEventListener("click", () => {
+                showContent('photo');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video');
+            });
+
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
+                localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
+                window.location.href = "index.html";
+            });
+
+            // Initial setup: Show photo gallery by default
+            showContent('photo');
+        });
+    </script>
+</head>
+
+<body oncontextmenu="return false;">
+    <h1>Vii Cos Profile</h1>
+    <div>
+        <button id="photoButton">Photo</button>
+        <button id="videoButton">Video</button>
+    </div>
+    
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Vii/PC1.jpg" alt="Faith Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Vii/PC2.jpg" alt="Faith Photo 2" class="protected-img">
+        <img src="/testnfc/Photo/Vii/PC3.jpg" alt="Faith Photo 3" class="protected-img">
+        <img src="/testnfc/Photo/Vii/PC4.jpg" alt="Faith Photo 4" class="protected-img">
+    </div>
+
+    <div class="video-gallery hidden">
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <source src="/testnfc/Video/Vii/Vid1.mp4" type="video/mp4">
+            
+        </video>
+    </div>
+
+    <button id="logoutButton">Logout</button>
+</body>
+</html>
