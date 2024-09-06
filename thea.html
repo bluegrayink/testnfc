@@ -8,6 +8,19 @@
     <title>Michela Thea</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
+         // Function to check if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.location.href = "index.html";
+            }
+        });
+        
          document.addEventListener('contextmenu', function(e) {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                     e.preventDefault();
