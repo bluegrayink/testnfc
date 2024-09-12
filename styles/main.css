@@ -2,16 +2,16 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f5f5f5; /* Menggunakan background-color dari kode pertama */
+    background-color: #f5f5f5;
     margin: 0;
-    padding: 20px; /* Menggunakan padding dari kode pertama */
+    padding: 20px;
 }
 
 h1 {
-    margin-top: 50px; /* Menggunakan margin-top dari kode kedua */
+    margin-top: 50px;
     color: #333;
-    font-size: 2em; /* Menggunakan font-size dari kode kedua */
-    margin-bottom: 10px; /* Menggunakan margin-bottom dari kode pertama */
+    font-size: 2em;
+    margin-bottom: 10px;
 }
 
 p.description {
@@ -19,26 +19,34 @@ p.description {
     margin-bottom: 30px;
 }
 
-.photo-gallery {
+/* Gallery container */
+.photo-gallery, .video-gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    text-align: center;
+    margin: 20px auto;
 }
 
-.photo-gallery img {
+/* Image and video styles */
+.photo-gallery img, .video-gallery video {
     width: 90%;
     max-width: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.video-gallery video {
+    max-width: 600px;
+}
+
 /* Button styles */
 button {
-    background-color: #7d8bae; /* Menggunakan background-color dari kode kedua */
+    background-color: #7d8bae;
     color: white;
     border: none;
-    padding: 15px 30px; /* Menggunakan padding dari kode kedua */
+    padding: 15px 30px;
     text-align: center;
     font-size: 16px;
     margin-top: 20px;
@@ -48,21 +56,21 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; /* Menggunakan background-color dari kode kedua */
+    background-color: #45a049;
 }
 
 #logoutButton {
     margin-top: 20px;
-    padding: 10px 20px; /* Jika ingin tetap menggunakan padding dari kode pertama, maka bisa menggunakan ini. */
-    background-color: #333; /* Menggunakan background-color dari kode pertama */
-    color: #fff; /* Menggunakan warna teks dari kode pertama */
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #logoutButton:hover {
-    background-color: #555; /* Menggunakan background-color dari kode pertama */
+    background-color: #555;
 }
 
 /* Image container */
@@ -87,22 +95,10 @@ button:hover {
     bottom: 0;
     background: transparent;
     z-index: 2; /* Layer above image */
-    pointer-events: none; /* Allow pointer events */
+    pointer-events: none;
 }
 
- /* Styles for hiding and showing sections */
-        .hidden {
-            display: none;
-        }
-
-        .photo-gallery, .video-gallery {
-            text-align: center;
-            margin: 20px auto;
-        }
-
-        .video-gallery video {
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+/* Hidden class for sections */
+.hidden {
+    display: none;
+}
