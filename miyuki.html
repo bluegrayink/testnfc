@@ -22,25 +22,83 @@
         });
        
         document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                 e.preventDefault();
             }
         });
 
-        // Menonaktifkan drag dan drop untuk semua gambar
+        // Disable drag and drop for all images
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery1 = document.querySelector('.photo-gallery1');
+            const photoGallery2 = document.querySelector('.photo-gallery2');
+            const videoGallery = document.querySelector('.video-gallery');
+            
+            // Function to show specific content
+            function showContent(contentType) {
+                // Hide all galleries
+                photoGallery1.classList.add('hidden');
+                photoGallery2.classList.add('hidden');
+                videoGallery.classList.add('hidden');
+
+                // Show the selected gallery
+                document.querySelector(`.${contentType}`).classList.remove('hidden');
+            }
+
+            document.getElementById("photoButton1").addEventListener("click", () => {
+                showContent('photo-gallery1');
+            });
+
+            document.getElementById("photoButton2").addEventListener("click", () => {
+                showContent('photo-gallery2');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video-gallery');
+            });
+
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
+                localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
+                window.location.href = "index.html";
+            });
+
+            // Initial setup: Show the first photo gallery by default
+            showContent('photo-gallery1');
         });
     </script>
 </head>
 
 <body oncontextmenu="return false;">
-    <h1>Miyuki Yoruna Photo Collection Page</h1>
-    <p class="description">This is my exclusive photo collection just for you.</p>
+    <h1>Miyuki Yoruna Profile</h1>
+    <div>
+        <button id="photoButton1">Part 1</button>
+        <button id="photoButton2">Part 2</button>
+        <button id="videoButton">Video</button>
+    </div>
     
-    <div class="photo-gallery">
+    <!-- First photo gallery -->
+    <div class="photo-gallery1">
         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
         <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+    </div>
+
+    <!-- Second photo gallery -->
+    <div class="photo-gallery2 hidden">
+        <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Faith Photo 3" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Faith Photo 4" class="protected-img">
+    </div>
+
+    <!-- Video gallery -->
+    <div class="video-gallery hidden">
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <button id="logoutButton">Logout</button>
