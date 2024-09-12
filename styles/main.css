@@ -20,7 +20,7 @@ p.description {
 }
 
 /* Gallery container */
-.photo-gallery, .video-gallery {
+.photo-gallery1, .photo-gallery2, .video-gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -30,7 +30,7 @@ p.description {
 }
 
 /* Image and video styles */
-.photo-gallery img, .video-gallery video {
+.photo-gallery1 img, .photo-gallery2 img, .video-gallery video {
     width: 90%;
     max-width: 400px;
     border-radius: 10px;
