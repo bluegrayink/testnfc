@@ -20,37 +20,31 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const photoGallery1 = document.querySelector('.photo-gallery');
-            const photoGallery2 = document.querySelector('.photo-gallery');
+            const photoGallery1 = document.querySelector('.photo-gallery1');
+            const photoGallery2 = document.querySelector('.photo-gallery2');
             const videoGallery = document.querySelector('.video-gallery');
             
             // Function to show specific content
             function showContent(contentType) {
-                if (contentType === 'photo1') {
-                    photoGallery1.classList.remove('hidden');
-                    photoGallery2.classList.add('hidden');
-                    videoGallery.classList.add('hidden');
-                } else if (contentType === 'photo2') {
-                    photoGallery1.classList.add('hidden');
-                    photoGallery2.classList.remove('hidden');
-                    videoGallery.classList.add('hidden');
-                } else if (contentType === 'video') {
-                    photoGallery1.classList.add('hidden');
-                    photoGallery2.classList.add('hidden');
-                    videoGallery.classList.remove('hidden');
-                }
+                // Hide all galleries
+                photoGallery1.classList.add('hidden');
+                photoGallery2.classList.add('hidden');
+                videoGallery.classList.add('hidden');
+
+                // Show the selected gallery
+                document.querySelector(`.${contentType}`).classList.remove('hidden');
             }
 
             document.getElementById("photoButton1").addEventListener("click", () => {
-                showContent('photo1');
+                showContent('photo-gallery1');
             });
 
             document.getElementById("photoButton2").addEventListener("click", () => {
-                showContent('photo2');
+                showContent('photo-gallery2');
             });
 
             document.getElementById("videoButton").addEventListener("click", () => {
-                showContent('video');
+                showContent('video-gallery');
             });
 
             document.getElementById("logoutButton").addEventListener("click", () => {
@@ -61,7 +55,7 @@
             });
 
             // Initial setup: Show the first photo gallery by default
-            showContent('photo1');
+            showContent('photo-gallery1');
         });
     </script>
 </head>
