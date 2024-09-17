@@ -7,37 +7,30 @@
     
     <title>Miyuki</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    
+
     <script>
-        // Function to check if the device is mobile
+        // Function to check if the device is mobile by viewport width or user agent
         function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Log user agent and window size for testing purposes
+            console.log("User Agent: ", navigator.userAgent);
+            console.log("Window Width: ", window.innerWidth);
+
             // Check if user is logged in and device is mobile
             if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
-                window.location.href = "index.html";
+                alert("Redirecting to login page or desktop device detected.");
+                window.location.href = "index.html"; // Redirect if not logged in or on desktop
             }
-        });
-       
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                e.preventDefault();
-            }
-        });
-
-        // Disable drag and drop for all images
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', event => event.preventDefault());
         });
 
         document.addEventListener('DOMContentLoaded', function() {
             const photoGallery1 = document.querySelector('.photo-gallery1');
             const photoGallery2 = document.querySelector('.photo-gallery2');
             const videoGallery = document.querySelector('.video-gallery');
-            
+
             // Function to show specific content
             function showContent(contentType) {
                 // Hide all galleries
@@ -71,32 +64,21 @@
             // Initial setup: Show the first photo gallery by default
             showContent('photo-gallery1');
         });
-        
-        // Function to handle NFC scan
-        async function handleNFCScan() {
-            try {
-                const ndef = new NDEFReader();
-                await ndef.scan();
-                console.log("Scan started successfully.");
-                
-                ndef.onreading = (event) => {
-                    const decoder = new TextDecoder();
-                    for (const record of event.message.records) {
-                        console.log("Record type: " + record.recordType);
-                        console.log("MIME type: " + record.mediaType);
-                        console.log("Data: " + decoder.decode(record.data));
-                    }
-                };
-            } catch (error) {
-                console.error("Error: " + error.message);
-                alert("Error: " + error.message);
-            }
-        }
 
-        // Add event listener for the NFC scan button
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById("scanButton").addEventListener("click", handleNFCScan);
+        // Disable right-click context menu for images and videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
         });
+
+        // Disable drag and drop for all images
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', event => event.preventDefault());
+            });
+        });
+
     </script>
 </head>
 
@@ -107,7 +89,7 @@
         <button id="photoButton2">Part 2</button>
         <button id="videoButton">Video</button>
     </div>
-
+    
     <!-- First photo gallery -->
     <div class="photo-gallery1">
         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
