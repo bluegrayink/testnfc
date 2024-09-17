@@ -5,38 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-     <title>Miyuki</title>
+    <title>Miyuki</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-   <script>
-       // Function to check if the device is mobile
+
+    <script>
+        // Function to check if the device is mobile by viewport width
         function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
+            return window.innerWidth <= 800;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Debugging: Log user agent and window size for testing purposes
+            console.log("User Agent: ", navigator.userAgent);
+            console.log("Window Width: ", window.innerWidth);
+
             // Check if user is logged in and device is mobile
             if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
-                window.location.href = "index.html";
+                alert("Redirecting to login page or desktop device detected.");
+                window.location.href = "index.html"; // Redirect if not logged in or on desktop
             }
-        });
-       
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                e.preventDefault();
-            }
-        });
-
-        // Disable drag and drop for all images
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', event => event.preventDefault());
         });
 
         document.addEventListener('DOMContentLoaded', function() {
             const photoGallery1 = document.querySelector('.photo-gallery1');
             const photoGallery2 = document.querySelector('.photo-gallery2');
             const videoGallery = document.querySelector('.video-gallery');
-            
+
             // Function to show specific content
             function showContent(contentType) {
                 // Hide all galleries
@@ -70,6 +64,21 @@
             // Initial setup: Show the first photo gallery by default
             showContent('photo-gallery1');
         });
+
+        // Disable right-click context menu for images and videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable drag and drop for all images
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', event => event.preventDefault());
+            });
+        });
+
     </script>
 </head>
 
@@ -96,20 +105,11 @@
     <!-- Video gallery -->
     <div class="video-gallery hidden">
         <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
-        <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
+            <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <button id="logoutButton">Logout</button>
-
-    <script>
-        document.getElementById("logoutButton").addEventListener("click", () => {
-            // Clear login status
-            localStorage.removeItem("isLoggedIn");
-            // Redirect to login page
-            window.location.href = "index.html";
-        });
-    </script>
 </body>
 </html>
