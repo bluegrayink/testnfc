@@ -43,3 +43,10 @@ document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
     }
 });
+
+// Disable drag and drop for all images
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('dragstart', event => event.preventDefault());
+    });
+});
