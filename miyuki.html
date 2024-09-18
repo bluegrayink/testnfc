@@ -14,6 +14,16 @@
             return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
         }
 
+    // Alias for logging
+log = ChromeSamples.log;
+
+// Check if NDEFReader is available
+if (!("NDEFReader" in window)) {
+    alert("Not Available on PC or Desktop browser");
+    window.location.href = "404.html";
+    // ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
+}
+
         window.addEventListener('DOMContentLoaded', () => {
             // Log user agent and window size for testing purposes
             console.log("User Agent: ", navigator.userAgent);
