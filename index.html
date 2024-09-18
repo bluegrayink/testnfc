@@ -8,20 +8,20 @@
     <title>Web NFC Login</title>
     <link rel="stylesheet" href="../testnfc/styles/index.css">
     <script>
-        window.addEventListener('error', function(error) {
-            if (ChromeSamples && ChromeSamples.setStatus) {
-                console.error(error);
-                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-                error.preventDefault();
-            }
-        });
-
         document.addEventListener('keydown', function (e) {
         // Cek jika Ctrl+U ditekan
             if (e.ctrlKey && e.key === 'u') {
                 e.preventDefault();  // Mencegah default action (melihat source code)
                 alert("View Source is disabled on this page.");
                 }
+        });
+        
+        window.addEventListener('error', function(error) {
+            if (ChromeSamples && ChromeSamples.setStatus) {
+                console.error(error);
+                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+                error.preventDefault();
+            }
         });
     </script>
 </head>
