@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Sonia Octarini</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+    <script src="eventButton.js"></script> <!-- JS terpisah untuk tombol event -->
+    <script src="points.js"></script> <!-- JS terpisah untuk poin -->
+</head>
+
+<body oncontextmenu="return false;">
+    <h1>Sonia Octarini <span id="points">0</span></h1> <!-- Tambah elemen poin di sebelah nama -->
+    
+    <div>
+        <button id="photoButton">Photo</button>
+        <button id="videoButton">Video</button>
+        <button id="eventButton">Event</button> <!-- Tombol event -->
+    </div>
+    
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Cison/PC1.jpg" alt="Cison Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Cison/PC2.jpg" alt="Cison Photo 2" class="protected-img">
+        <img src="/testnfc/Photo/Cison/PC3.jpg" alt="Cison Photo 3" class="protected-img">
+        <img src="/testnfc/Photo/Cison/PC4.jpg" alt="Cison Photo 4" class="protected-img">
+    </div>
+
+    <div class="video-gallery hidden">
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <source src="/testnfc/Video/Cison/Vid3.mp4" type="video/mp4">
+        </video>
+        <p>[Cover] Bermuara - Rizky Febian (Feat Grakhiel)</p>
+
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <source src="/testnfc/Video/Cison/Vid1.mp4" type="video/mp4">
+        </video>
+        <p>Just US Two</p>
+
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <source src="/testnfc/Video/Cison/Vid2.mp4" type="video/mp4">
+        </video>
+        <p>[Cover] First Love - Utada Hikaru</p>
+    </div>
+
+    <button id="logoutButton">Logout</button>
+</body>
+</html>
