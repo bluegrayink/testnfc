@@ -1,51 +1,59 @@
-// Function to check if the device is mobile by user agent or viewport width
+// Function to log messages and update status
+var ChromeSamples = {
+    log: function(...args) {
+        const line = args.map(arg => (typeof arg === 'string' ? arg : JSON.stringify(arg))).join(' ');
+        document.querySelector('#log').innerHTML += line + '<br>';
+    },
+    setStatus: function(status) {
+        document.querySelector('#status').textContent = status;
+    }
+};
+
+// Alias for logging
+log = ChromeSamples.log;
+
+// Function to check if the device is mobile (by user agent or viewport width)
 function isMobileDevice() {
-    // Checking for common mobile devices in the user agent and viewport width
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 800;
 }
 
-// Function to check if NFC is supported in the device (Web NFC)
+// Function to check if NFC is supported on the device (Web NFC)
 function isNfcSupported() {
-    // Checking if NDEFReader (NFC) is available in the browser
     return 'NDEFReader' in window;
 }
 
-// Function to handle redirection based on device and NFC support
+// Main function to handle login and device checking
 function checkLoginAndDevice() {
-    // Log user agent and window size for debugging
-    console.log("User Agent: ", navigator.userAgent);
-    console.log("Window Width: ", window.innerWidth);
-    
+    log("User Agent:", navigator.userAgent);  // Log user agent
+    log("Window Width:", window.innerWidth);  // Log window width
+
     // Check if the device is mobile
     const isMobile = isMobileDevice();
     
-    // Check if the user is logged in
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    
-    // Case 1: If on desktop (PC or laptop), redirect to 404 page
+    // Case 1: Redirect desktop users to 404 page
     if (!isMobile) {
         alert("This page is not accessible from a PC or desktop browser.");
-        window.location.href = "404.html";  // Redirect to 404 for desktop users
+        window.location.href = "404.html";
         return;
     }
 
     // Case 2: If on mobile but NFC is not supported, redirect to login
-    if (isMobile && !isNfcSupported()) {
+    if (!isNfcSupported()) {
         alert("NFC not supported, redirecting to login page.");
-        window.location.href = "index.html";  // Redirect to login for non-NFC mobile browsers
+        window.location.href = "index.html";
         return;
     }
 
-    // Case 3: If on mobile and NFC is supported, check login status
-    if (isMobile && isNfcSupported() && !isLoggedIn) {
+    // Case 3: If on mobile with NFC but not logged in, redirect to login
+    if (!localStorage.getItem("isLoggedIn")) {
         alert("Please log in to continue.");
-        window.location.href = "index.html";  // Redirect to login if not logged in
+        window.location.href = "index.html";
         return;
     }
 
-    // If all checks pass (mobile, NFC, and logged in), allow access
-    console.log("Access granted: Logged in, using a mobile device with NFC support.");
+    // If all checks pass (mobile, NFC, logged in), allow access
+    log("Access granted: Logged in, using a mobile device with NFC support.");
 }
 
-// Run the check when the page is fully loaded
+// Execute the login and device check when the page is loaded
 document.addEventListener('DOMContentLoaded', checkLoginAndDevice);
