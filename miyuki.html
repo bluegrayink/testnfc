@@ -15,13 +15,10 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Log user agent and window size for testing purposes
-            console.log("User Agent: ", navigator.userAgent);
-            console.log("Window Width: ", window.innerWidth);
-
             // Check if user is logged in and device is mobile
             if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                window.location.href = "index.html"; 
+                // Redirect to login page if not logged in or not on a mobile device
+                window.location.href = "index.html";
             }
         });
 
