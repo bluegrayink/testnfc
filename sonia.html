@@ -7,28 +7,83 @@
     
     <title>Sonia Octarini</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    <script src="eventButton.js"></script> <!-- JS terpisah untuk tombol event -->
-    <script src="points.js"></script> <!-- JS terpisah untuk poin -->
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable drag and drop for all images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery1 = document.querySelector('.photo-gallery1');
+            const photoGallery2 = document.querySelector('.photo-gallery2');
+            const videoGallery = document.querySelector('.video-gallery');
+            
+            // Function to show specific content
+            function showContent(contentType) {
+                // Hide all galleries
+                photoGallery1.classList.add('hidden');
+                photoGallery2.classList.add('hidden');
+                videoGallery.classList.add('hidden');
+
+                // Show the selected gallery
+                document.querySelector(`.${contentType}`).classList.remove('hidden');
+            }
+
+            document.getElementById("photoButton1").addEventListener("click", () => {
+                showContent('photo-gallery1');
+            });
+
+            document.getElementById("photoButton2").addEventListener("click", () => {
+                showContent('photo-gallery2');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video-gallery');
+            });
+
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
+                localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
+                window.location.href = "index.html";
+            });
+
+            // Initial setup: Show the first photo gallery by default
+            showContent('photo-gallery1');
+        });
+    </script>
 </head>
 
 <body oncontextmenu="return false;">
-    <h1>Sonia Octarini <span id="points">0</span></h1> <!-- Tambah elemen poin di sebelah nama -->
-    
+    <h1>Sonia Octarini</h1>
     <div>
-        <button id="photoButton">Photo</button>
+        <button id="photoButton1">Photo Gallery 1</button>
+        <button id="photoButton2">Photo Gallery 2</button>
         <button id="videoButton">Video</button>
-        <button id="eventButton">Event</button> <!-- Tombol event -->
+        <button id="eventButton">Event</button>
     </div>
     
-    <div class="photo-gallery">
+    <!-- First photo gallery -->
+    <div class="photo-gallery1">
         <img src="/testnfc/Photo/Cison/PC1.jpg" alt="Cison Photo 1" class="protected-img">
         <img src="/testnfc/Photo/Cison/PC2.jpg" alt="Cison Photo 2" class="protected-img">
+    </div>
+
+    <!-- Second photo gallery -->
+    <div class="photo-gallery2 hidden">
         <img src="/testnfc/Photo/Cison/PC3.jpg" alt="Cison Photo 3" class="protected-img">
         <img src="/testnfc/Photo/Cison/PC4.jpg" alt="Cison Photo 4" class="protected-img">
     </div>
 
+    <!-- Video gallery -->
     <div class="video-gallery hidden">
-        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+       <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
         <source src="/testnfc/Video/Cison/Vid3.mp4" type="video/mp4">
         </video>
         <p>[Cover] Bermuara - Rizky Febian (Feat Grakhiel)</p>
