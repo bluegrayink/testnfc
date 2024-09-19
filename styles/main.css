@@ -1,12 +1,4 @@
 /* General styles */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 20px;
-}
-
 h1 {
     margin-top: 50px;
     color: #333;
@@ -34,7 +26,7 @@ h2 {
     width: 100px; /* Ukuran gambar */
     height: 100px;
     border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
-    object-fit: cover; /* Gambar proporsional */
+    object-fit: cover; /* Gambar tetap proporsional */
     border: 2px solid #ccc; /* Border opsional */
 }
 
