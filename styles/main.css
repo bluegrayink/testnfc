@@ -15,7 +15,6 @@ h1 {
 }
 
 h2 {
-    text-align: right;
     color: #666;
     font-size: 1.2em;
     margin-top: -10px; /* Mengurangi jarak antara h1 dan h2 */
