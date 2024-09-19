@@ -12,18 +12,21 @@ h1 {
     color: #333;
     font-size: 2em;
     margin-bottom: 10px;
-    margin: 0; /* Hilangkan margin ganda */
 }
 
-p.description {
+h2 {
+    text-align: left;
     color: #666;
-    margin-bottom: 30px;
+    font-size: 1.2em;
+    margin-top: -10px; /* Mengurangi jarak antara h1 dan h2 */
+    margin-bottom: 20px;
 }
 
 /* Profile container and image */
 .profile-container {
     display: flex;
     align-items: center;
+    justify-content: center; /* Pusatkan elemen secara horizontal */
     gap: 15px; /* Jarak antara foto profil dan nama */
 }
 
