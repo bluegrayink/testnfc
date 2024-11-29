@@ -9,19 +9,6 @@
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
     <script>
-        // Function to check if the device is mobile by viewport width or user agent
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in and device is mobile
-            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
-                window.location.href = "index.html";
-            }
-        });
-
         // Function to initialize NFC and verify code
         function initializeNFC() {
             if ("NDEFReader" in window) {
