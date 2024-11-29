@@ -14,12 +14,18 @@ var ChromeSamples = {
 // Alias for logging
 log = ChromeSamples.log;
 
-// Check if NDEFReader is available
-if (!("NDEFReader" in window)) {
-    alert("Not Available on PC or Desktop browser");
-    window.location.href = "404.html";
-    // ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
-}
+        // Function to check if the device is mobile by viewport width or user agent
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.location.href = "index.html";
+            }
+        });
 
 // Lists of valid NFC UIDs for each page
 const uidToPageMap = {
