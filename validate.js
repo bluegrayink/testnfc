@@ -1,24 +1,23 @@
-// Mendapatkan parameter 'code' dari URL
-const urlParams = new URLSearchParams(window.location.search);
-const hashFromUrl = urlParams.get('code');
-
-// Database simulasi hash UID
+// Simulasi database hash UID
 const uidDatabase = {
-    '04DE5AA0672681': 'yourgeneratedhash1',
-    'B4E5AA0672692': 'yourgeneratedhash2'
+    'yourgeneratedhash1': '04DE5AA0672681',
+    'yourgeneratedhash2': 'B4E5AA0672692'
 };
 
-// Fungsi untuk memverifikasi hash
-function verifyHash(hash) {
-    for (let uid in uidDatabase) {
-        const validHash = uidDatabase[uid];
-        if (validHash === hash) {
-            return `UID untuk hash ini adalah ${uid}. Validasi berhasil!`;
-        }
-    }
-    return 'Hash tidak valid! Akses ditolak.';
-}
+// Ambil parameter 'code' dari URL
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
 
-// Tampilkan hasil validasi
-const statusMessage = verifyHash(hashFromUrl);
-document.getElementById('status').innerHTML = statusMessage;
+if (code) {
+    // Validasi apakah hash ada di database
+    const uid = uidDatabase[code];
+
+    // Tampilkan UID jika ditemukan
+    if (uid) {
+        document.getElementById('result').innerHTML = `<p>UID yang valid: ${uid}</p>`;
+    } else {
+        document.getElementById('result').innerHTML = `<p>Hash tidak ditemukan atau tidak valid.</p>`;
+    }
+} else {
+    document.getElementById('result').innerHTML = `<p>Code tidak ditemukan dalam URL.</p>`;
+}
