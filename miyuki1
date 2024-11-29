@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Miyuki</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+
+    <script>
+        // Function to check if the device is mobile by viewport width or user agent
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
+                window.location.href = "index.html";
+            }
+        });
+
+        // Function to initialize NFC and verify code
+        function initializeNFC() {
+            if ("NDEFReader" in window) {
+                const reader = new NDEFReader();
+
+                reader.addEventListener("reading", (event) => {
+                    const code = event.message.records[0].data;
+                    const nfcCode = new TextDecoder().decode(code);
+
+                    // Verify if the NFC code is the correct one
+                    if (nfcCode === "04DE5AA0672681") {
+                        // Show content if NFC code matches
+                        showContent('photo-gallery1');
+                    } else {
+                        alert("Invalid NFC code!");
+                        window.location.href = "index.html"; // Redirect to login page if code doesn't match
+                    }
+                });
+
+                // Start scanning for NFC tag
+                reader.scan().catch((error) => {
+                    alert("Failed to scan NFC tag: " + error);
+                    window.location.href = "index.html"; // Redirect if scanning fails
+                });
+            } else {
+                alert("Web NFC is not supported on this device or browser.");
+                window.location.href = "index.html"; // Redirect if Web NFC is not available
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoGallery1 = document.querySelector('.photo-gallery1');
+            const photoGallery2 = document.querySelector('.photo-gallery2');
+            const videoGallery = document.querySelector('.video-gallery');
+
+            // Function to show specific content
+            function showContent(contentType) {
+                // Hide all galleries
+                photoGallery1.classList.add('hidden');
+                photoGallery2.classList.add('hidden');
+                videoGallery.classList.add('hidden');
+
+                // Show the selected gallery
+                document.querySelector(`.${contentType}`).classList.remove('hidden');
+            }
+
+            document.getElementById("photoButton1").addEventListener("click", () => {
+                showContent('photo-gallery1');
+            });
+
+            document.getElementById("photoButton2").addEventListener("click", () => {
+                showContent('photo-gallery2');
+            });
+
+            document.getElementById("videoButton").addEventListener("click", () => {
+                showContent('video-gallery');
+            });
+
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                // Clear login status
+                localStorage.removeItem("isLoggedIn");
+                // Redirect to login page
+                window.location.href = "index.html";
+            });
+
+            // Initial setup: Show the first photo gallery by default (will be shown only after NFC verification)
+            showContent('photo-gallery1');
+        });
+
+        // Disable right-click context menu for images and videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable drag and drop for all images
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', event => event.preventDefault());
+            });
+        });
+
+        // Initialize NFC on page load
+        initializeNFC();
+
+    </script>
+</head>
+
+<body oncontextmenu="return false;">
+    <h1>Miyuki Yoruna Profile</h1>
+    <div>
+        <button id="photoButton1">Part 1</button>
+        <button id="photoButton2">Part 2</button>
+        <button id="videoButton">Video</button>
+    </div>
+    
+    <!-- First photo gallery -->
+    <div class="photo-gallery1">
+        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+    </div>
+
+    <!-- Second photo gallery -->
+    <div class="photo-gallery2 hidden">
+        <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Miyuki Photo 3" class="protected-img">
+        <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Miyuki Photo 4" class="protected-img">
+    </div>
+
+    <!-- Video gallery -->
+    <div class="video-gallery hidden">
+        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+            <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <button id="logoutButton">Logout</button>
+
+</body>
+</html>
