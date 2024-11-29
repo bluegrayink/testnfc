@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read NFC UID</title>
+</head>
+<body>
+    <h1>Tap NFC Card to Read UID</h1>
+    <p id="status"></p>
+    <p id="uid"></p>
+
+    <script>
+        const statusElement = document.getElementById('status');
+        const uidElement = document.getElementById('uid');
+
+        // Cek apakah browser mendukung Web NFC API
+        if ('NFCReader' in window) {
+            statusElement.textContent = "Browser supports NFC! Tap your NFC card...";
+            startNFCReader();
+        } else {
+            statusElement.textContent = "NFC is not supported in this browser.";
+        }
+
+        async function startNFCReader() {
+            try {
+                // Menginisialisasi pembaca NFC
+                const nfcReader = new NFCReader();
+                await nfcReader.requestPermission(); // Meminta izin akses NFC
+                
+                nfcReader.addEventListener('reading', event => {
+                    const nfcData = event.data;
+                    // Menampilkan UID dari kartu NFC
+                    uidElement.textContent = `UID: ${nfcData.id}`;
+                    console.log('UID:', nfcData.id);
+                });
+            } catch (error) {
+                console.error('Error reading NFC:', error);
+                statusElement.textContent = 'Failed to read NFC card. Please try again.';
+            }
+        }
+    </script>
+</body>
+</html>
