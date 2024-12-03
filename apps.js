@@ -1,8 +1,8 @@
 // UID map
 const uidToPageMap = {
-    "miyuki.html": ["64019CB0", "996947BF", "97C447BF"],
-    "rune.html": ["B405A0B0", "CB9B4ABF"],
-    "gita.html": ["B4C3A1B0", "C37947BF"]
+    "miyuki.html": ["64019CB0", "175647BF", "F22F47BF", "996947BF", "97C447BF", "04DE5AA0672681"],
+    "rune.html": ["B405A0B0", "CB9B4ABF", "1D044BBF"],
+    "gita.html": ["B4C3A1B0", "C37947BF", "0BA547BF"]
 };
 
 // Elements
@@ -93,8 +93,11 @@ scanButton.addEventListener("click", async () => {
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            // Sanitize and log UID directly
-            const scannedUID = sanitizeUID(serialNumber);
+            const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
+                .map(b => b.toString(16).padStart(2, "0"))
+                .join("")
+                .toUpperCase();
+
             log(`Scanned UID: ${scannedUID}`);
             validateAndRedirect(scannedUID);
         });
