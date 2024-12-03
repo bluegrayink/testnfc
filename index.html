@@ -20,6 +20,22 @@
                 error.preventDefault();
             }
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Regex untuk mendeteksi Android dan iOS Safari
+        const isAndroid = /android/i.test(userAgent);
+        const isSafariOnIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+        // Jika bukan Android atau Safari di iOS, alihkan pengguna
+        if (!isAndroid && !isSafariOnIOS) {
+            // Tampilkan pesan atau redirect
+            alert("This page can only be accessed on Android or Safari on iOS.");
+            window.location.href = "404.html"; // Halaman untuk perangkat tidak didukung
+            }
+        });
+
     </script>
 </head>
 <body>
