@@ -13,14 +13,6 @@
                 e.preventDefault(); // Mencegah melihat source code
             }
         });
-
-        window.addEventListener('error', function(error) {
-            if (window.ChromeSamples && ChromeSamples.setStatus) {
-                console.error(error);
-                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-                error.preventDefault();
-            }
-        });
     </script>
 </head>
 
