@@ -4,62 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <title>Web NFC Login</title>
-    <link rel="stylesheet" href="../testnfc/styles/index.css">
-    <script>
-        document.addEventListener('keydown', function (e) {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault(); // Mencegah melihat source code
-            }
-        });
-
-        window.addEventListener('error', function(error) {
-            if (window.ChromeSamples && ChromeSamples.setStatus) {
-                console.error(error);
-                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-                error.preventDefault();
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <h1>Web NFC Login</h1>
 
     <button id="scanButton">Click to Scan</button>
     <button id="iphoneButton">For iPhone</button>
 
-    <div id="iphoneSection" style="display: none; margin-top: 20px;">
-        <label for="uidInput">Enter UID:</label>
-        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+    <div id="iphoneSection">
+        <input type="text" id="uidInput" placeholder="Enter NFC UID">
         <button id="submitUidButton">Submit</button>
     </div>
 
     <div id="status"></div>
     <div id="log"></div>
 
-    <script src="app2.js"></script>
-    <script>
-        // Handle iPhone button click
-        const iphoneButton = document.getElementById('iphoneButton');
-        const iphoneSection = document.getElementById('iphoneSection');
-        const submitUidButton = document.getElementById('submitUidButton');
-        const uidInput = document.getElementById('uidInput');
-        const statusDiv = document.getElementById('status');
-
-        iphoneButton.addEventListener('click', () => {
-            iphoneSection.style.display = 'block'; // Show the input section
-        });
-
-        submitUidButton.addEventListener('click', () => {
-            const uid = uidInput.value.trim();
-            if (uid) {
-                statusDiv.textContent = `UID submitted: ${uid}`;
-            } else {
-                statusDiv.textContent = 'Please enter a valid UID.';
-            }
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
