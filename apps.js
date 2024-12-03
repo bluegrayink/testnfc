@@ -30,14 +30,15 @@ const ChromeSamples = {
 // Alias for logging
 const log = ChromeSamples.log;
 
-// Function to sanitize UID (remove colons if present)
+// Function to sanitize UID (remove colons and convert to uppercase)
 const sanitizeUID = (uid) => {
-    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
+    return uid.replace(/:/g, "").toUpperCase();
 };
 
 // Function to validate UID and redirect
 const validateAndRedirect = (rawUid) => {
     const uid = sanitizeUID(rawUid); // Sanitize UID
+    log(`Validating UID: ${uid}`);
     let redirectTo = null;
 
     for (const [page, uids] of Object.entries(uidToPageMap)) {
@@ -92,16 +93,15 @@ scanButton.addEventListener("click", async () => {
             log("Cannot read data from the NFC tag. Try another one?");
         });
 
-        ndef.addEventListener("reading", ({ serialNumber }) => {
-            const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
-                .map(b => b.toString(16).padStart(2, "0"))
-                .join("")
-                .toUpperCase();
-
-            log(`Scanned UID: ${scannedUID}`);
-            validateAndRedirect(scannedUID);
+        ndef.addEventListener("reading", (event) => {
+            const scannedUID = event.serialNumber; // Raw UID
+            log(`Raw UID from NFC: ${scannedUID}`);
+            const sanitizedUID = sanitizeUID(scannedUID);
+            log(`Sanitized UID: ${sanitizedUID}`);
+            validateAndRedirect(sanitizedUID);
         });
     } catch (error) {
         log("Error: " + error.message);
+        ChromeSamples.setStatus("Error: Unable to scan NFC. Please try again.");
     }
 });
