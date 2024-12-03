@@ -7,35 +7,24 @@
     <title>Web NFC Login</title>
     <link rel="stylesheet" href="../testnfc/styles/index.css">
     <script>
-        document.addEventListener('keydown', function (e) {
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault(); // Prevent view source code
+                e.preventDefault();
             }
         });
 
-        window.addEventListener('error', function (error) {
-            console.error(error);
-            if (window.ChromeSamples && ChromeSamples.setStatus) {
-                ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
-                error.preventDefault();
-            }
-        });
-
+        // Redirect non-Android and non-iOS Safari users
         document.addEventListener("DOMContentLoaded", () => {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            const isSafariOnIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-        // Regex untuk mendeteksi Android dan iOS Safari
-        const isAndroid = /android/i.test(userAgent);
-        const isSafariOnIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-
-        // Jika bukan Android atau Safari di iOS, alihkan pengguna
-        if (!isAndroid && !isSafariOnIOS) {
-            // Tampilkan pesan atau redirect
-            alert("This page can only be accessed on Android or Safari on iOS.");
-            window.location.href = "404.html"; // Halaman untuk perangkat tidak didukung
+            if (!isAndroid && !isSafariOnIOS) {
+                alert("This page can only be accessed on Android or Safari on iOS.");
+                window.location.href = "404.html";
             }
         });
-
     </script>
 </head>
 <body>
@@ -44,6 +33,7 @@
     <button id="scanButton">Click to Scan</button>
     <button id="iphoneButton">For iPhone</button>
 
+    <!-- iPhone-specific input section -->
     <div id="iphoneSection" style="display: none; margin-top: 20px;">
         <label for="uidInput">Enter UID:</label>
         <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
