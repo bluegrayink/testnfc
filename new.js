@@ -2,7 +2,8 @@
 const uidToPageMap = {
     "miyuki.html": ["64019CB0", "175647BF", "F22F47BF", "996947BF", "97C447BF", "04DE5AA0672681"],
     "rune.html": ["B405A0B0", "CB9B4ABF", "1D044BBF"],
-    "gita.html": ["B4C3A1B0", "C37947BF", "0BA547BF"]
+    "gita.html": ["B4C3A1B0", "C37947BF"],
+    "jetsukii.html": ["0BA547BF"]
 };
 
 // Elements
