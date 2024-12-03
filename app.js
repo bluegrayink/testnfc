@@ -1,69 +1,107 @@
-// Function to log messages
-var ChromeSamples = {
-    log: function() {
-        var line = Array.prototype.slice.call(arguments).map(function(argument) {
-            return typeof argument === 'string' ? argument : JSON.stringify(argument);
-        }).join(' ');
-        document.querySelector('#log').innerHTML += line + '<br>'; // Use innerHTML to support HTML formatting
-    },
-    setStatus: function(status) {
-        document.querySelector('#status').textContent = status;
-    }
-};
-
-// Alias for logging
-log = ChromeSamples.log;
-
-// Check if NDEFReader is available
-if (!("NDEFReader" in window)) {
-    alert("Not Available on PC or Desktop browser");
-    window.location.href = "404.html";
-    // ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
-}
-
-// Lists of valid NFC UIDs for each page
+// UID map
 const uidToPageMap = {
     "miyuki.html": ["64019CB0", "175647BF", "F22F47BF", "996947BF", "97C447BF", "04DE5AA0672681"],
     "rune.html": ["B405A0B0", "CB9B4ABF", "1D044BBF"],
     "gita.html": ["B4C3A1B0", "C37947BF", "0BA547BF"]
 };
 
-// Event listener for scan button
-document.getElementById("scanButton").addEventListener("click", async () => {
-    log("Silahkan Scan kartu anda");
+// Elements
+const iphoneButton = document.getElementById("iphoneButton");
+const iphoneSection = document.getElementById("iphoneSection");
+const submitUidButton = document.getElementById("submitUidButton");
+const uidInput = document.getElementById("uidInput");
+const statusDiv = document.getElementById("status");
+const scanButton = document.getElementById("scanButton");
+const logDiv = document.getElementById("log");
+
+// Helper functions for logging and status
+const ChromeSamples = {
+    log: function () {
+        const line = Array.from(arguments)
+            .map(arg => (typeof arg === "string" ? arg : JSON.stringify(arg)))
+            .join(" ");
+        logDiv.innerHTML += line + "<br>";
+    },
+    setStatus: function (status) {
+        statusDiv.textContent = status;
+    }
+};
+
+// Alias for logging
+const log = ChromeSamples.log;
+
+// Function to sanitize UID (remove colons if present)
+const sanitizeUID = (uid) => {
+    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
+};
+
+// Function to validate UID and redirect
+const validateAndRedirect = (rawUid) => {
+    const uid = sanitizeUID(rawUid); // Sanitize UID
+    let redirectTo = null;
+
+    for (const [page, uids] of Object.entries(uidToPageMap)) {
+        if (uids.includes(uid)) {
+            redirectTo = page;
+            break;
+        }
+    }
+
+    if (redirectTo) {
+        ChromeSamples.setStatus("Access granted. Redirecting...");
+        setTimeout(() => {
+            localStorage.setItem("isLoggedIn", "true"); // Set login status
+            window.location.href = redirectTo; // Redirect to respective page
+        }, 1000);
+    } else {
+        ChromeSamples.setStatus("Access denied: Invalid UID.");
+    }
+};
+
+// Show input section for iPhone
+iphoneButton.addEventListener("click", () => {
+    iphoneSection.style.display = "block";
+});
+
+// Handle UID submission
+submitUidButton.addEventListener("click", () => {
+    const rawUid = uidInput.value.trim();
+    if (rawUid) {
+        validateAndRedirect(rawUid);
+    } else {
+        ChromeSamples.setStatus("Please enter a valid UID.");
+    }
+});
+
+// Check NFC support
+if (!("NDEFReader" in window)) {
+    alert("Web NFC is not available. Use Chrome on Android.");
+    window.location.href = "404.html";
+}
+
+// NFC scanning logic
+scanButton.addEventListener("click", async () => {
+    log("Please scan your NFC card...");
 
     try {
         const ndef = new NDEFReader();
         await ndef.scan();
-        log("<i>&gt; Scan started &lt;</i>"); // Use <i> tags for italic text
+        log("<i>&gt; Scan started &lt;</i>");
 
         ndef.addEventListener("readingerror", () => {
             log("Cannot read data from the NFC tag. Try another one?");
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            
             const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
-                .map(b => b.toString(16).padStart(2, '0'))
-                .join('').toUpperCase();
+                .map(b => b.toString(16).padStart(2, "0"))
+                .join("")
+                .toUpperCase();
 
-            // Find the corresponding page based on the scanned UID
-            let redirectTo = null;
-            for (const [page, uids] of Object.entries(uidToPageMap)) {
-                if (uids.includes(scannedUID)) {
-                    redirectTo = page;
-                    break;
-                }
-            }
-
-            if (redirectTo) {
-                localStorage.setItem("isLoggedIn", "true"); // Set login status
-                window.location.href = redirectTo; // Redirect to the respective page
-            } else {
-                document.getElementById('status').textContent = "Access Denied: Invalid NFC card.";
-            }
+            log(`Scanned UID: ${scannedUID}`);
+            validateAndRedirect(scannedUID);
         });
     } catch (error) {
-        log("Error: " + error);
+        log("Error: " + error.message);
     }
 });
