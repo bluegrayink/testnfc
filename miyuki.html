@@ -9,76 +9,57 @@
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
     <script>
-        // Function to check if the device is mobile by viewport width or user agent
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent) || window.innerWidth <= 800;
-        }
-
+        // Check if the user accessed this page through index.html
         window.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in and device is mobile
-            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
-                // Redirect to login page if not logged in or not on a mobile device
+            if (!sessionStorage.getItem("accessGranted")) {
                 window.location.href = "index.html";
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const photoGallery1 = document.querySelector('.photo-gallery1');
-            const photoGallery2 = document.querySelector('.photo-gallery2');
-            const videoGallery = document.querySelector('.video-gallery');
-
-            // Function to show specific content
-            function showContent(contentType) {
-                // Hide all galleries
-                photoGallery1.classList.add('hidden');
-                photoGallery2.classList.add('hidden');
-                videoGallery.classList.add('hidden');
-
-                // Show the selected gallery
-                document.querySelector(`.${contentType}`).classList.remove('hidden');
-            }
-
-            document.getElementById("photoButton1").addEventListener("click", () => {
-                showContent('photo-gallery1');
-            });
-
-            document.getElementById("photoButton2").addEventListener("click", () => {
-                showContent('photo-gallery2');
-            });
-
-            document.getElementById("videoButton").addEventListener("click", () => {
-                showContent('video-gallery');
-            });
-
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                // Clear login status
-                localStorage.removeItem("isLoggedIn");
-                // Redirect to login page
-                window.location.href = "index.html";
-            });
-
-            // Initial setup: Show the first photo gallery by default
-            showContent('photo-gallery1');
-        });
-
-        // Disable right-click context menu for images and videos
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                e.preventDefault();
-            }
-        });
-
-        // Disable drag and drop for all images
+        // Disable right-click and drag events on images and videos
         document.addEventListener('DOMContentLoaded', () => {
+            // Disable context menu for images and videos
+            document.addEventListener('contextmenu', (e) => {
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                    e.preventDefault();
+                }
+            });
+
+            // Disable drag-and-drop for all images
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
             });
-        });
 
+            // Handle gallery navigation
+            const galleries = {
+                'photo-gallery1': document.querySelector('.photo-gallery1'),
+                'photo-gallery2': document.querySelector('.photo-gallery2'),
+                'video-gallery': document.querySelector('.video-gallery')
+            };
+
+            const showContent = (contentType) => {
+                Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+                galleries[contentType].classList.remove('hidden');
+            };
+
+            document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
+            document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
+            document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+
+            // Handle logout
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                sessionStorage.removeItem("accessGranted");
+                localStorage.removeItem("isLoggedIn");
+                window.location.href = "index.html";
+            });
+
+            // Show the first gallery by default
+            showContent('photo-gallery1');
+        });
     </script>
 </head>
 
-<body oncontextmenu="return false;">
+<body>
     <h1>Miyuki Yoruna Profile</h1>
     <div>
         <button id="photoButton1">Part 1</button>
@@ -100,13 +81,12 @@
 
     <!-- Video gallery -->
     <div class="video-gallery hidden">
-        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
+        <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;">
             <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <button id="logoutButton">Logout</button>
-
 </body>
 </html>
