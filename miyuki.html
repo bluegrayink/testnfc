@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
     <script>
-        // Check if the user accessed this page through index.html
-        window.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem("accessGranted")) {
-                window.location.href = "index.html";
-            }
-        });
-
         // Disable right-click and drag events on images and videos
         document.addEventListener('DOMContentLoaded', () => {
             // Disable context menu for images and videos
