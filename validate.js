@@ -30,9 +30,16 @@ const ChromeSamples = {
 // Alias for logging
 const log = ChromeSamples.log;
 
+// Function to sanitize UID (remove colons if present)
+const sanitizeUID = (uid) => {
+    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
+};
+
 // Function to validate UID and redirect
-const validateAndRedirect = (uid) => {
+const validateAndRedirect = (rawUid) => {
+    const uid = sanitizeUID(rawUid); // Sanitize UID
     let redirectTo = null;
+
     for (const [page, uids] of Object.entries(uidToPageMap)) {
         if (uids.includes(uid)) {
             redirectTo = page;
@@ -58,9 +65,9 @@ iphoneButton.addEventListener("click", () => {
 
 // Handle UID submission
 submitUidButton.addEventListener("click", () => {
-    const uid = uidInput.value.trim().toUpperCase();
-    if (uid) {
-        validateAndRedirect(uid);
+    const rawUid = uidInput.value.trim();
+    if (rawUid) {
+        validateAndRedirect(rawUid);
     } else {
         ChromeSamples.setStatus("Please enter a valid UID.");
     }
