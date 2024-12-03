@@ -9,9 +9,15 @@
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
     <script>
-        // Disable right-click and drag events on images and videos
+        // Verifikasi akses sebelum memuat halaman
         document.addEventListener('DOMContentLoaded', () => {
-            // Disable context menu for images and videos
+            // Cek apakah pengguna sudah login
+            if (!localStorage.getItem("isLoggedIn")) {
+                // Jika belum login, arahkan kembali ke halaman index
+                window.location.href = "index.html";
+            }
+
+            // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                     e.preventDefault();
