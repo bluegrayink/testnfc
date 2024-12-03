@@ -7,41 +7,6 @@
     
     <title>Web NFC Login</title>
     <link rel="stylesheet" href="../testnfc/styles/index.css">
-    <style>
-        #scanButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #iphoneButton {
-            display: block;
-            margin: 10px auto;
-            padding: 8px 16px;
-            font-size: 14px;
-            background-color: #6C757D;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #iphoneSection {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        #status {
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
     <script>
         document.addEventListener('keydown', function (e) {
             if (e.ctrlKey && e.key === 'u') {
@@ -60,12 +25,12 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">Web NFC Login</h1>
+    <h1>Web NFC Login</h1>
 
     <button id="scanButton">Click to Scan</button>
     <button id="iphoneButton">For iPhone</button>
 
-    <div id="iphoneSection" style="display: none;">
+    <div id="iphoneSection" style="display: none; margin-top: 20px;">
         <label for="uidInput">Enter UID:</label>
         <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
         <button id="submitUidButton">Submit</button>
@@ -74,6 +39,7 @@
     <div id="status"></div>
     <div id="log"></div>
 
+    <script src="app2.js"></script>
     <script>
         // Handle iPhone button click
         const iphoneButton = document.getElementById('iphoneButton');
