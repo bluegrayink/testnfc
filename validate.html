@@ -4,26 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <title>Web NFC Login</title>
     <link rel="stylesheet" href="../testnfc/styles/index.css">
     <script>
         document.addEventListener('keydown', function (e) {
             if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault(); // Mencegah melihat source code
+                e.preventDefault(); // Prevent view source code
             }
         });
 
-        window.addEventListener('error', function(error) {
+        window.addEventListener('error', function (error) {
+            console.error(error);
             if (window.ChromeSamples && ChromeSamples.setStatus) {
-                console.error(error);
                 ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
                 error.preventDefault();
             }
         });
     </script>
 </head>
-
 <body>
     <h1>Web NFC Login</h1>
 
@@ -40,26 +38,5 @@
     <div id="log"></div>
 
     <script src="app2.js"></script>
-    <script>
-        // Handle iPhone button click
-        const iphoneButton = document.getElementById('iphoneButton');
-        const iphoneSection = document.getElementById('iphoneSection');
-        const submitUidButton = document.getElementById('submitUidButton');
-        const uidInput = document.getElementById('uidInput');
-        const statusDiv = document.getElementById('status');
-
-        iphoneButton.addEventListener('click', () => {
-            iphoneSection.style.display = 'block'; // Show the input section
-        });
-
-        submitUidButton.addEventListener('click', () => {
-            const uid = uidInput.value.trim();
-            if (uid) {
-                statusDiv.textContent = `UID submitted: ${uid}`;
-            } else {
-                statusDiv.textContent = 'Please enter a valid UID.';
-            }
-        });
-    </script>
 </body>
 </html>
