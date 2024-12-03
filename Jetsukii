@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Jetsukii</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+
+    <script>
+        // Verifikasi akses sebelum memuat halaman
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cek apakah pengguna sudah login
+            if (!localStorage.getItem("isLoggedIn")) {
+                // Jika belum login, arahkan kembali ke halaman index
+                window.location.href = "index.html";
+            }
+
+            // Disable right-click and drag events on images and videos
+            document.addEventListener('contextmenu', (e) => {
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                    e.preventDefault();
+                }
+            });
+
+            // Disable drag-and-drop for all images
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', event => event.preventDefault());
+            });
+
+            // Handle gallery navigation
+            const galleries = {
+                'photo-gallery1': document.querySelector('.photo-gallery1'),
+                'photo-gallery2': document.querySelector('.photo-gallery2'),
+                'video-gallery': document.querySelector('.video-gallery')
+            };
+
+            const showContent = (contentType) => {
+                Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+                galleries[contentType].classList.remove('hidden');
+            };
+
+            document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
+            document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
+            // document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+
+            // Handle logout
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                sessionStorage.removeItem("accessGranted");
+                localStorage.removeItem("isLoggedIn");
+                window.location.href = "index.html";
+            });
+
+            // Show the first gallery by default
+            showContent('photo-gallery1');
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Jetsukii Profile</h1>
+    <div>
+        <button id="photoButton1">Part 1</button>
+        <button id="photoButton2">Part 2</button>
+    </div>
+    
+    <!-- First photo gallery -->
+    <div class="photo-gallery1">
+        <img src="/testnfc/Photo/Jetsukii/PC1A.jpg" alt="Jetsukii Photo 1A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC2A.jpg" alt="Jetsukii Photo 2A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC3A.jpg" alt="Jetsukii Photo 3A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC4A.jpg" alt="Jetsukii Photo 4A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC5A.jpg" alt="Jetsukii Photo 5A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC6A.jpg" alt="Jetsukii Photo 6A" class="protected-img">
+    </div>
+
+    <!-- Second photo gallery -->
+    <div class="photo-gallery2 hidden">
+        <img src="/testnfc/Photo/Jetsukii/PC1B.JPG" alt="Jetsukii Photo 1B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC2B.JPG" alt="Jetsukii Photo 2B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC3B.JPG" alt="Jetsukii Photo 3B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC4B.JPG" alt="Jetsukii Photo 4B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC5B.JPG" alt="Jetsukii Photo 5B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC6B.JPG" alt="Jetsukii Photo 6B" class="protected-img">
+    </div>
+
+    <button id="logoutButton">Logout</button>
+</body>
+</html>
