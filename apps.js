@@ -93,11 +93,8 @@ scanButton.addEventListener("click", async () => {
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
-                .map(b => b.toString(16).padStart(2, "0"))
-                .join("")
-                .toUpperCase();
-
+            // Sanitize and log UID directly
+            const scannedUID = sanitizeUID(serialNumber);
             log(`Scanned UID: ${scannedUID}`);
             validateAndRedirect(scannedUID);
         });
