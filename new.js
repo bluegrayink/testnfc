@@ -75,10 +75,10 @@ submitUidButton.addEventListener("click", () => {
 });
 
 // Check NFC support
-if (!("NDEFReader" in window)) {
-    alert("Web NFC is not available. Use Chrome on Android.");
-    window.location.href = "404.html";
-}
+//if (!("NDEFReader" in window)) {
+  //  alert("Web NFC is not available. Use Chrome on Android.");
+    //window.location.href = "404.html";
+//}
 
 // NFC scanning logic
 scanButton.addEventListener("click", async () => {
