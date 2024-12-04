@@ -1,43 +1,41 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Terbatas</title>
-    <script>
-        window.onload = function() {
-            var userAgent = navigator.userAgent;
-
-            // Cek apakah pengguna menggunakan Safari di iPhone
-            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
-            // Cek apakah pengguna menggunakan browser di Android
-            var isAndroidBrowser = /Android/.test(userAgent);
-
-            if (!isSafariIphone && !isAndroidBrowser) {
-                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
-            }
-        };
-    </script>
+    <title>Audio Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .audio-container {
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Selamat datang di website kami!</h1>
-    <p>Konten khusus untuk pengguna Safari di iPhone dan browser di Android.</p>
-    
-     <h1>Web NFC Login</h1>
+    <h1>Audio Player</h1>
+    <div class="audio-container">
+        <!-- Audio Player -->
+        <audio id="audioPlayer" controls>
+            <source src="youdiantian.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
-    <button id="scanButton">For Android</button>
-    <button id="iphoneButton">For iOS</button>
-
-    <!-- iPhone-specific input section -->
-    <div id="iphoneSection" style="display: none; margin-top: 20px;">
-        <label for="uidInput">Enter UID:</label>
-        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
-        <button id="submitUidButton">Submit</button>
+        <!-- Download Button -->
+        <br>
+        <a href="youdiantian.mp3" download="your-audio-file.mp3">
+            <button>Download Audio</button>
+        </a>
     </div>
-
-    <div id="status"></div>
-    <div id="log"></div>
-
-    <script src="new.js"></script>
 </body>
 </html>
