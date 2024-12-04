@@ -15,16 +15,19 @@
         });
 
         // Redirect non-Android and non-iOS Safari users
-        document.addEventListener("DOMContentLoaded", () => {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const isAndroid = /android/i.test(userAgent);
-            const isSafariOnIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+       window.onload = function() {
+            var userAgent = navigator.userAgent;
 
-            if (!isAndroid && !isSafariOnIOS) {
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
                 alert("This page can only be accessed on Android or Safari on iOS.");
                 window.location.href = "404.html";
             }
-        });
+        };
     </script>
 </head>
 <body>
