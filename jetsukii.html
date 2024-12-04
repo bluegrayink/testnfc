@@ -5,80 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Jetsukii</title>
+     <title>Jetsukii Photo Collection</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-
     <script>
-        // Verifikasi akses sebelum memuat halaman
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cek apakah pengguna sudah login
-            if (!localStorage.getItem("isLoggedIn")) {
-                // Jika belum login, arahkan kembali ke halaman index
+        // Function to check if the device is mobile
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|Android/i.test(navigator.userAgent);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in and device is mobile
+            if (!localStorage.getItem("isLoggedIn") || !isMobileDevice()) {
+                // Redirect to login page if not logged in or not on a mobile device
                 window.location.href = "index.html";
             }
+        });
 
-            // Disable right-click and drag events on images and videos
-            document.addEventListener('contextmenu', (e) => {
-                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                    e.preventDefault();
-                }
-            });
+    document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
 
-            // Disable drag-and-drop for all images
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('dragstart', event => event.preventDefault());
-            });
-
-            // Handle gallery navigation
-            const galleries = {
-                'photo-gallery1': document.querySelector('.photo-gallery1'),
-                'photo-gallery2': document.querySelector('.photo-gallery2'),
-                'video-gallery': document.querySelector('.video-gallery')
-            };
-
-            const showContent = (contentType) => {
-                Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-                galleries[contentType].classList.remove('hidden');
-            };
-
-            document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
-            document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
-             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
-
-            // Handle logout
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                sessionStorage.removeItem("accessGranted");
-                localStorage.removeItem("isLoggedIn");
-                window.location.href = "index.html";
-            });
-
-            // Show the first gallery by default
-            showContent('photo-gallery1');
+        // Menonaktifkan drag dan drop untuk semua gambar
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
         });
     </script>
 </head>
 
-<body>
-    <h1>Jetsukii Profile</h1>
-    <div>
-        <button id="photoButton1">Part 1</button>
-        <button id="photoButton2">Part 2</button>
-    </div>
+<body oncontextmenu="return false;">
+    <h1>Welcome to the Jetsukii Photo Collection Page</h1>
+    <p class="description">This is my exclusive photo collection just for you.</p>
     
-    <!-- First photo gallery -->
-    <div class="photo-gallery1">
-        <img src="/testnfc/Photo/Jetsukii/PC1A.png" alt="Jetsukii Photo 1A" class="protected-img">
-        <img src="/testnfc/Photo/Jetsukii/PC2A.png" alt="Jetsukii Photo 2A" class="protected-img">
-        <img src="/testnfc/Photo/Jetsukii/PC3A.png" alt="Jetsukii Photo 3A" class="protected-img">
-    </div>
-
-    <!-- Second photo gallery -->
-    <div class="photo-gallery2 hidden">
-        <img src="/testnfc/Photo/Jetsukii/PC1B.png" alt="Jetsukii Photo 1B" class="protected-img">
-        <img src="/testnfc/Photo/Jetsukii/PC2B.png" alt="Jetsukii Photo 2B" class="protected-img">
-        <img src="/testnfc/Photo/Jetsukii/PC3B.png" alt="Jetsukii Photo 3B" class="protected-img">
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Jetsukii/PC1A.png" alt="Jet Photo 1" class="protected-img">
+        <img src="/testnfc/Photo/Gita/PC1B.png" alt="Jet Photo 2" class="protected-img">
+<img src="/testnfc/Photo/Jetsukii/PC2A.png" alt="Jet Photo 3" class="protected-img">
+        <img src="/testnfc/Photo/Gita/PC2B.png" alt="Jet Photo 4" class="protected-img">
     </div>
 
     <button id="logoutButton">Logout</button>
+
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            // Clear login status
+            localStorage.removeItem("isLoggedIn");
+            // Redirect to login page
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>
