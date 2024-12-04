@@ -24,8 +24,7 @@
             var isAndroidBrowser = /Android/.test(userAgent);
 
             if (!isSafariIphone && !isAndroidBrowser) {
-                alert("This page can only be accessed on Android or Safari on iOS.");
-                window.location.href = "404.html";
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
             }
         };
     </script>
