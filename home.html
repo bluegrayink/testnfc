@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Terbatas</title>
+    <script>
+        window.onload = function() {
+            var userAgent = navigator.userAgent;
+
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>Selamat datang di website kami!</h1>
+    <p>Konten khusus untuk pengguna Safari di iPhone dan browser di Android.</p>
+</body>
+</html>
