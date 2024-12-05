@@ -31,8 +31,7 @@
 
             // Handle gallery navigation
             const galleries = {
-                'photo-gallery1': document.querySelector('.photo-gallery1'),
-                'photo-gallery2': document.querySelector('.photo-gallery2'),
+                'photo-gallery': document.querySelector('.photo-gallery'),
                 'video-gallery': document.querySelector('.video-gallery'),
                 'audio-gallery': document.querySelector('.audio-gallery')
             };
@@ -41,9 +40,8 @@
                 Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
                 galleries[contentType].classList.remove('hidden');
             };
-
-            document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
-            document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
+            
+            document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
             document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
@@ -68,21 +66,13 @@
         <button id="audioButton">Audio</button>
     </div>
 
-    <!-- Sub-buttons for photo galleries -->
-    <div>
-        <button id="photoButton1">Klee</button>
-        <button id="photoButton2">Zeta</button>
-    </div>
-
-    <!-- First photo gallery -->
-    <div class="photo-gallery1">
+    <!-- Photo gallery -->
+    <div class="photo-gallery hidden">
+        <h2>Klee</h2> 
         <img src="/testnfc/Photo/Jetsukii/PC1A.png" alt="Jet Photo 1A" class="protected-img">
         <img src="/testnfc/Photo/Jetsukii/PC2A.png" alt="Jet Photo 2A" class="protected-img">
         <img src="/testnfc/Photo/Jetsukii/PC3A.png" alt="Jet Photo 3A" class="protected-img">
-    </div>
-
-    <!-- Second photo gallery -->
-    <div class="photo-gallery2 hidden">
+        <h2>Zeta</h2>
         <img src="/testnfc/Photo/Jetsukii/PC1B.png" alt="Jet Photo 1B" class="protected-img">
         <img src="/testnfc/Photo/Jetsukii/PC2B.png" alt="Jet Photo 2B" class="protected-img">
         <img src="/testnfc/Photo/Jetsukii/PC3B.png" alt="Jet Photo 3B" class="protected-img">
