@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #ffdce1;
+    background-color: #fdfdfd;
     margin: 0;
     padding: 20px;
 }
@@ -48,6 +48,7 @@ h2 {
 
 /* Gallery container */
 .photo-gallery, .video-gallery, .audio-gallery {
+    background-color: #ffdce1;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -70,7 +71,7 @@ h2 {
 
 /* Button styles */
 button {
-    background-color: #7d8bae;
+    /* background-color: #7d8bae; */
     color: white;
     border: none;
     padding: 15px 30px;
