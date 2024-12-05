@@ -47,7 +47,7 @@ h2 {
 }
 
 /* Gallery container */
-.photo-gallery1, .photo-gallery2, .video-gallery {
+.photo-gallery1, .photo-gallery2, .video-gallery, audio-gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -57,7 +57,7 @@ h2 {
 }
 
 /* Image and video styles */
-.photo-gallery1 img, .photo-gallery2 img, .video-gallery video {
+.photo-gallery1 img, .photo-gallery2 img, .video-gallery video, .audio-gallery audio {
     width: 90%;
     max-width: 400px;
     border-radius: 10px;
