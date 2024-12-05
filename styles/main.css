@@ -47,7 +47,7 @@ h2 {
 }
 
 /* Gallery container */
-.photo-gallery1, .photo-gallery2, .video-gallery, audio-gallery {
+.photo-gallery1, .photo-gallery2, .video-gallery, .audio-gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
