@@ -33,7 +33,8 @@
             const galleries = {
                 'photo-gallery1': document.querySelector('.photo-gallery1'),
                 'photo-gallery2': document.querySelector('.photo-gallery2'),
-                'video-gallery': document.querySelector('.video-gallery')
+                'video-gallery': document.querySelector('.video-gallery'),
+                'audio-gallery': document.querySelector('.audio-gallery')
             };
 
             const showContent = (contentType) => {
@@ -44,6 +45,7 @@
             document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
             document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+            document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
             // Handle logout
             document.getElementById("logoutButton").addEventListener("click", () => {
@@ -64,6 +66,7 @@
         <button id="photoButton1">Klee</button>
         <button id="photoButton2">Zeta</button>
         <button id="videoButton">Video</button>
+        <button id="audioButton">Audio</button>
     </div>
     
     <!-- First photo gallery -->
@@ -91,6 +94,22 @@
         <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;">
             <source src="/testnfc/Video/Jetsukii/vid03.mp4" type="video/mp4">
         </video>
+    </div>
+
+    <!-- Audio gallery -->
+    <div class="audio-gallery hidden">
+        <audio controls>
+            <source src="/testnfc/Audio/Jetsukii/audio01.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="/testnfc/Audio/Jetsukii/audio02.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="/testnfc/Audio/Jetsukii/audio03.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <button id="logoutButton">Logout</button>
