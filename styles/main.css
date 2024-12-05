@@ -46,6 +46,22 @@ h2 {
     text-align: left; /* Align text to the left */
 }
 
+/* Container untuk membagi halaman */
+        .d-background {
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+        }
+
+.section01 {
+            flex: 1; /* Proporsi 1 */
+            background-color: #fdfdfd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
 /* Gallery container */
 .photo-gallery, .video-gallery, .audio-gallery {
     background-color: #ffdce1;
