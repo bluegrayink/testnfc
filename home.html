@@ -3,39 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player</title>
+    <title>Split Background</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
+        /* Reset margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
-        .audio-container {
-            margin: 20px auto;
-            max-width: 400px;
+
+        /* Container untuk membagi halaman */
+        .split-background {
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
         }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+
+        /* Bagian atas */
+        .top-section {
+            flex: 1; /* Proporsi 1 */
+            background-color: lightblue; /* Warna bagian atas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+        /* Bagian bawah */
+        .bottom-section {
+            flex: 1; /* Proporsi 1 */
+            background-color: lightcoral; /* Warna bagian bawah */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <h1>Audio Player</h1>
-    <div class="audio-container">
-        <!-- Audio Player -->
-        <audio id="audioPlayer" controls>
-            <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-
-        <!-- Download Button -->
-        <br>
-        <a href="/testnfc/Audio/youdiantian.mp3" download="youdiantian.mp3">
-            <button>Download Audio</button>
-        </a>
+    <div class="split-background">
+        <div class="top-section">
+            <h1>Bagian Atas</h1>
+        </div>
+        <div class="bottom-section">
+            <h1>Bagian Bawah</h1>
+        </div>
     </div>
 </body>
 </html>
