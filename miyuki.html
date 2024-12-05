@@ -31,19 +31,19 @@
 
             // Handle gallery navigation
             const galleries = {
-                'photo-gallery1': document.querySelector('.photo-gallery1'),
-                'photo-gallery2': document.querySelector('.photo-gallery2'),
-                'video-gallery': document.querySelector('.video-gallery')
+                'photo-gallery': document.querySelector('.photo-gallery'),
+                'video-gallery': document.querySelector('.video-gallery'),
+                'audio-gallery': document.querySelector('.audio-gallery')
             };
 
             const showContent = (contentType) => {
                 Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
                 galleries[contentType].classList.remove('hidden');
             };
-
-            document.getElementById("photoButton1").addEventListener("click", () => showContent('photo-gallery1'));
-            document.getElementById("photoButton2").addEventListener("click", () => showContent('photo-gallery2'));
+            
+            document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+            document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
             // Handle logout
             document.getElementById("logoutButton").addEventListener("click", () => {
@@ -51,9 +51,6 @@
                 localStorage.removeItem("isLoggedIn");
                 window.location.href = "index.html";
             });
-
-            // Show the first gallery by default
-            showContent('photo-gallery1');
         });
     </script>
 </head>
@@ -61,29 +58,36 @@
 <body>
     <h1>Miyuki Yoruna Profile</h1>
     <div>
-        <button id="photoButton1">Part 1</button>
-        <button id="photoButton2">Part 2</button>
+        <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
-    </div>
-    
-    <!-- First photo gallery -->
-    <div class="photo-gallery1">
-        <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
-        <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+        <button id="audioButton">Audio</button>
     </div>
 
-    <!-- Second photo gallery -->
-    <div class="photo-gallery2 hidden">
-        <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Miyuki Photo 3" class="protected-img">
-        <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Miyuki Photo 4" class="protected-img">
+    <!-- Photo gallery -->
+    <div class="photo-gallery hidden">
+        <h1>Photocard 01</h1> 
+         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+         <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+	<h1>Photocard 02</h1> 
+         <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Miyuki Photo 3" class="protected-img">
+         <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Miyuki Photo 4" class="protected-img">
     </div>
 
     <!-- Video gallery -->
     <div class="video-gallery hidden">
+        <h1>Video 01</h1> 
         <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;">
             <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
+    </div>
+
+    <!-- Audio gallery -->
+    <div class="audio-gallery hidden">
+        <h1>Audio 01</h1> 
+        <audio controls>
+            <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <button id="logoutButton">Logout</button>
