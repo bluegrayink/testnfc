@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smooth Drop-Down Effect</title>
+    <title>Drop-Down Effect</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,21 +15,19 @@
             cursor: pointer;
         }
 
-        /* Styling for the section */
         .section {
-            max-height: 0;
+            display: none;
             opacity: 0;
-            
-            transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            transform: translateY(-20px);
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
-        /* Active state to trigger the drop-down effect */
         .section.active {
-            max-height: 500px; /* Adjust to fit content */
+            display: block;
             opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Optional: Content styling */
         .section img {
             display: block;
             margin: 20px auto;
@@ -42,7 +40,7 @@
 
     <div id="photoSection" class="section">
         <h2>Photo Gallery</h2>
-        <p>This is the photo section with a smoother drop-down effect.</p>
+        <p>This is the photo section with a drop-down effect.</p>
         <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
 
@@ -51,8 +49,19 @@
         const section = document.getElementById("photoSection");
 
         button.addEventListener("click", () => {
-            // Toggle the active class to trigger the drop-down effect
-            section.classList.toggle("active");
+            if (section.classList.contains("active")) {
+                // Hide the section
+                section.classList.remove("active");
+                setTimeout(() => {
+                    section.style.display = "none";
+                }, 500); // Match the transition duration
+            } else {
+                // Show the section
+                section.style.display = "block";
+                setTimeout(() => {
+                    section.classList.add("active");
+                }, 10); // Small delay to allow display:block to apply
+            }
         });
     </script>
 </body>
