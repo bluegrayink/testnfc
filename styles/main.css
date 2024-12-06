@@ -76,21 +76,22 @@ h2 {
 
 /* Button styles */
 button {
-    background:  transparent;
-    height:  40px;
-     line-height:  40px;
-     border:  2px solid black;
-     display:  inline-block;
-     float:  none;
-     text-align:  center;
-     width:  100px;
-     padding:  0px;
-     font-size:  16px;
-     color: black;
-    cursor: pointer;
-    border-radius: 15px;
-    transition: background-color 0.3s ease;
-}
+    	background:  transparent;
+    	height:  40px;
+     	line-height:  40px;
+     	border:  2px solid black;
+     	display:  inline-block;
+     	float:  none;
+     	text-align:  center;
+     	width:  100px;
+     	padding:  0px;
+     	font-size:  16px;
+	color: black;
+    	cursor: pointer;
+    	border-radius: 15px;
+    	margin-top: 20px;
+    	transition: background-color 0.3s ease;
+	}
 
 button:hover {
     background-color: #2a2a2a;
