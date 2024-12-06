@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom-In Effect</title>
+    <title>Drop-Down Effect</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,28 +15,26 @@
             cursor: pointer;
         }
 
-     
-    .section {
-        display: none;
-        opacity: 0;
-        transform: scale(0.8);
-    }
-
-    .section.active {
-        display: block;
-        animation: zoomIn 0.5s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        0% {
+        /* Styling for the section */
+        .section {
+            max-height: 0;
             opacity: 0;
-            transform: scale(0.8);
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
         }
-        100% {
+
+        /* Active state to trigger the drop-down effect */
+        .section.active {
+            max-height: 500px; /* Adjust to fit content */
             opacity: 1;
-            transform: scale(1);
         }
-    }
+
+        /* Optional: Limit for content width */
+        .section img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -44,7 +42,7 @@
 
     <div id="photoSection" class="section">
         <h2>Photo Gallery</h2>
-        <p>This is the photo section with a zoom-in effect.</p>
+        <p>This is the photo section with a drop-down effect.</p>
         <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
 
@@ -53,6 +51,7 @@
         const section = document.getElementById("photoSection");
 
         button.addEventListener("click", () => {
+            // Toggle the active class to trigger the drop-down effect
             section.classList.toggle("active");
         });
     </script>
