@@ -9,29 +9,34 @@
             font-family: Arial, sans-serif;
         }
 
-        .section {
-            display: none; /* Sembunyikan secara default */
-            opacity: 0; /* Supaya bisa di-animasi */
-            transform: scale(0.8); /* Awal lebih kecil */
-            transition: all 0.3s ease-in-out; /* Efek transisi */
-            background-color: lightblue;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .section.active {
-            display: block; /* Tampilkan jika active */
-            opacity: 1; /* Buat sepenuhnya terlihat */
-            transform: scale(1); /* Perbesar ke ukuran normal */
-        }
-
         button {
             padding: 10px 20px;
             margin: 10px;
             cursor: pointer;
         }
+
+     
+    .section {
+        display: none;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    .section.active {
+        display: block;
+        animation: zoomIn 0.5s ease forwards;
+    }
+
+    @keyframes zoomIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
     </style>
 </head>
 <body>
