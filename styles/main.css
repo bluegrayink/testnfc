@@ -46,13 +46,6 @@ h2 {
     text-align: left; /* Align text to the left */
 }
 
-/* Container untuk membagi halaman */
-        .d-background {
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Full viewport height */
-        }
-
 /* Gallery container */
 .photo-gallery, .video-gallery, .audio-gallery {
     display: flex;
