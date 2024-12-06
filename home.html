@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop-Down Effect</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jetsukii</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,53 +17,95 @@
             cursor: pointer;
         }
 
-        .section {
+        .hidden {
             display: none;
+        }
+
+        .gallery {
+            max-height: 0;
+            overflow: hidden;
             opacity: 0;
             transform: translateY(-20px);
-            transition: transform 0.5s ease, opacity 0.5s ease;
+            transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .section.active {
+        .gallery.active {
             display: block;
+            max-height: 1000px; /* Adjust this value as needed for your content */
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .section img {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
         }
     </style>
 </head>
 <body>
-    <button id="photoButton">Show Photo Section</button>
-
-    <div id="photoSection" class="section">
-        <h2>Photo Gallery</h2>
-        <p>This is the photo section with a drop-down effect.</p>
-        <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+    <h1>Jetsukii Profile</h1>
+    <div>
+        <button id="photoButton">Photo</button>
+        <button id="videoButton">Video</button>
+        <button id="audioButton">Audio</button>
     </div>
 
-    <script>
-        const button = document.getElementById("photoButton");
-        const section = document.getElementById("photoSection");
+    <!-- Photo gallery -->
+    <div id="photoGallery" class="gallery">
+        <h1>Klee Halloween</h1> 
+        <img src="/testnfc/Photo/Jetsukii/PC1A.png" alt="Jet Photo 1A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC2A.png" alt="Jet Photo 2A" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC3A.png" alt="Jet Photo 3A" class="protected-img">
+        <h1>Zeta</h1>
+        <img src="/testnfc/Photo/Jetsukii/PC1B.png" alt="Jet Photo 1B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC2B.png" alt="Jet Photo 2B" class="protected-img">
+        <img src="/testnfc/Photo/Jetsukii/PC3B.png" alt="Jet Photo 3B" class="protected-img">
+    </div>
 
-        button.addEventListener("click", () => {
-            if (section.classList.contains("active")) {
-                // Hide the section
-                section.classList.remove("active");
-                setTimeout(() => {
-                    section.style.display = "none";
-                }, 500); // Match the transition duration
-            } else {
-                // Show the section
-                section.style.display = "block";
-                setTimeout(() => {
-                    section.classList.add("active");
-                }, 10); // Small delay to allow display:block to apply
-            }
+    <!-- Video gallery -->
+    <div id="videoGallery" class="gallery">
+        <h1>Video 01</h1> 
+        <video controls class="protected-video" controlsList="nodownload">
+            <source src="/testnfc/Video/Jetsukii/vid01.mp4" type="video/mp4">
+        </video>
+        <h1>Video 02</h1> 
+        <video controls class="protected-video" controlsList="nodownload">
+            <source src="/testnfc/Video/Jetsukii/vid02.mp4" type="video/mp4">
+        </video>
+        <h1>Video 03</h1> 
+        <video controls class="protected-video" controlsList="nodownload">
+            <source src="/testnfc/Video/Jetsukii/vid03.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Audio gallery -->
+    <div id="audioGallery" class="gallery">
+        <h1>Audio 01</h1> 
+        <audio controls>
+            <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <button id="logoutButton">Logout</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Galleries and buttons
+            const galleries = {
+                photoButton: document.getElementById("photoGallery"),
+                videoButton: document.getElementById("videoGallery"),
+                audioButton: document.getElementById("audioGallery"),
+            };
+
+            // Add event listeners to buttons
+            Object.keys(galleries).forEach(buttonId => {
+                document.getElementById(buttonId).addEventListener("click", () => {
+                    Object.values(galleries).forEach(gallery => gallery.classList.remove("active"));
+                    galleries[buttonId].classList.add("active");
+                });
+            });
+
+            // Logout functionality
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                localStorage.removeItem("isLoggedIn");
+                window.location.href = "index.html";
+            });
         });
     </script>
 </body>
