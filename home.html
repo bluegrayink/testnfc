@@ -3,51 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Split Background</title>
+    <title>Zoom-In Effect</title>
     <style>
-        /* Reset margin and padding */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        body {
+            font-family: Arial, sans-serif;
         }
 
-        /* Container untuk membagi halaman */
-        .split-background {
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Full viewport height */
+        .section {
+            display: none; /* Sembunyikan secara default */
+            opacity: 0; /* Supaya bisa di-animasi */
+            transform: scale(0.8); /* Awal lebih kecil */
+            transition: all 0.3s ease-in-out; /* Efek transisi */
+            background-color: lightblue;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            text-align: center;
         }
 
-        /* Bagian atas */
-        .top-section {
-            flex: 1; /* Proporsi 1 */
-            background-color: lightblue; /* Warna bagian atas */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
+        .section.active {
+            display: block; /* Tampilkan jika active */
+            opacity: 1; /* Buat sepenuhnya terlihat */
+            transform: scale(1); /* Perbesar ke ukuran normal */
         }
 
-        /* Bagian bawah */
-        .bottom-section {
-            flex: 1; /* Proporsi 1 */
-            background-color: lightcoral; /* Warna bagian bawah */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="split-background">
-        <div class="top-section">
-            <h1>Bagian Atas</h1>
-        </div>
-        <div class="bottom-section">
-            <h1>Bagian Bawah</h1>
-        </div>
+    <button id="photoButton">Show Photo Section</button>
+
+    <div id="photoSection" class="section">
+        <h2>Photo Gallery</h2>
+        <p>This is the photo section with a zoom-in effect.</p>
+        <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
+
+    <script>
+        const button = document.getElementById("photoButton");
+        const section = document.getElementById("photoSection");
+
+        button.addEventListener("click", () => {
+            section.classList.toggle("active");
+        });
+    </script>
 </body>
 </html>
