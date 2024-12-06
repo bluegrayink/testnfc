@@ -55,7 +55,6 @@ h2 {
 
 /* Gallery container */
 .photo-gallery, .video-gallery, .audio-gallery {
-    background-color: #ffdce1;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
