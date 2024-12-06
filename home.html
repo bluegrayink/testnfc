@@ -53,31 +53,27 @@
 
     <script>
         const photoButton = document.getElementById("photoButton");
-        const photoSection = document.getElementById("photoSection");
-
         const videoButton = document.getElementById("videoButton");
+
+        const photoSection = document.getElementById("photoSection");
         const videoSection = document.getElementById("videoSection");
 
-        const toggleSection = (button, section) => {
-            button.addEventListener("click", () => {
-                if (section.classList.contains("active")) {
-                    // Hide the section
-                    section.classList.remove("active");
-                    setTimeout(() => {
-                        section.style.display = "none";
-                    }, 500); // Match the transition duration
-                } else {
-                    // Show the section
+        const sections = [photoSection, videoSection];
+
+        const showSection = (sectionToShow) => {
+            sections.forEach(section => {
+                if (section === sectionToShow) {
                     section.style.display = "block";
-                    setTimeout(() => {
-                        section.classList.add("active");
-                    }, 10); // Small delay to allow display:block to apply
+                    setTimeout(() => section.classList.add("active"), 10);
+                } else {
+                    section.classList.remove("active");
+                    setTimeout(() => (section.style.display = "none"), 500);
                 }
             });
         };
 
-        toggleSection(photoButton, photoSection);
-        toggleSection(videoButton, videoSection);
+        photoButton.addEventListener("click", () => showSection(photoSection));
+        videoButton.addEventListener("click", () => showSection(videoSection));
     </script>
 </body>
 </html>
