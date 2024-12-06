@@ -57,11 +57,17 @@ h2 {
 }
 
 /* Image and video styles */
-.photo-gallery img, .video-gallery video, .audio-gallery audio {
+.photo-gallery img, .video-gallery video {
     width: 100%;
     max-width: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.audio-gallery audio {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
 }
 
 .video-gallery video {
