@@ -37,6 +37,7 @@
 </head>
 <body>
     <button id="photoButton">Show Photo Section</button>
+    <button id="videoButton">Show Video Section</button>
 
     <div id="photoSection" class="section">
         <h2>Photo Gallery</h2>
@@ -44,25 +45,39 @@
         <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
 
-    <script>
-        const button = document.getElementById("photoButton");
-        const section = document.getElementById("photoSection");
+    <div id="videoSection" class="section">
+        <h2>Video Gallery</h2>
+        <p>This is the video section with a drop-down effect.</p>
+        <img src="https://via.placeholder.com/200" alt="Placeholder Image">
+    </div>
 
-        button.addEventListener("click", () => {
-            if (section.classList.contains("active")) {
-                // Hide the section
-                section.classList.remove("active");
-                setTimeout(() => {
-                    section.style.display = "none";
-                }, 500); // Match the transition duration
-            } else {
-                // Show the section
-                section.style.display = "block";
-                setTimeout(() => {
-                    section.classList.add("active");
-                }, 10); // Small delay to allow display:block to apply
-            }
-        });
+    <script>
+        const photoButton = document.getElementById("photoButton");
+        const photoSection = document.getElementById("photoSection");
+
+        const videoButton = document.getElementById("videoButton");
+        const videoSection = document.getElementById("videoSection");
+
+        const toggleSection = (button, section) => {
+            button.addEventListener("click", () => {
+                if (section.classList.contains("active")) {
+                    // Hide the section
+                    section.classList.remove("active");
+                    setTimeout(() => {
+                        section.style.display = "none";
+                    }, 500); // Match the transition duration
+                } else {
+                    // Show the section
+                    section.style.display = "block";
+                    setTimeout(() => {
+                        section.classList.add("active");
+                    }, 10); // Small delay to allow display:block to apply
+                }
+            });
+        };
+
+        toggleSection(photoButton, photoSection);
+        toggleSection(videoButton, videoSection);
     </script>
 </body>
 </html>
