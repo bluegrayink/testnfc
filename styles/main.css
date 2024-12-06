@@ -76,7 +76,8 @@ h2 {
 
 /* Button styles */
 button {
-    height:  40px;
+    background:  transparent;
+     height:  40px;
      line-height:  40px;
      border:  2px solid white;
      display:  inline-block;
