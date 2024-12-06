@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop-Down Effect</title>
+    <title>Smooth Drop-Down Effect</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,7 +20,7 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
+            transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
         }
 
         /* Active state to trigger the drop-down effect */
@@ -29,7 +29,7 @@
             opacity: 1;
         }
 
-        /* Optional: Limit for content width */
+        /* Optional: Content styling */
         .section img {
             display: block;
             margin: 20px auto;
@@ -42,7 +42,7 @@
 
     <div id="photoSection" class="section">
         <h2>Photo Gallery</h2>
-        <p>This is the photo section with a drop-down effect.</p>
+        <p>This is the photo section with a smoother drop-down effect.</p>
         <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
 
