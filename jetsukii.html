@@ -8,37 +8,6 @@
     <title>Jetsukii</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
-    <style>
-        .hidden {
-            display: none;
-        }
-
-         .container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        div.animated {
-            position: absolute;
-            visibility: hidden;
-            animation-name: fadeIn;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(0);}
-            to {opacity: 1; transform: translateY(20px); visibility: visible;}
-        }
-
-        img, video, audio {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Verify login
