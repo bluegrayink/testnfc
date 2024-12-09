@@ -153,3 +153,10 @@ button:hover {
             from {opacity: 0; transform: translateY(0);}
             to {opacity: 1; transform: translateY(20px); visibility: visible;}
         }
+
+.container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
