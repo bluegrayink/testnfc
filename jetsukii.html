@@ -8,8 +8,39 @@
     <title>Jetsukii</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
+    <style>
+        .hidden {
+            display: none;
+        }
+
+         .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        div.animated {
+            position: absolute;
+            visibility: hidden;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(0);}
+            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+         document.addEventListener('DOMContentLoaded', () => {
             // Verify login
             if (!localStorage.getItem("isLoggedIn")) {
                 window.location.href = "index.html";
@@ -94,12 +125,10 @@
         <!-- Audio gallery -->
         <div class="audio-gallery hidden">
             <h1>Audio 01</h1> 
-            <audio controls>
+            <audio controls style="width: 300px; align: center;">
                 <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
             </audio>
         </div>
     </div>
-    
 </body>
 </html>
