@@ -40,12 +40,6 @@
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "index.html";
-            }
-
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
@@ -131,7 +125,5 @@
             </audio>
         </div>
     </div>
-    
-    <button id="logoutButton">Logout</button>
 </body>
 </html>
