@@ -166,5 +166,5 @@ button:hover {
     text-decoration: none;
     border: none; /* Hilangkan garis default di sekitar tautan */
     margin: 0;
-    padding: 10;
+    padding: 20px;
 }
