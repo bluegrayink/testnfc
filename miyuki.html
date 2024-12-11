@@ -6,14 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Miyuki</title>
-    <link rel="stylesheet" href="../testnfc/styles/main.css">
+    <link rel="stylesheet" href="../testnfc/styles/main00.css">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+         .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        div.animated {
+            position: absolute;
+            visibility: hidden;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(0);}
+            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 
     <script>
-        // Verifikasi akses sebelum memuat halaman
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cek apakah pengguna sudah login
+         document.addEventListener('DOMContentLoaded', () => {
+            // Verify login
             if (!localStorage.getItem("isLoggedIn")) {
-                // Jika belum login, arahkan kembali ke halaman index
                 window.location.href = "index.html";
             }
 
@@ -24,12 +53,10 @@
                 }
             });
 
-            // Disable drag-and-drop for all images
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
             });
 
-            // Handle gallery navigation
             const galleries = {
                 'photo-gallery': document.querySelector('.photo-gallery'),
                 'video-gallery': document.querySelector('.video-gallery'),
@@ -38,14 +65,17 @@
 
             const showContent = (contentType) => {
                 Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-                galleries[contentType].classList.remove('hidden');
+                const galleryToShow = galleries[contentType];
+                if (galleryToShow) {
+                    galleryToShow.classList.remove('hidden');
+                    galleryToShow.classList.add('animated');
+                }
             };
-            
+
             document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
             document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
-            // Handle logout
             document.getElementById("logoutButton").addEventListener("click", () => {
                 sessionStorage.removeItem("accessGranted");
                 localStorage.removeItem("isLoggedIn");
@@ -63,6 +93,7 @@
         <button id="audioButton">Audio</button>
     </div>
 
+<div class="container">
     <!-- Photo gallery -->
     <div class="photo-gallery hidden">
         <h1>Photocard 01</h1> 
@@ -89,7 +120,6 @@
             Your browser does not support the audio element.
         </audio>
     </div>
-
-    <button id="logoutButton">Logout</button>
+</div>
 </body>
 </html>
