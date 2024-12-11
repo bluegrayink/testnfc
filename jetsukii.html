@@ -53,6 +53,14 @@
                 }
             });
 
+            // Waktu dalam milidetik (30 menit)
+            const redirectTimeout = 60000;
+
+            // Arahkan pengguna ke halaman index.html
+            setTimeout(() => {
+                window.location.href = 'indexjetsukii.html'; // Ganti dengan path ke halaman utama Anda
+            }, redirectTimeout);
+
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
             });
