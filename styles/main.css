@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #ffdce1;
+    background-color: #FFD1DC;
     margin: 0;
     padding: 20px;
 }
@@ -10,14 +10,14 @@ body {
 h1 {
     margin: 10px;
     font-size: 1.8em;
-    color: #2a2a2a;	
+    color: #5C5C5C;	
 }
 
 h2 {
     margin-left: 10px;
 	margin-top: 0px;
     font-size: 1em;
-    color: #666; 
+    color: #5C5C5C; 
 }
 
 /* Profile container */
@@ -78,14 +78,14 @@ h2 {
 button {
     	background:  transparent;
     	height:  40px;
-     	border:  2px solid black;
+     	border:  2px solid #5C5C5C;
      	display:  inline-block;
      	float:  none;
      	text-align:  center;
      	width:  100px;
      	padding:  0px;
      	font-size:  16px;
-	color: black;
+	color: #5C5C5C;
     	cursor: pointer;
     	border-radius: 15px;
     	margin-top: 20px;
@@ -93,14 +93,14 @@ button {
 	}
 
 button:hover {
-    background-color: #2a2a2a;
-    color: white;
+    background-color: #5C5C5C;
+    color: #fdfdfd;
 }
 
 #logoutButton {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #666;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -167,4 +167,26 @@ button:hover {
     border: none; /* Hilangkan garis default di sekitar tautan */
     margin: 0;
     padding: 5px;
+}
+
+.business-collab {
+    text-align: center; /* Meratakan teks ke tengah */
+    font-family: Arial, sans-serif; /* Sesuaikan dengan font Anda */
+}
+
+.email-section {
+    display: flex; /* Gunakan flexbox untuk menyusun ikon dan teks */
+    justify-content: center; /* Meratakan elemen secara horizontal */
+    align-items: center; /* Meratakan elemen secara vertikal */
+    gap: 8px; /* Menambahkan jarak antara ikon dan teks */
+}
+
+.email-section img {
+    width: 24px; /* Sesuaikan ukuran ikon */
+    height: 24px;
+}
+
+.email-section span {
+    font-size: 16px; /* Sesuaikan ukuran teks */
+    color: #666; /* Sesuaikan warna teks */
 }
