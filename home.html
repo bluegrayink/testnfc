@@ -27,11 +27,67 @@
                 document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
             }
         };
+
+        // script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const buttonToKlee = document.getElementById('toKlee');
+    const buttonToZeta = document.getElementById('toZeta');
+
+    const validUID = 'F481A3B0'; // UID NFC yang valid
+    let targetPage = null;
+
+    // Fungsi untuk mulai membaca NFC
+    const startNFCScan = async () => {
+        if (!('NDEFReader' in window)) {
+            alert('Browser ini tidak mendukung NFC!');
+            return;
+        }
+
+        try {
+            const ndef = new NDEFReader();
+            await ndef.scan();
+            console.log('Silakan scan kartu NFC Anda.');
+
+            ndef.onreading = (event) => {
+                const uid = event.serialNumber.toUpperCase(); // UID NFC
+                console.log('UID NFC:', uid);
+
+                if (uid === validUID) {
+                    if (targetPage) {
+                        window.location.href = targetPage;
+                    } else {
+                        alert('Halaman tidak ditentukan!');
+                    }
+                } else {
+                    alert('Kartu NFC tidak valid!');
+                }
+            };
+        } catch (error) {
+            console.error('Gagal memulai pembacaan NFC:', error);
+        }
+    };
+
+    // Tombol Klee
+    buttonToKlee.addEventListener('click', () => {
+        targetPage = 'jetsukii-klee.html';
+        startNFCScan();
+    });
+
+    // Tombol Zeta
+    buttonToZeta.addEventListener('click', () => {
+        targetPage = 'jetsukii-zeta.html';
+        startNFCScan();
+    });
+});
+
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
-   
+
+    <button id="toKlee">Buka Klee</button>
+    <button id="toZeta">Buka Zeta</button>
+    
     <button id="scanButton">For Android</button>
     <button id="iphoneButton">For iOS</button>
 
@@ -44,7 +100,6 @@
 
     <div id="status"></div>
     <div id="log"></div>
-
-    <script src="new.js"></script>
+    
 </body>
 </html>
