@@ -1,107 +1,76 @@
 // UID map
 const uidToPageMap = {
-    "miyuki.html": ["64019CB0", "175647BF", "F22F47BF", "996947BF", "97C447BF", "04DE5AA0672681"],
-    "rune.html": ["B405A0B0", "CB9B4ABF", "1D044BBF"],
-    "gita.html": ["B4C3A1B0", "C37947BF", "0BA547BF"]
+    "jetsukii-klee.html": ["F481A3B0"], // UID untuk halaman Klee
+    "jetsukii-zeta.html": ["F481A3B0"]  // UID untuk halaman Zeta
 };
 
 // Elements
-const iphoneButton = document.getElementById("iphoneButton");
-const iphoneSection = document.getElementById("iphoneSection");
-const submitUidButton = document.getElementById("submitUidButton");
-const uidInput = document.getElementById("uidInput");
+const kleeButton = document.getElementById("kleeButton");
+const zetaButton = document.getElementById("zetaButton");
 const statusDiv = document.getElementById("status");
 const scanButton = document.getElementById("scanButton");
-const logDiv = document.getElementById("log");
+let targetPage = null; // Halaman yang dituju berdasarkan tombol
 
 // Helper functions for logging and status
-const ChromeSamples = {
-    log: function () {
-        const line = Array.from(arguments)
-            .map(arg => (typeof arg === "string" ? arg : JSON.stringify(arg)))
-            .join(" ");
-        logDiv.innerHTML += line + "<br>";
-    },
-    setStatus: function (status) {
-        statusDiv.textContent = status;
-    }
+const setStatus = (status) => {
+    statusDiv.textContent = status;
 };
 
-// Alias for logging
-const log = ChromeSamples.log;
-
-// Function to sanitize UID (remove colons and convert to uppercase)
+// Function to sanitize UID (remove colons if present)
 const sanitizeUID = (uid) => {
-    return uid.replace(/:/g, "").toUpperCase();
+    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
 };
 
 // Function to validate UID and redirect
 const validateAndRedirect = (rawUid) => {
     const uid = sanitizeUID(rawUid); // Sanitize UID
-    log(`Validating UID: ${uid}`);
-    let redirectTo = null;
+    const validUids = uidToPageMap[targetPage] || []; // UID valid untuk halaman target
 
-    for (const [page, uids] of Object.entries(uidToPageMap)) {
-        if (uids.includes(uid)) {
-            redirectTo = page;
-            break;
-        }
-    }
-
-    if (redirectTo) {
-        ChromeSamples.setStatus("Access granted. Redirecting...");
+    if (validUids.includes(uid)) {
+        setStatus("Access granted. Redirecting...");
         setTimeout(() => {
             localStorage.setItem("isLoggedIn", "true"); // Set login status
-            window.location.href = redirectTo; // Redirect to respective page
+            window.location.href = targetPage; // Redirect ke halaman target
         }, 1000);
     } else {
-        ChromeSamples.setStatus("Access denied: Invalid UID.");
+        setStatus("Access denied: Invalid UID.");
     }
 };
 
-// Show input section for iPhone
-iphoneButton.addEventListener("click", () => {
-    iphoneSection.style.display = "block";
+// Tombol untuk membuka halaman Klee
+kleeButton.addEventListener("click", () => {
+    targetPage = "jetsukii-klee.html"; // Set halaman target ke Klee
+    startNFCScan(); // Mulai scan NFC
 });
 
-// Handle UID submission
-submitUidButton.addEventListener("click", () => {
-    const rawUid = uidInput.value.trim();
-    if (rawUid) {
-        validateAndRedirect(rawUid);
-    } else {
-        ChromeSamples.setStatus("Please enter a valid UID.");
-    }
+// Tombol untuk membuka halaman Zeta
+zetaButton.addEventListener("click", () => {
+    targetPage = "jetsukii-zeta.html"; // Set halaman target ke Zeta
+    startNFCScan(); // Mulai scan NFC
 });
-
-// Check NFC support
-if (!("NDEFReader" in window)) {
-    alert("Web NFC is not available. Use Chrome on Android.");
-    window.location.href = "404.html";
-}
 
 // NFC scanning logic
-scanButton.addEventListener("click", async () => {
-    log("Please scan your NFC card...");
+const startNFCScan = async () => {
+    if (!("NDEFReader" in window)) {
+        alert("Web NFC is not available. Use Chrome on Android.");
+        return;
+    }
+
+    setStatus("Please scan your NFC card...");
 
     try {
         const ndef = new NDEFReader();
         await ndef.scan();
-        log("<i>&gt; Scan started &lt;</i>");
 
         ndef.addEventListener("readingerror", () => {
-            log("Cannot read data from the NFC tag. Try another one?");
+            setStatus("Cannot read data from the NFC tag. Try another one?");
         });
 
-        ndef.addEventListener("reading", (event) => {
-            const scannedUID = event.serialNumber; // Raw UID
-            log(`Raw UID from NFC: ${scannedUID}`);
-            const sanitizedUID = sanitizeUID(scannedUID);
-            log(`Sanitized UID: ${sanitizedUID}`);
-            validateAndRedirect(sanitizedUID);
+        ndef.addEventListener("reading", ({ serialNumber }) => {
+            const scannedUID = sanitizeUID(serialNumber);
+            validateAndRedirect(scannedUID);
         });
     } catch (error) {
-        log("Error: " + error.message);
-        ChromeSamples.setStatus("Error: Unable to scan NFC. Please try again.");
+        setStatus("Error: " + error.message);
     }
-});
+};
