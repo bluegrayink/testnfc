@@ -51,10 +51,6 @@ zetaButton.addEventListener("click", () => {
 
 // NFC scanning logic
 const startNFCScan = async () => {
-    if (!("NDEFReader" in window)) {
-        alert("Web NFC is not available. Use Chrome on Android.");
-        return;
-    }
 
     setStatus("Please scan your NFC card...");
 
