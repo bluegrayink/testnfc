@@ -1,69 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFC Navigation</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jetsukii web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
-        // script.js
-document.addEventListener('DOMContentLoaded', () => {
-    const buttonToKlee = document.getElementById('toKlee');
-    const buttonToZeta = document.getElementById('toZeta');
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
 
-    const validUID = 'F481A3B0'; // UID NFC yang valid
-    let targetPage = null;
+        // Redirect non-Android and non-iOS Safari users
+       window.onload = function() {
+            var userAgent = navigator.userAgent;
 
-    // Fungsi untuk mulai membaca NFC
-    const startNFCScan = async () => {
-        if (!('NDEFReader' in window)) {
-            alert('Browser ini tidak mendukung NFC!');
-            return;
-        }
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
 
-        try {
-            const ndef = new NDEFReader();
-            await ndef.scan();
-            console.log('Silakan scan kartu NFC Anda.');
-
-            ndef.onreading = (event) => {
-                const uid = event.serialNumber.toUpperCase(); // UID NFC
-                console.log('UID NFC:', uid);
-
-                if (uid === validUID) {
-                    if (targetPage) {
-                        window.location.href = targetPage;
-                    } else {
-                        alert('Halaman tidak ditentukan!');
-                    }
-                } else {
-                    alert('Kartu NFC tidak valid!');
-                }
-            };
-        } catch (error) {
-            console.error('Gagal memulai pembacaan NFC:', error);
-        }
-    };
-
-    // Tombol Klee
-    buttonToKlee.addEventListener('click', () => {
-        targetPage = 'jetsukii-klee.html';
-        startNFCScan();
-    });
-
-    // Tombol Zeta
-    buttonToZeta.addEventListener('click', () => {
-        targetPage = 'jetsukii-zeta.html';
-        startNFCScan();
-    });
-});
-
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
     </script>
-
 </head>
-<body>
-    <h1>Scan NFC untuk Buka Halaman</h1>
-    <button id="toKlee">Buka Klee</button>
-    <button id="toZeta">Buka Zeta</button>
+<body style="background-color: #ffd0d7;">
+    <h1>Jetsukii Page</h1>
+   
+    <button id="scanButton">For Android</button>
+    <button id="iphoneButton">For iOS</button>
+
+    <!-- iPhone-specific input section -->
+    <div id="iphoneSection" style="display: none; margin-top: 20px;">
+        <label for="uidInput">Enter UID:</label>
+        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+        <button id="submitUidButton">Submit</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="log"></div>
+
+    <script src="new.js"></script>
 </body>
 </html>
