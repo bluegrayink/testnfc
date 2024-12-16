@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Calendar</title>
+    <title>Event Calendar with Details</title>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
     <style>
@@ -13,12 +13,12 @@
             padding: 0;
         }
         #calendar {
-            max-width: 350px; /* Ukuran lebih kecil untuk tampilan mobile */
-            margin: 30px auto;
+            max-width: 900px;
+            margin: 50px auto;
         }
         #event-details {
             display: none;
-            max-width: 350px;
+            max-width: 600px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ddd;
@@ -28,52 +28,13 @@
         #event-details h2 {
             margin-top: 0;
         }
-        .event-highlight {
-            background-color: #ff5722; /* Warna kotak dengan event */
-            color: white;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-        }
-        .fc-daygrid-day {
-            position: relative;
-            padding-bottom: 100%; /* Membuat elemen menjadi kotak */
-            width: 100%; /* Lebar penuh */
-            border: none; /* Menghilangkan garis pada tanggal */
-        }
-        .fc-daygrid-day-number {
-            font-size: 16px;
-            border: none; /* Menghilangkan garis pada tanggal */
-        }
-        .fc-daygrid-day-content {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: none; /* Menghilangkan border pada konten hari */
-        }
-        .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
-            font-weight: bold;
-            color: #ff5722; /* Warna khusus untuk hari ini */
-        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center; font-size: 1.5em;">Event Calendar</h1>
+    <h1 style="text-align: center;">Event Calendar</h1>
     <div id="calendar"></div>
 
-    <!-- Div untuk menampilkan detail event -->
+    <!-- Div for displaying event details -->
     <div id="event-details">
         <h2>Event Details</h2>
         <p id="event-title"></p>
@@ -85,45 +46,33 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
-            var events = [
-                {
-                    title: 'Cosplay Workshop',
-                    start: '2024-12-15',
-                    description: 'Join us for a cosplay workshop to learn crafting and sewing techniques!'
-                },
-                {
-                    title: 'Meet & Greet with Yukari',
-                    start: '2024-12-20',
-                    description: 'Exclusive meet and greet session with Yukari! Don’t miss it.'
-                },
-                {
-                    title: 'Photo Session',
-                    start: '2024-12-25',
-                    description: 'Christmas-themed cosplay photoshoot for fans and cosplayers.'
-                }
-            ];
-
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: events,
+                events: [
+                    {
+                        title: 'Cosplay Workshop',
+                        start: '2024-12-15',
+                        description: 'Join us for a cosplay workshop to learn crafting and sewing techniques!'
+                    },
+                    {
+                        title: 'Meet & Greet with Yukari',
+                        start: '2024-12-20',
+                        description: 'Exclusive meet and greet session with Yukari! Don’t miss it.'
+                    },
+                    {
+                        title: 'Photo Session',
+                        start: '2024-12-25',
+                        description: 'Christmas-themed cosplay photoshoot for fans and cosplayers.'
+                    }
+                ],
                 editable: false,
                 selectable: false,
-                eventDisplay: 'none', // Tidak ada teks event di dalam tanggal
-                dayCellDidMount: function(arg) {
-                    // Cek apakah tanggal memiliki event
-                    var dateStr = arg.date.toISOString().split('T')[0];
-                    var event = events.find(e => e.start === dateStr);
-
-                    if (event) {
-                        arg.el.classList.add('event-highlight'); // Memberikan warna kotak penuh
-                        arg.el.addEventListener('click', function() {
-                            // Tampilkan detail event saat tanggal diklik
-                            document.getElementById('event-details').style.display = 'block';
-                            document.getElementById('event-title').textContent = "Title: " + event.title;
-                            document.getElementById('event-date').textContent = "Date: " + event.start;
-                            document.getElementById('event-description').textContent = "Description: " + event.description;
-                        });
-                    }
+                eventClick: function(info) {
+                    // Display event details
+                    document.getElementById('event-details').style.display = 'block';
+                    document.getElementById('event-title').textContent = "Title: " + info.event.title;
+                    document.getElementById('event-date').textContent = "Date: " + info.event.start.toDateString();
+                    document.getElementById('event-description').textContent = "Description: " + info.event.extendedProps.description;
                 }
             });
 
