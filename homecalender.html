@@ -13,12 +13,12 @@
             padding: 0;
         }
         #calendar {
-            max-width: 400px; /* Lebih kecil untuk mobile browser */
+            max-width: 350px; /* Lebih kecil lagi untuk tampilan mobile */
             margin: 30px auto;
         }
         #event-details {
             display: none;
-            max-width: 400px;
+            max-width: 350px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ddd;
@@ -28,13 +28,23 @@
         #event-details h2 {
             margin-top: 0;
         }
-        .event-highlight { /* Full kotak dengan warna lebih kontras */
-            background-color: #ff5722; /* Warna oranye terang */
-            color: white; /* Teks tetap terlihat meskipun ada warna kontras */
+        .event-highlight {
+            background-color: #ff5722; /* Kotak oranye terang */
+            color: white; /* Teks putih */
             font-weight: bold;
+            border-radius: 0; /* Menghilangkan border-radius agar menjadi kotak penuh */
         }
-        .fc-daygrid-day:hover {
-            cursor: pointer;
+        .fc-daygrid-day {
+            position: relative;
+        }
+        .fc-daygrid-day-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+            font-weight: bold;
+            color: #ff5722; /* Warna khusus untuk hari ini */
         }
     </style>
 </head>
@@ -84,7 +94,7 @@
                     var event = events.find(e => e.start === dateStr);
 
                     if (event) {
-                        arg.el.classList.add('event-highlight'); // Tambahkan warna penuh pada tanggal
+                        arg.el.classList.add('event-highlight'); // Memberikan warna kotak penuh
                         arg.el.addEventListener('click', function() {
                             // Tampilkan detail event saat tanggal diklik
                             document.getElementById('event-details').style.display = 'block';
