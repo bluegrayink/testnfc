@@ -51,40 +51,44 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
+            var events = [
+                {
+                    title: 'Cosplay Workshop',
+                    start: '2024-12-15',
+                    description: 'Join us for a cosplay workshop to learn crafting and sewing techniques!'
+                },
+                {
+                    title: 'Meet & Greet with Yukari',
+                    start: '2024-12-20',
+                    description: 'Exclusive meet and greet session with Yukari! Don’t miss it.'
+                },
+                {
+                    title: 'Photo Session',
+                    start: '2024-12-25',
+                    description: 'Christmas-themed cosplay photoshoot for fans and cosplayers.'
+                }
+            ];
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: [
-                    {
-                        title: 'Cosplay Workshop',
-                        start: '2024-12-15',
-                        description: 'Join us for a cosplay workshop to learn crafting and sewing techniques!'
-                    },
-                    {
-                        title: 'Meet & Greet with Yukari',
-                        start: '2024-12-20',
-                        description: 'Exclusive meet and greet session with Yukari! Don’t miss it.'
-                    },
-                    {
-                        title: 'Photo Session',
-                        start: '2024-12-25',
-                        description: 'Christmas-themed cosplay photoshoot for fans and cosplayers.'
-                    }
-                ],
+                events: events,
                 editable: false,
                 selectable: false,
-                eventDisplay: 'background', // Hanya menampilkan latar belakang, tanpa teks
-                eventBackgroundColor: '#ffecb3', // Warna background untuk tanggal dengan event
-                eventClick: function(info) {
-                    // Tampilkan detail event
-                    document.getElementById('event-details').style.display = 'block';
-                    document.getElementById('event-title').textContent = "Title: " + info.event.title;
-                    document.getElementById('event-date').textContent = "Date: " + info.event.start.toDateString();
-                    document.getElementById('event-description').textContent = "Description: " + info.event.extendedProps.description;
-                },
+                eventDisplay: 'none', // Tidak menampilkan teks event di dalam kalender
                 dayCellDidMount: function(arg) {
-                    // Tambahkan class jika tanggal memiliki event
-                    if (arg.date.getDate() === 15 || arg.date.getDate() === 20 || arg.date.getDate() === 25) {
-                        arg.el.classList.add('event-highlight');
+                    // Cek apakah tanggal memiliki event
+                    var dateStr = arg.date.toISOString().split('T')[0];
+                    var event = events.find(e => e.start === dateStr);
+
+                    if (event) {
+                        arg.el.classList.add('event-highlight'); // Tambahkan warna khusus
+                        arg.el.addEventListener('click', function() {
+                            // Tampilkan detail event saat tanggal diklik
+                            document.getElementById('event-details').style.display = 'block';
+                            document.getElementById('event-title').textContent = "Title: " + event.title;
+                            document.getElementById('event-date').textContent = "Date: " + event.start;
+                            document.getElementById('event-description').textContent = "Description: " + event.description;
+                        });
                     }
                 }
             });
