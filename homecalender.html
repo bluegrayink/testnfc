@@ -7,132 +7,28 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        *, *:after, *:before {
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --c-theme-primary: #008FFD;
-            --c-theme-primary-accent: #CBE8FF;
-            --c-bg-primary: #D6DAE0;
-            --c-bg-secondary: #EAEBEC;
-            --c-bg-tertiary: #FDFDFD;
-            --c-text-primary: #1F1F25;
-            --c-text-secondary: #999FA6;
-        }
-
         body {
-            font-family: "Inter", sans-serif;
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--c-bg-primary);
-            color: var(--c-text-primary);
-        }
-
-        button {
-            font: inherit;
-            cursor: pointer;
-        }
-
-        .datepicker {
-            width: 95%;
-            max-width: 350px;
-            background-color: var(--c-bg-tertiary);
-            border-radius: 10px;
-            box-shadow: 0 0 2px 0 rgba(#000, .2), 0 5px 10px 0 rgba(#000, .1);
-            padding: 1rem;
-        }
-
-        .datepicker-top {
-            margin-bottom: 1rem;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-            margin-top: -.5rem;
-        }
-
-        .tag {
-            margin-right: .5rem;
-            margin-top: .5rem;
-            border: 0;
-            background-color: var(--c-bg-secondary);
-            border-radius: 10px;
-            padding: .5em .75em;
-            font-weight: 600;
-        }
-
-        .month-selector {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            background-color:#FFF;
-            border-radius: 12px;
-            width: 2.5rem;
-            height: 2.5rem;
-            box-shadow: 0 0 2px 0 rgba(#000,.25), 0 0 10px 0 rgba(#000, .15);
-        }
-
-        .month-name {
-            font-weight: 600;
-        }
-
-        .datepicker-calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-row-gap: 1rem;
-        }
-
-        .day, .date {
-            justify-self: center;
-        }
-
-        .day {
-            color: var(--c-text-secondary);
-            font-size: .875em;
-            font-weight: 500;
-            justify-self: center;
-        }
-
-        .date {
-            border: 0;
+            font-family: Arial, sans-serif;
+            margin: 0;
             padding: 0;
-            width: 2.25rem;
-            height: 2.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            font-weight: 600;
-            border: 2px solid transparent;
-            background-color: transparent;
-            cursor: pointer;
         }
-
-        .faded {
-            color: var(--c-text-secondary);
+        #calendar {
+            max-width: 350px; /* Ukuran lebih kecil untuk tampilan mobile */
+            margin: 30px auto;
+            overflow: hidden; /* Menghilangkan scroll */
         }
-
-        .current-day {
-            color: #FFF;
-            border-color: var(--c-theme-primary);
-            background-color: var(--c-theme-primary);
+        #event-details {
+            display: none;
+            max-width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
-
+        #event-details h2 {
+            margin-top: 0;
+        }
         .event-highlight {
             background-color: #ff5722; /* Warna kotak dengan event */
             color: white;
@@ -147,28 +43,36 @@
             height: 100%;
             border-radius: 0;
         }
+        .fc-daygrid-day {
+            position: relative;
+            padding-bottom: 100%; /* Membuat elemen menjadi kotak */
+            width: 100%; /* Lebar penuh */
+        }
+        .fc-daygrid-day-content {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+            font-weight: bold;
+            color: #ff5722; /* Warna khusus untuk hari ini */
+        }
+        .fc-daygrid-day-number {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <div class="datepicker">
-        <div class="datepicker-top">
-            <div class="btn-group">
-                <button class="tag">Today</button>
-                <button class="tag">Tomorrow</button>
-                <button class="tag">In 2 days</button>
-            </div>
-            <div class="month-selector">
-                <button class="arrow"><i class="material-icons">chevron_left</i></button>
-                <span class="month-name">December 2020</span>
-                <button class="arrow"><i class="material-icons">chevron_right</i></button>
-            </div>
-        </div>
-
-        <div class="datepicker-calendar" id="calendar"></div>
-    </div>
+    <h1 style="text-align: center; font-size: 1.5em;">Event Calendar</h1>
+    <div id="calendar"></div>
 
     <!-- Div untuk menampilkan detail event -->
-    <div id="event-details" style="display: none;">
+    <div id="event-details">
         <h2>Event Details</h2>
         <p id="event-title"></p>
         <p id="event-date"></p>
@@ -197,26 +101,31 @@
                 }
             ];
 
-            // Generate the calendar dynamically
-            for (let i = 1; i <= 31; i++) {
-                let dateElement = document.createElement('button');
-                dateElement.classList.add('date');
-                dateElement.textContent = i;
-                
-                var dateStr = `2024-12-${i.toString().padStart(2, '0')}`;
-                var event = events.find(e => e.start === dateStr);
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: events,
+                editable: false,
+                selectable: false,
+                eventDisplay: 'none', // Tidak ada teks event di dalam tanggal
+                dayCellDidMount: function(arg) {
+                    // Cek apakah tanggal memiliki event
+                    var dateStr = arg.date.toISOString().split('T')[0];
+                    var event = events.find(e => e.start === dateStr);
 
-                if (event) {
-                    dateElement.classList.add('event-highlight');
-                    dateElement.addEventListener('click', function() {
-                        document.getElementById('event-details').style.display = 'block';
-                        document.getElementById('event-title').textContent = "Title: " + event.title;
-                        document.getElementById('event-date').textContent = "Date: " + event.start;
-                        document.getElementById('event-description').textContent = "Description: " + event.description;
-                    });
+                    if (event) {
+                        arg.el.classList.add('event-highlight'); // Memberikan warna kotak penuh
+                        arg.el.addEventListener('click', function() {
+                            // Tampilkan detail event saat tanggal diklik
+                            document.getElementById('event-details').style.display = 'block';
+                            document.getElementById('event-title').textContent = "Title: " + event.title;
+                            document.getElementById('event-date').textContent = "Date: " + event.start;
+                            document.getElementById('event-description').textContent = "Description: " + event.description;
+                        });
+                    }
                 }
-                calendarEl.appendChild(dateElement);
-            }
+            });
+
+            calendar.render();
         });
     </script>
 </body>
