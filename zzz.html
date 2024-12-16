@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Calendar</title>
+    <!-- FullCalendar Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <style>
         html, body {
           margin: 0;
@@ -18,23 +21,27 @@
           margin: 40px auto;
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    timeZone: 'UTC',
-    initialView: 'dayGridMonth',
-    events: 'https://fullcalendar.io/api/demo-feeds',
-    editable: true,
-    selectable: true
-  });
-
-  calendar.render();
-});
-    </script>
 </head>
 <body>
+    <!-- Div untuk kalender -->
     <div id='calendar'></div>
-</body> 
+
+    <!-- FullCalendar Script -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC',
+                initialView: 'dayGridMonth',
+                events: 'https://fullcalendar.io/api/demo-feeds',
+                editable: true,
+                selectable: true
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
 </html>
