@@ -1,135 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Calendar</title>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
         }
-        #calendar {
-            max-width: 350px; /* Ukuran lebih kecil untuk tampilan mobile */
-            contentHeight: 600px;
-            margin: 30px auto;
+
+        h3,h4,h5 {
+            font-weight: 300 !important;
         }
-        #event-details {
-            display: none;
-            max-width: 350px;
-            margin: 20px auto;
+
+        .calendar-wrapper {
+            height: auto;
+            max-width: 730px;
+            margin: 0 auto;
+        }
+
+        .calendar-header {
+            background-color: rgba(18, 15, 25, 0.25);
+            height: 100%;
             padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            position: relative;
         }
-        #event-details h2 {
-            margin-top: 0;
+
+        .header-title {
+            padding-left: 15%;
         }
-        .event-highlight {
-            background-color: #ff5722; /* Warna kotak dengan event */
-            color: white;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+
+        .header-background {
+            background-image: url("https://raw.githubusercontent.com/JustMonk/codepen-resource-project/master/img/compressed-header.jpg");
+            height: 200px;
+            background-position: center right;
+            background-size: cover;
+        }
+
+        .calendar-content {
+            background-color: #fff;
+            padding: 20px;
+            padding-left: 15%;
+            padding-right: 15%;
+            overflow: hidden;
+        }
+
+        .event-mark {
+            width: 5px;
+            height: 5px;
+            background-color: teal;
+            border-radius: 100px;
             position: absolute;
-            top: 0;
-            left: 0;
+            left: 46%;
+            top: 70%;
+        }
+
+        .calendar-footer {
+            height: 200px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            text-align: center;
+            background-color: #4b6289 !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .addForm {
+            position: absolute;
+            top: 100%;
             width: 100%;
             height: 100%;
-            border-radius: 0;
+            background-color: #4b5889 !important;
+            transition: top 0.5s cubic-bezier(1, 0, 0, 1);
+            padding: 0 5px 0 5px;
         }
-        .fc-daygrid-day {
+
+        .addForm input {
+            color: #fff;
+        }
+
+        .addForm .row {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            margin-bottom: 0;
+        }
+
+        .addForm h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .addEventButtons {
+            text-align: right;
+            padding: 0 0.75rem 0 0.75rem;
+        }
+
+        .addEventButtons a {
+            color: black;
+            font-weight: 300;
+        }
+
+        .emptyForm {
+            padding: 20px;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+        .emptyForm h4 {
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-wrapper {
+            color: #fff;
+            background-color: #5a649c !important;
+            padding-top: 0;
+            padding-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .sidebar-title {
+            padding: 50px 6% 50px 12%;
+        }
+
+        .sidebar-title h4 {
+            margin-top: 0;
+        }
+
+        .sidebar-events {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            margin-bottom: 70px;
+        }
+
+        .empty-message {
+            font-size: 1.2rem;
+            padding: 15px 6% 15px 12%;
+        }
+
+        .eventCard {
+            background-color: #fff;
+            color: black;
+            padding: 12px 24px 12px 24px;
+            border-bottom: 1px solid #E5E5E5;
+            white-space: nowrap;
             position: relative;
-            padding-bottom: 100%; /* Membuat elemen menjadi kotak */
-            width: 100%; /* Lebar penuh */
-            border: none; /* Menghilangkan garis pada tanggal */
+            animation: slideInDown 0.5s;
         }
-        .fc-daygrid-day-number {
-            font-size: 16px;
-            border: none; /* Menghilangkan garis pada tanggal */
-        }
-        .fc-daygrid-day-content {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: none; /* Menghilangkan border pada konten hari */
-        }
-        .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+
+        .eventCard-header {
             font-weight: bold;
-            color: #ff5722; /* Warna khusus untuk hari ini */
+        }
+
+        .eventCard-description {
+            color: grey;
+        }
+
+        .eventCard-mark-wrapper {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 60px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .eventCard-mark {
+            width: 8px;
+            height: 8px;
+            background-color: #b39ddb;
+            border-radius: 100px;
+            position: absolute;
+            left: 50%;
+            top: 45%;
+        }
+
+        .day-mark {
+            width: 7px;
+            height: 7px;
+            background-color: #b39ddb;
+            border-radius: 100px;
+            position: absolute;
+            left: 47%;
+            top: 67%;
+        }
+
+        .content-wrapper {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            margin-left: 300px;
+        }
+
+        #table-body .col:hover {
+            cursor: pointer;
+            background-color: #E0E0E0;
+        }
+
+        .empty-day:hover {
+            cursor: default !important;
+            background-color: #fff !important;
+        }
+
+        #table-body .row .col {
+            padding: .75rem;
+        }
+
+        #table-body .col {
+            border: 1px solid transparent;
+        }
+
+        #calendar-table {
+            text-align: center;
+        }
+
+        .prev-button {
+            position: absolute;
+            cursor: pointer;
+            left: 0%;
+            top: 35%;
+            color: grey !important;
+        }
+
+        .prev-button i {
+            font-size: 4em;
+        }
+
+        .next-button {
+            position: absolute;
+            cursor: pointer;
+            right: 0%;
+            top: 35%;
+            color: grey !important;
+        }
+
+        .next-button i {
+            font-size: 4em;
+        }
+
+        .addEvent {
+            box-shadow: 0 5px 15px rgb(57, 168, 228);
+            background-color: #39a8e4;
+            padding: 10px;
+            padding-left: 3em;
+            padding-right: 3em;
+            cursor: pointer;
+            border-radius: 25px;
+            color: #fff !important;
+            background-image: linear-gradient(135deg, #8d8dd4, #45ced4);
+        }
+
+        .addEvent:hover {
+            transition: box-shadow 0.5s;
+            box-shadow: 0 4px 25px rgb(57, 168, 228);
+        }
+
+        .mobile-header {
+            padding: 0;
+            display: none;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            position: fixed;
+            z-index: 99;
+            width: 100%;
+            background-color: #5a649c !important;
+        }
+
+        .mobile-header a i {
+            color: #fff;
+            font-size: 38px;
+        }
+
+        .mobile-header h4 {
+            color: #fff;
+        }
+
+        .mobile-header .row {
+            margin-bottom: 0;
+        }
+
+        .mobile-header h4 {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        @media (max-width:992px) {
+            .content-wrapper {
+                margin-left: 0;
+            }
+
+            .mobile-header {
+                display: block;
+            }
+
+            .calendar-wrapper {
+                margin-top: 80px;
+            }
+
+            .sidebar-wrapper {
+                background-color: #EEEEEE !important;
+            }
+
+            .sidebar-title {
+                background-color: #5A649C !important;
+            }
+
+            .empty-message {
+                color: black;
+                font-weight: 300;
+                font-size: 1.2rem;
+                padding: 15px;
+            }
         }
     </style>
 </head>
-<body>
-    <h1 style="text-align: center; font-size: 1.5em;">Event Calendar</h1>
-    <div id="calendar"></div>
 
-    <!-- Div untuk menampilkan detail event -->
-    <div id="event-details">
-        <h2>Event Details</h2>
-        <p id="event-title"></p>
-        <p id="event-date"></p>
-        <p id="event-description"></p>
+<body>
+
+    <div class="mobile-header z-depth-1">
+
+        <div class="row">
+            <div class="col-2">
+                <a href="#" data-activates="sidebar" class="button-collapse" style="">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+            <div class="col">
+                <h4>Events</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main-wrapper">
+
+        <div class="sidebar-wrapper z-depth-2 side-nav fixed" id="sidebar">
+
+            <div class="sidebar-title">
+                <h4>Calendar Events</h4>
+            </div>
+
+            <div class="sidebar-events" id="sidebar-events">
+                <div class="empty-message">
+                    <h4>No event added yet</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content-wrapper">
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <div class="header-title">
+                        <h3>December</h3>
+                    </div>
+                    <div class="header-background"></div>
+                    <div class="addEvent" id="addEvent">Add new event</div>
+                </div>
+
+                <div class="calendar-content">
+                    <table id="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="addForm" id="add-form">
+        <div class="emptyForm">
+            <h4>Add New Event</h4>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="event-title" type="text" class="validate">
+                    <label for="event-title">Event Title</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="event-description" class="materialize-textarea"></textarea>
+                    <label for="event-description">Event Description</label>
+                </div>
+            </div>
+
+            <div class="addEventButtons">
+                <a href="javascript:void(0);" class="btn btn-flat" id="add-event-button">Add</a>
+                <a href="javascript:void(0);" class="btn btn-flat" id="cancel-add-event">Cancel</a>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+        $(document).ready(function () {
 
-            var events = [
-                {
-                    title: 'Cosplay Workshop',
-                    start: '2024-12-15',
-                    description: 'Join us for a cosplay workshop to learn crafting and sewing techniques!'
-                },
-                {
-                    title: 'Meet & Greet with Yukari',
-                    start: '2024-12-20',
-                    description: 'Exclusive meet and greet session with Yukari! Don’t miss it.'
-                },
-                {
-                    title: 'Photo Session',
-                    start: '2024-12-25',
-                    description: 'Christmas-themed cosplay photoshoot for fans and cosplayers.'
+            // Initialize materialize
+            $('.button-collapse').sideNav();
+
+            const calendarData = {};
+
+            function renderCalendar(month, year) {
+                let date = new Date(year, month);
+                let firstDay = date.getDay();
+                let lastDate = new Date(year, month + 1, 0).getDate();
+
+                const tbody = $('#table-body');
+                tbody.empty();
+
+                let row = $('<tr></tr>');
+                let dayCount = 1;
+
+                // Fill in the empty days before the first day of the month
+                for (let i = 0; i < firstDay; i++) {
+                    row.append('<td class="empty-day"></td>');
                 }
-            ];
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: events,
-                editable: false,
-                selectable: false,
-                eventDisplay: 'none', // Tidak ada teks event di dalam tanggal
-                dayCellDidMount: function(arg) {
-                    // Cek apakah tanggal memiliki event
-                    var dateStr = arg.date.toISOString().split('T')[0];
-                    var event = events.find(e => e.start === dateStr);
+                // Fill in the days of the month
+                for (let i = firstDay; i < 7; i++) {
+                    row.append(`<td class="col" data-day="${dayCount}">${dayCount}</td>`);
+                    dayCount++;
+                }
+                tbody.append(row);
 
-                    if (event) {
-                        arg.el.classList.add('event-highlight'); // Memberikan warna kotak penuh
-                        arg.el.addEventListener('click', function() {
-                            // Tampilkan detail event saat tanggal diklik
-                            document.getElementById('event-details').style.display = 'block';
-                            document.getElementById('event-title').textContent = "Title: " + event.title;
-                            document.getElementById('event-date').textContent = "Date: " + event.start;
-                            document.getElementById('event-description').textContent = "Description: " + event.description;
-                        });
+                // Continue filling in the calendar
+                for (let i = 7; i < lastDate + firstDay; i++) {
+                    if (i % 7 === 0) {
+                        row = $('<tr></tr>');
                     }
+                    row.append(`<td class="col" data-day="${dayCount}">${dayCount}</td>`);
+                    dayCount++;
+                    if (i % 7 === 6) {
+                        tbody.append(row);
+                    }
+                }
+            }
+
+            $('#addEvent').click(function () {
+                $('#add-form').css('top', '0%');
+            });
+
+            $('#cancel-add-event').click(function () {
+                $('#add-form').css('top', '100%');
+            });
+
+            $('#add-event-button').click(function () {
+                let title = $('#event-title').val();
+                let description = $('#event-description').val();
+                let day = $('#table-body td.selected').data('day');
+
+                if (title && day) {
+                    if (!calendarData[day]) {
+                        calendarData[day] = [];
+                    }
+                    calendarData[day].push({ title, description });
+
+                    $('#add-form').css('top', '100%');
+                    renderCalendar(11, 2024);
                 }
             });
 
-            calendar.render();
+            $(document).on('click', '#table-body td', function () {
+                let day = $(this).data('day');
+                $('#sidebar-events').empty();
+                $('#sidebar-events').append(`<div class="empty-message"><h4>Events for Day ${day}</h4></div>`);
+                if (calendarData[day]) {
+                    calendarData[day].forEach(event => {
+                        $('#sidebar-events').append(`
+                            <div class="eventCard">
+                                <div class="eventCard-header">${event.title}</div>
+                                <div class="eventCard-description">${event.description}</div>
+                            </div>
+                        `);
+                    });
+                }
+            });
+
+            renderCalendar(11, 2024);
         });
     </script>
+
 </body>
 </html>
