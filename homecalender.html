@@ -85,6 +85,7 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 events: events,
+                aspectRatio: 2,  // Mengubah rasio lebar-tinggi kalender (lebih kecil = kotak lebih simetris)
                 editable: false,
                 selectable: false,
                 eventDisplay: 'none', // Tidak ada teks event di dalam tanggal
@@ -105,7 +106,6 @@
                     }
                 },
                 height: 'auto',  // Menyesuaikan tinggi kalender dengan konten tanpa scrollbar
-                aspectRatio: 2,  // Mengubah rasio lebar-tinggi kalender (lebih kecil = kotak lebih simetris)
             });
 
             calendar.render();
