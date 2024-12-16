@@ -13,7 +13,7 @@
             padding: 0;
         }
         #calendar {
-            max-width: 350px; /* Lebih kecil lagi untuk tampilan mobile */
+            max-width: 350px; /* Ukuran lebih kecil untuk tampilan mobile */
             margin: 30px auto;
         }
         #event-details {
@@ -29,32 +29,40 @@
             margin-top: 0;
         }
         .event-highlight {
-            background-color: #ff5722; /* Kotak oranye terang */
-            color: white; /* Teks putih */
+            background-color: #ff5722; /* Warna kotak dengan event */
+            color: white;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 0; /* Menghilangkan border-radius agar menjadi kotak penuh */
-            width: 100%;
-            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
         }
         .fc-daygrid-day {
             position: relative;
-            padding-bottom: 100%; /* Membuat kotak persegi */
+            padding-bottom: 100%; /* Membuat elemen menjadi kotak */
+            width: 100%; /* Lebar penuh */
         }
         .fc-daygrid-day-content {
+            position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
             font-weight: bold;
             color: #ff5722; /* Warna khusus untuk hari ini */
+        }
+        .fc-daygrid-day-number {
+            font-size: 16px;
         }
     </style>
 </head>
