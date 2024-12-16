@@ -13,12 +13,12 @@
             padding: 0;
         }
         #calendar {
-            max-width: 600px; /* Membuat kalender lebih kecil */
-            margin: 50px auto;
+            max-width: 400px; /* Lebih kecil untuk mobile browser */
+            margin: 30px auto;
         }
         #event-details {
             display: none;
-            max-width: 600px;
+            max-width: 400px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ddd;
@@ -28,15 +28,18 @@
         #event-details h2 {
             margin-top: 0;
         }
-        .event-highlight { /* Memberikan warna berbeda pada tanggal dengan event */
-            background-color: #ffecb3; /* Warna kuning muda */
-            border-radius: 50%; /* Membuat lingkaran */
+        .event-highlight { /* Full kotak dengan warna lebih kontras */
+            background-color: #ff5722; /* Warna oranye terang */
+            color: white; /* Teks tetap terlihat meskipun ada warna kontras */
+            font-weight: bold;
+        }
+        .fc-daygrid-day:hover {
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Event Calendar</h1>
+    <h1 style="text-align: center; font-size: 1.5em;">Event Calendar</h1>
     <div id="calendar"></div>
 
     <!-- Div untuk menampilkan detail event -->
@@ -74,14 +77,14 @@
                 events: events,
                 editable: false,
                 selectable: false,
-                eventDisplay: 'none', // Tidak menampilkan teks event di dalam kalender
+                eventDisplay: 'none', // Tidak ada teks event di dalam tanggal
                 dayCellDidMount: function(arg) {
                     // Cek apakah tanggal memiliki event
                     var dateStr = arg.date.toISOString().split('T')[0];
                     var event = events.find(e => e.start === dateStr);
 
                     if (event) {
-                        arg.el.classList.add('event-highlight'); // Tambahkan warna khusus
+                        arg.el.classList.add('event-highlight'); // Tambahkan warna penuh pada tanggal
                         arg.el.addEventListener('click', function() {
                             // Tampilkan detail event saat tanggal diklik
                             document.getElementById('event-details').style.display = 'block';
