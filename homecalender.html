@@ -47,6 +47,11 @@
             position: relative;
             padding-bottom: 100%; /* Membuat elemen menjadi kotak */
             width: 100%; /* Lebar penuh */
+            border: none; /* Menghilangkan garis pada tanggal */
+        }
+        .fc-daygrid-day-number {
+            font-size: 16px;
+            border: none; /* Menghilangkan garis pada tanggal */
         }
         .fc-daygrid-day-content {
             position: absolute;
@@ -57,13 +62,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            border: none; /* Menghilangkan border pada konten hari */
         }
         .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
             font-weight: bold;
             color: #ff5722; /* Warna khusus untuk hari ini */
-        }
-        .fc-daygrid-day-number {
-            font-size: 16px;
         }
     </style>
 </head>
