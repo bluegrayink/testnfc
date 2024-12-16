@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Calendar with Details</title>
+    <title>Event Calendar</title>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar/main.min.js"></script>
     <style>
@@ -13,7 +13,7 @@
             padding: 0;
         }
         #calendar {
-            max-width: 900px;
+            max-width: 600px; /* Membuat kalender lebih kecil */
             margin: 50px auto;
         }
         #event-details {
@@ -28,13 +28,18 @@
         #event-details h2 {
             margin-top: 0;
         }
+        .event-highlight { /* Memberikan warna berbeda pada tanggal dengan event */
+            background-color: #ffecb3; /* Warna kuning muda */
+            border-radius: 50%; /* Membuat lingkaran */
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1 style="text-align: center;">Event Calendar</h1>
     <div id="calendar"></div>
 
-    <!-- Div for displaying event details -->
+    <!-- Div untuk menampilkan detail event -->
     <div id="event-details">
         <h2>Event Details</h2>
         <p id="event-title"></p>
@@ -67,12 +72,20 @@
                 ],
                 editable: false,
                 selectable: false,
+                eventDisplay: 'background', // Hanya menampilkan latar belakang, tanpa teks
+                eventBackgroundColor: '#ffecb3', // Warna background untuk tanggal dengan event
                 eventClick: function(info) {
-                    // Display event details
+                    // Tampilkan detail event
                     document.getElementById('event-details').style.display = 'block';
                     document.getElementById('event-title').textContent = "Title: " + info.event.title;
                     document.getElementById('event-date').textContent = "Date: " + info.event.start.toDateString();
                     document.getElementById('event-description').textContent = "Description: " + info.event.extendedProps.description;
+                },
+                dayCellDidMount: function(arg) {
+                    // Tambahkan class jika tanggal memiliki event
+                    if (arg.date.getDate() === 15 || arg.date.getDate() === 20 || arg.date.getDate() === 25) {
+                        arg.el.classList.add('event-highlight');
+                    }
                 }
             });
 
