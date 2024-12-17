@@ -1,164 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Calendar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .calendar-container {
-            width: 300px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ff5722;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-        }
-        .calendar-header button {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-        }
-        .calendar-cell {
-            padding: 7px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .day-header {
-            font-weight: bold;
-            background-color: #eee;
-        }
-        .calendar-cell.today {
-            background-color: #ff5722;
-            color: white;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="calendar-container">
-        <!-- Header dengan Tombol Navigasi -->
-        <div class="calendar-header">
-            <button id="prev-month">&lt;</button>
-            <div id="calendar-header"></div>
-            <button id="next-month">&gt;</button>
-        </div>
-        <!-- Grid Kalender -->
-        <div class="calendar-grid" id="calendar-grid"></div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const calendarHeader = document.getElementById('calendar-header');
-            const calendarGrid = document.getElementById('calendar-grid');
-            const prevMonthBtn = document.getElementById('prev-month');
-            const nextMonthBtn = document.getElementById('next-month');
-
-            let today = new Date();
-            let currentMonth = today.getMonth();
-            let currentYear = today.getFullYear();
-
-            const monthNames = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-            // Fungsi Render Kalender
-            function renderCalendar(month, year) {
-                calendarHeader.innerText = `${monthNames[month]} ${year}`;
-                calendarGrid.innerHTML = "";
-
-                // Render Nama Hari
-                dayNames.forEach(day => {
-                    const dayHeader = document.createElement("div");
-                    dayHeader.classList.add("calendar-cell", "day-header");
-                    dayHeader.innerText = day;
-                    calendarGrid.appendChild(dayHeader);
-                });
-
-                // Tanggal awal bulan dan jumlah hari dalam bulan
-                const firstDay = new Date(year, month, 1).getDay(); // Hari pertama bulan ini
-                const daysInMonth = new Date(year, month + 1, 0).getDate(); // Total hari dalam bulan
-
-                // Sel kosong sebelum tanggal 1
-                for (let i = 0; i < firstDay; i++) {
-                    const emptyCell = document.createElement("div");
-                    emptyCell.classList.add("calendar-cell");
-                    calendarGrid.appendChild(emptyCell);
-                }
-
-                // Isi tanggal
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dateCell = document.createElement("div");
-                    dateCell.classList.add("calendar-cell");
-                    dateCell.innerText = day;
-
-                    // Highlight hari ini
-                    if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                        dateCell.classList.add("today");
-                    }
-
-                    calendarGrid.appendChild(dateCell);
-                }
-
-                // Sel kosong tambahan agar baris genap (jika perlu)
-                const totalCells = firstDay + daysInMonth;
-                const remainingCells = (7 - (totalCells % 7)) % 7; 
-                for (let i = 0; i < remainingCells; i++) {
-                    const emptyCell = document.createElement("div");
-                    emptyCell.classList.add("calendar-cell");
-                    calendarGrid.appendChild(emptyCell);
-                }
-            }
-
-            // Fungsi Pindah Bulan
-            function changeMonth(delta) {
-                currentMonth += delta;
-                if (currentMonth < 0) {
-                    currentMonth = 11; // Desember
-                    currentYear--;
-                } else if (currentMonth > 11) {
-                    currentMonth = 0; // Januari
-                    currentYear++;
-                }
-                renderCalendar(currentMonth, currentYear);
-            }
-
-            // Event Listener Tombol
-            prevMonthBtn.addEventListener("click", function () {
-                changeMonth(-1);
-            });
-
-            nextMonthBtn.addEventListener("click", function () {
-                changeMonth(1);
-            });
-
-            // Render Kalender Awal
-            renderCalendar(currentMonth, currentYear);
-        });
-    </script>
-</body>
-</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calendar-container {
+        width: 300px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ff5722;
+        color: white;
+        padding: 10px;
+        font-size: 18px;
+    }
+    .calendar-header button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+    }
+    .calendar-cell {
+        padding: 7px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .day-header {
+        font-weight: bold;
+        background-color: #eee;
+    }
+    .calendar-cell.today {
+        background-color: #ff5722;
+        color: white;
+        font-weight: bold;
+        border-radius: 50%; /* Bentuk lingkaran */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 30px; /* Ukuran lingkaran */
+        height: 30px; /* Ukuran lingkaran */
+    }
+</style>
