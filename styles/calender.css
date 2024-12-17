@@ -5,7 +5,7 @@
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        margin-top: 20px;
+        margin: 20px 0px 0px 10px;
     }
     .calendar-header {
         display: flex;
