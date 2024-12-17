@@ -134,11 +134,7 @@
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
             document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                sessionStorage.removeItem("accessGranted");
-                localStorage.removeItem("isLoggedIn");
-                window.location.href = "indexmiyuki.html";
-            });
+        
 
             // Calendar code
             const calendarHeader = document.getElementById('calendar-header');
