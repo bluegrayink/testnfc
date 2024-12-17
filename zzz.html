@@ -130,12 +130,11 @@
 
                 // Sel kosong tambahan agar baris genap (jika perlu)
                 const totalCells = firstDay + daysInMonth;
-                const remainingCells = (7 - (totalCells % 7)) % 7; // Perhitungan yang diperbaiki
-                    for (let i = 0; i < remainingCells; i++) {
+                const remainingCells = (7 - (totalCells % 7)) % 7; 
+                for (let i = 0; i < remainingCells; i++) {
                     const emptyCell = document.createElement("div");
-                        emptyCell.classList.add("calendar-cell");
-                        calendarGrid.appendChild(emptyCell);
-                    }
+                    emptyCell.classList.add("calendar-cell");
+                    calendarGrid.appendChild(emptyCell);
                 }
             }
 
