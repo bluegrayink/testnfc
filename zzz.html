@@ -102,8 +102,8 @@
                 });
 
                 // Tanggal awal bulan dan jumlah hari dalam bulan
-                const firstDay = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const firstDay = new Date(year, month, 1).getDay(); // Hari pertama bulan ini
+                const daysInMonth = new Date(year, month + 1, 0).getDate(); // Total hari dalam bulan
 
                 // Sel kosong sebelum tanggal 1
                 for (let i = 0; i < firstDay; i++) {
@@ -124,6 +124,17 @@
                     }
 
                     calendarGrid.appendChild(dateCell);
+                }
+
+                // Sel kosong tambahan agar baris genap (jika perlu)
+                const totalCells = firstDay + daysInMonth;
+                const remainingCells = 7 - (totalCells % 7);
+                if (remainingCells < 7) { // Tambahkan sel kosong hanya jika tidak penuh
+                    for (let i = 0; i < remainingCells; i++) {
+                        const emptyCell = document.createElement("div");
+                        emptyCell.classList.add("calendar-cell");
+                        calendarGrid.appendChild(emptyCell);
+                    }
                 }
             }
 
