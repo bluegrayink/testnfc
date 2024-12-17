@@ -1,0 +1,58 @@
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calendar-container {
+        width: 300px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ff5722;
+        color: white;
+        padding: 10px;
+        font-size: 18px;
+    }
+    .calendar-header button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+    .calendar-cell {
+        padding: 7px;
+        text-align: center;
+        font-size: 14px;
+        border: none; /* Hilangkan border */
+    }
+    .day-header {
+        font-weight: bold;
+        background-color: #eee;
+        border: none; /* Hilangkan border */
+    }
+    .calendar-cell.today {
+        background-color: #ff5722;
+        color: white;
+        font-weight: bold;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 17px;
+        height: 17px;
+    }
