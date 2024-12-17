@@ -44,7 +44,7 @@
          document.addEventListener('DOMContentLoaded', () => {
             // Verify login
             if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "index.html";
+                window.location.href = "indexmiyuki.html";
             }
 
             // Disable right-click and drag events on images and videos
@@ -88,7 +88,7 @@
             document.getElementById("logoutButton").addEventListener("click", () => {
                 sessionStorage.removeItem("accessGranted");
                 localStorage.removeItem("isLoggedIn");
-                window.location.href = "index.html";
+                window.location.href = "indexmiyuki.html";
             });
         });
     </script>
@@ -101,7 +101,8 @@
         <button id="videoButton">Video</button>
         <button id="audioButton">Audio</button>
     </div>
-    
+
+	<div class="container">
 <div class="calendar-container">
         <!-- Header dengan Tombol Navigasi -->
         <div class="calendar-header">
@@ -113,6 +114,8 @@
         <div class="calendar-grid" id="calendar-grid"></div>
     </div>
     <script src="calender.js"></script>
+	</div>
+	
 <div class="container">
     <!-- Photo gallery -->
     <div class="photo-gallery hidden">
