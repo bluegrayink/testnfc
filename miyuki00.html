@@ -7,6 +7,7 @@
     
     <title>Miyuki</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
+	<link rel="stylesheet" href="../testnfc/styles/calender.css">
 
     <style>
         .hidden {
@@ -41,10 +42,7 @@
 
     <script>
          document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexmiyuki.html";
-            }
+           
 
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
@@ -53,13 +51,7 @@
                 }
             });
 
-		// Waktu dalam milidetik (30 menit)
-            const redirectTimeout = 1800000;
-
-            // Arahkan pengguna ke halaman index.html
-            setTimeout(() => {
-                window.location.href = 'indexmiyuki.html'; // Ganti dengan path ke halaman utama Anda
-            }, redirectTimeout);
+		
 
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
@@ -101,6 +93,18 @@
         <button id="audioButton">Audio</button>
     </div>
 
+<div class="calendar-container">
+        <!-- Header dengan Tombol Navigasi -->
+        <div class="calendar-header">
+            <button id="prev-month">&lt;</button>
+            <div id="calendar-header"></div>
+            <button id="next-month">&gt;</button>
+        </div>
+        <!-- Grid Kalender -->
+        <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+<script></script>
+	
 <div class="container">
     <!-- Photo gallery -->
     <div class="photo-gallery hidden">
