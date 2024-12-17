@@ -39,28 +39,29 @@
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 1px;
     }
     .calendar-cell {
         padding: 7px;
         text-align: center;
         font-size: 14px;
+        border: none; /* Hilangkan border */
     }
     .day-header {
         font-weight: bold;
         background-color: #eee;
+        border: none; /* Hilangkan border */
     }
     .calendar-cell.today {
         background-color: #ff5722;
         color: white;
         font-weight: bold;
-        border-radius: 50%; /* Bentuk lingkaran */
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: auto;
-        width: 17px; /* Ukuran lingkaran */
-        height: 17px; /* Ukuran lingkaran */
+        width: 17px;
+        height: 17px;
     }
 </style>
 </head>
@@ -107,8 +108,8 @@
                 });
 
                 // Tanggal awal bulan dan jumlah hari dalam bulan
-                const firstDay = new Date(year, month, 1).getDay(); // Hari pertama bulan ini
-                const daysInMonth = new Date(year, month + 1, 0).getDate(); // Total hari dalam bulan
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
 
                 // Sel kosong sebelum tanggal 1
                 for (let i = 0; i < firstDay; i++) {
@@ -145,10 +146,10 @@
             function changeMonth(delta) {
                 currentMonth += delta;
                 if (currentMonth < 0) {
-                    currentMonth = 11; // Desember
+                    currentMonth = 11;
                     currentYear--;
                 } else if (currentMonth > 11) {
-                    currentMonth = 0; // Januari
+                    currentMonth = 0;
                     currentYear++;
                 }
                 renderCalendar(currentMonth, currentYear);
