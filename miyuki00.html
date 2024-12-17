@@ -8,13 +8,58 @@
     <title>Miyuki</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
 
+    <style>
+        .hidden {
+            display: none;
+        }
+
+         .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        div.animated {
+            position: absolute;
+            visibility: hidden;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(0);}
+            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
     <script>
+         document.addEventListener('DOMContentLoaded', () => {
+            // Verify login
+            if (!localStorage.getItem("isLoggedIn")) {
+                window.location.href = "index.html";
+            }
+
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                     e.preventDefault();
                 }
             });
+
+		// Waktu dalam milidetik (30 menit)
+            const redirectTimeout = 1800000;
+
+            // Arahkan pengguna ke halaman index.html
+            setTimeout(() => {
+                window.location.href = 'indexmiyuki.html'; // Ganti dengan path ke halaman utama Anda
+            }, redirectTimeout);
 
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
@@ -48,42 +93,41 @@
     </script>
 </head>
 
-<body>
-    <h1>Miyuki Profile</h1>
+<body style="background-color: #e3c7ff;">
+    <h1>Miyuki Yoruna Profile</h1>
     <div>
         <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
         <button id="audioButton">Audio</button>
     </div>
 
-    <div class="container">
-        <!-- Photo gallery -->
-        <div class="photo-gallery hidden">
-            <h1>Klee Halloween</h1> 
-           <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
-           <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
-            <h1>Zeta</h1>
-            <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Miyuki Photo 3" class="protected-img">
-            <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Miyuki Photo 4" class="protected-img">
-        </div>
+<div class="container">
+    <!-- Photo gallery -->
+    <div class="photo-gallery hidden">
+        <h1>Photocard 01</h1> 
+         <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo 1" class="protected-img">
+         <img src="/testnfc/Photo/Miyuki/PC2.jpg" alt="Miyuki Photo 2" class="protected-img">
+	<h1>Photocard 02</h1> 
+         <img src="/testnfc/Photo/Miyuki/PC3.jpg" alt="Miyuki Photo 3" class="protected-img">
+         <img src="/testnfc/Photo/Miyuki/PC4.jpg" alt="Miyuki Photo 4" class="protected-img">
+    </div>
 
-        <!-- Video gallery -->
-        <div class="video-gallery hidden">
-            <h1>Video 01</h1> 
-            <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;">
+    <!-- Video gallery -->
+    <div class="video-gallery hidden">
+        <h1>Video 01</h1> 
+        <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;">
             <source src="/testnfc/Video/Miyuki/Vid1.mp4" type="video/mp4">
         </video>
-        </div>
-
-        <!-- Audio gallery -->
-        <div class="audio-gallery hidden">
-            <h1>Audio 01</h1> 
-            <audio controls>
-                <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
     </div>
-    
+
+    <!-- Audio gallery -->
+    <div class="audio-gallery hidden">
+        <h1>Audio 01</h1> 
+        <audio controls style="width: 300px; align: center;">
+            <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</div>
 </body>
 </html>
