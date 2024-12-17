@@ -1,11 +1,11 @@
 .calendar-container {
-		font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
         width: 300px;
         text-align: center;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        margin: 20px;
+        margin-top: 20px;
     }
     .calendar-header {
         display: flex;
