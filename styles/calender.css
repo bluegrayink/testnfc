@@ -24,6 +24,12 @@
         margin-top: 0px;
         cursor: pointer;
     }
+
+    .calendar-header button:hover {
+    	background-color: inherit; 
+    	cursor: default; 
+    }
+
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
