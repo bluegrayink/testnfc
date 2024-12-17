@@ -42,25 +42,13 @@
 
     <script>
          document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexmiyuki.html";
-            }
-
+           
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                     e.preventDefault();
                 }
             });
-
-		// Waktu dalam milidetik (30 menit)
-            const redirectTimeout = 1800000;
-
-            // Arahkan pengguna ke halaman index.html
-            setTimeout(() => {
-                window.location.href = 'indexmiyuki.html'; // Ganti dengan path ke halaman utama Anda
-            }, redirectTimeout);
 
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
@@ -85,11 +73,7 @@
             document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
             document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                sessionStorage.removeItem("accessGranted");
-                localStorage.removeItem("isLoggedIn");
-                window.location.href = "indexmiyuki.html";
-            });
+            
         });
     </script>
 </head>
