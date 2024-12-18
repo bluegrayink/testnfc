@@ -16,12 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
             // Simpan data event
-            let events = {
-                // Contoh event
-                '2024-12-21': 'Comic Fiesta (CF) Malaysia 2024 - Booth Senyuki',
-                '2024-12-22': 'Comic Fiesta (CF) Malaysia 2024 - Booth Senyuki'
-            };
-
+             const events = {
+            '2024-12-21': ['Comic Fiesta (CF) Malaysia 2024 - Booth Senyuki'],
+            '2024-12-22': ['Comic Fiesta (CF) Malaysia 2024 - Booth Senyuki']
+            }; 
+           
             // Fungsi Render Kalender
             function renderCalendar(month, year) {
                 calendarHeader.innerText = `${monthNames[month]} ${year}`;
@@ -57,20 +56,37 @@ document.addEventListener("DOMContentLoaded", function () {
                         dateCell.classList.add("today");
                     }
 
-                    // Tambahkan event jika ada
-                    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    if (events[dateKey]) {
-                        dateCell.classList.add("event");
-                        dateCell.setAttribute("data-event", events[dateKey]);
-                    }
+                    // Highlight event dates
+                    if (events[date]) {
+                    cell.classList.add('event');
+                     }
 
-                    // Event click untuk menampilkan detail event
-                    dateCell.addEventListener("click", function () {
-                        displayEvent(dateKey);
-                    });
+                    // Add click event to cell
+                cell.addEventListener('click', () => {
+                    displayEventDetails(date);
+                });
 
-                    calendarGrid.appendChild(dateCell);
-                }
+                calendarGrid.appendChild(cell);
+            }
+        }
+
+        // Function to display event details
+        function displayEventDetails(date) {
+            eventList.innerHTML = '<h2>Event Details</h2>';
+            if (events[date]) {
+                events[date].forEach(event => {
+                    const eventItem = document.createElement('div');
+                    eventItem.classList.add('event-item');
+                    eventItem.textContent = `${date}: ${event}`;
+                    eventList.appendChild(eventItem);
+                });
+            } else {
+                const noEventItem = document.createElement('div');
+                noEventItem.classList.add('event-item');
+                noEventItem.textContent = 'Tidak ada Event';
+                eventList.appendChild(noEventItem);
+            }
+        }
 
                 // Sel kosong tambahan agar baris genap (jika perlu)
                 const totalCells = firstDay + daysInMonth;
@@ -93,18 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentYear++;
                 }
                 renderCalendar(currentMonth, currentYear);
-            }
-
-            // Fungsi untuk menampilkan detail event
-            function displayEvent(dateKey) {
-                eventList.innerHTML = "";
-                if (events[dateKey]) {
-                    const listItem = document.createElement("li");
-                    listItem.innerText = `${dateKey}: ${events[dateKey]}`;
-                    eventList.appendChild(listItem);
-                } else {
-                    eventList.innerHTML = "<li>No events for this date.</li>";
-                }
             }
 
             // Event Listener Tombol
