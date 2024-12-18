@@ -1,6 +1,9 @@
 const calendarGrid = document.getElementById('calendar-grid');
         const eventList = document.getElementById('event-list');
-        const events = {}; // Object to store events
+        const events = {
+            '2024-12-25': ['Christmas Celebration'],
+            '2024-12-31': ['New Year Eve Party']
+        }; // Object to store events
 
         // Function to generate a calendar
         function generateCalendar(year, month) {
@@ -18,7 +21,8 @@ const calendarGrid = document.getElementById('calendar-grid');
                 const cell = document.createElement('div');
                 cell.classList.add('calendar-cell');
                 cell.textContent = day;
-                cell.dataset.date = `${year}-${month + 1}-${day}`; // Add data attribute
+                const date = `${year}-${month + 1}-${String(day).padStart(2, '0')}`;
+                cell.dataset.date = date; // Add data attribute
 
                 // Highlight today's date
                 const today = new Date();
@@ -26,31 +30,35 @@ const calendarGrid = document.getElementById('calendar-grid');
                     cell.classList.add('today');
                 }
 
+                // Highlight event dates
+                if (events[date]) {
+                    cell.classList.add('event');
+                }
+
                 // Add click event to cell
                 cell.addEventListener('click', () => {
-                    const date = cell.dataset.date;
-                    const eventName = prompt(`Add event for ${date}:`);
-                    if (eventName) {
-                        if (!events[date]) events[date] = [];
-                        events[date].push(eventName);
-                        displayEvents();
-                    }
+                    displayEventDetails(date);
                 });
 
                 calendarGrid.appendChild(cell);
             }
         }
 
-        // Function to display events
-        function displayEvents() {
-            eventList.innerHTML = '<h2>Events</h2>';
-            for (const date in events) {
+        // Function to display event details
+        function displayEventDetails(date) {
+            eventList.innerHTML = '<h2>Event Details</h2>';
+            if (events[date]) {
                 events[date].forEach(event => {
                     const eventItem = document.createElement('div');
                     eventItem.classList.add('event-item');
                     eventItem.textContent = `${date}: ${event}`;
                     eventList.appendChild(eventItem);
                 });
+            } else {
+                const noEventItem = document.createElement('div');
+                noEventItem.classList.add('event-item');
+                noEventItem.textContent = 'No events on this date.';
+                eventList.appendChild(noEventItem);
             }
         }
 
