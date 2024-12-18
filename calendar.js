@@ -3,8 +3,8 @@ const eventList = document.getElementById('event-list');
 const events = {
     '2024-12-21': ['21-22 Des : Comic Fiesta (CF) Malaysia - Booth Senyuki'],
     '2024-12-22': ['21-22 Des : Comic Fiesta (CF) Malaysia - Booth Senyuki'],
-    '2025-02-08': ['08-09 Feb : Mukashi - SPARK'],
-    '2025-02-09': ['08-09 Feb : Mukashi - SPARK']
+    '2025-2-8': ['08-09 Feb : Mukashi - SPARK'],
+    '2025-2-9': ['08-09 Feb : Mukashi - SPARK']
 }; // Object to store events
 
 const monthNames = [
