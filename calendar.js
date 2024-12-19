@@ -3,7 +3,7 @@ const eventList = document.getElementById('event-list');
 const dayRow = document.getElementById('day-row');
 const headerTitle = document.getElementById('header-title');
 
-const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const monthNames = [
     "January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October",
@@ -35,7 +35,7 @@ function generateCalendar(year, month) {
     headerTitle.textContent = `${monthNames[month]} ${year}`;
     calendarGrid.innerHTML = '';
 
-    const firstDay = new Date(year, month, 1).getDay();
+    const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     // Add empty cells for the first row
@@ -49,6 +49,13 @@ function generateCalendar(year, month) {
         const cell = document.createElement('div');
         cell.classList.add('calendar-cell');
         cell.textContent = day;
+        
+        const dayOfWeek = new Date(year, month, day).getDay();
+
+    // Highlight Sundays
+    if (dayOfWeek === 0) { // 0 represents Sunday
+        cell.classList.add('sunday');
+    }
 
         if (events[date]) {
             cell.classList.add('event');
