@@ -3,206 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Calendar with Events</title>
-    <style>
-        /* Tambahkan CSS untuk styling kalender */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            margin: 20px 0;
-            text-align: center;
-            color: #333;
-        }
-
-        .calendar-container {
-            width: 300px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            background-color: white;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ff8496;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-        }
-
-        .calendar-header button {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background-color: #ddd;
-        }
-
-        .calendar-cell {
-            padding: 7px;
-            text-align: center;
-            font-size: 14px;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        .calendar-cell.today {
-            background-color: #ff8496;
-            color: white;
-            font-weight: bold;
-            border-radius: 50%;
-        }
-
-        .calendar-cell.event {
-            background-color: #2196F3;
-            color: white;
-            border-radius: 50%;
-        }
-
-        .day-header {
-            font-weight: bold;
-            background-color: #eee;
-        }
-
-        .event-list {
-            margin-top: 20px;
-            text-align: left;
-            width: 300px;
-        }
-
-        .event-item {
-            padding: 10px;
-            background-color: #e3f2fd;
-            border: 1px solid #2196F3;
-            margin-bottom: 5px;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Calendar with Events</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Event Calendar</h1>
+    <h1>Interactive Calendar</h1>
     <div class="calendar-container">
         <div class="calendar-header">
             <button id="prev-month">&lt;</button>
-            <div id="calendar-header"></div>
+            <div id="calendar-header">Month Year</div>
             <button id="next-month">&gt;</button>
         </div>
-        <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="day-row">
+            <div class="day-cell">Sun</div>
+            <div class="day-cell">Mon</div>
+            <div class="day-cell">Tue</div>
+            <div class="day-cell">Wed</div>
+            <div class="day-cell">Thu</div>
+            <div class="day-cell">Fri</div>
+            <div class="day-cell">Sat</div>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
     </div>
-
-    <div class="event-list" id="event-list">
-        <h2>Event Details</h2>
-    </div>
-
-    <script>
-        const calendarGrid = document.getElementById('calendar-grid');
-        const eventList = document.getElementById('event-list');
-        const events = {
-            '2024-12-25': ['Christmas Celebration'],
-            '2024-12-31': ['New Year Eve Party']
-        }; // Object to store events
-
-        // Function to generate a calendar
-        function generateCalendar(year, month) {
-            calendarGrid.innerHTML = ''; // Clear previous calendar
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-            // Add empty cells for the first row
-            for (let i = 0; i < firstDay; i++) {
-                calendarGrid.innerHTML += `<div class="calendar-cell"></div>`;
-            }
-
-            // Generate calendar days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const cell = document.createElement('div');
-                cell.classList.add('calendar-cell');
-                cell.textContent = day;
-                const date = `${year}-${month + 1}-${String(day).padStart(2, '0')}`;
-                cell.dataset.date = date; // Add data attribute
-
-                // Highlight today's date
-                const today = new Date();
-                if (today.getDate() === day && today.getMonth() === month && today.getFullYear() === year) {
-                    cell.classList.add('today');
-                }
-
-                // Highlight event dates
-                if (events[date]) {
-                    cell.classList.add('event');
-                }
-
-                // Add click event to cell
-                cell.addEventListener('click', () => {
-                    displayEventDetails(date);
-                });
-
-                calendarGrid.appendChild(cell);
-            }
-        }
-
-        // Function to display event details
-        function displayEventDetails(date) {
-            eventList.innerHTML = '<h2>Event Details</h2>';
-            if (events[date]) {
-                events[date].forEach(event => {
-                    const eventItem = document.createElement('div');
-                    eventItem.classList.add('event-item');
-                    eventItem.textContent = `${date}: ${event}`;
-                    eventList.appendChild(eventItem);
-                });
-            } else {
-                const noEventItem = document.createElement('div');
-                noEventItem.classList.add('event-item');
-                noEventItem.textContent = 'No events on this date.';
-                eventList.appendChild(noEventItem);
-            }
-        }
-
-        // Initialize calendar
-        const currentDate = new Date();
-        let currentMonth = currentDate.getMonth();
-        let currentYear = currentDate.getFullYear();
-
-        generateCalendar(currentYear, currentMonth);
-
-        document.getElementById('prev-month').addEventListener('click', () => {
-            currentMonth -= 1;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear -= 1;
-            }
-            generateCalendar(currentYear, currentMonth);
-        });
-
-        document.getElementById('next-month').addEventListener('click', () => {
-            currentMonth += 1;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear += 1;
-            }
-            generateCalendar(currentYear, currentMonth);
-        });
-    </script>
+    <div id="event-list" class="event-list"></div>
+    <script src="calendar.js"></script>
 </body>
 </html>
