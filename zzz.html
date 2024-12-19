@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffd0d7;
     color: #333;
     display: flex;
     justify-content: center;
@@ -42,6 +42,7 @@ h1 {
 /* Calendar Container */
 .calendar-container {
     margin: 20px 0;
+	border-radius: 8px;
 }
 
 /* Calendar Header */
@@ -53,7 +54,6 @@ h1 {
     color: white;
     padding: 10px;
     font-size: 18px;
-    border-radius: 4px;
 }
 
 .calendar-header button {
@@ -68,15 +68,17 @@ h1 {
 .day-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background-color: #f1f1f1;
-    padding: 10px 0;
+    background-color: #fff;
+    padding: 5px 0;
+	font-weight: bold;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
-    margin-top: 10px;
+    margin-top: 0px;
+	background-color: #fff;
 }
 
 .calendar-cell {
@@ -86,10 +88,6 @@ h1 {
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-}
-
-.calendar-cell:hover {
-    background-color: #f0f0f0;
 }
 
 .calendar-cell.today {
@@ -105,6 +103,10 @@ h1 {
     height: 16px;
 }
 
+.calendar-cell.sunday {
+    color: red;
+}
+
 .calendar-cell.event {
     background-color: #2196F3;
     color: white;
@@ -116,7 +118,6 @@ h1 {
     margin: auto;
     width: 16px;
     height: 16px;
-   
 }
 
 /* Event List */
@@ -169,7 +170,7 @@ const eventList = document.getElementById('event-list');
 const dayRow = document.getElementById('day-row');
 const headerTitle = document.getElementById('header-title');
 
-const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const monthNames = [
     "January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October",
@@ -215,6 +216,13 @@ function generateCalendar(year, month) {
         const cell = document.createElement('div');
         cell.classList.add('calendar-cell');
         cell.textContent = day;
+        
+        const dayOfWeek = new Date(year, month, day).getDay();
+
+    // Highlight Sundays
+    if (dayOfWeek === 0) { // 0 represents Sunday
+        cell.classList.add('sunday');
+    }
 
         if (events[date]) {
             cell.classList.add('event');
