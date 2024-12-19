@@ -48,41 +48,32 @@ h1 {
     gap: 1px;
 }
 
+.day-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: bold;
+    text-align: center;
+    background-color: #eee;
+}
+
 .calendar-cell {
     padding: 7px;
     text-align: center;
     font-size: 14px;
 }
 
-.day-header {
-    font-weight: bold;
-    background-color: #eee;
-}
-
 .calendar-cell.today {
     background-color: #ff8496;
     color: white;
     font-weight: bold;
-    border-radius: 50%; /* Circular shape */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 16px; /* Circle size */
-    height: 16px; /* Circle size */
+    border-radius: 50%;
 }
 
 .calendar-cell.event {
     background-color: #2196F3;
     color: white;
     font-weight: bold;
-    border-radius: 50%; /* Circular shape */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 16px; /* Circle size */
-    height: 16px; /* Circle size */
+    border-radius: 50%;
 }
 
 .event-list {
