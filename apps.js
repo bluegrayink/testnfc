@@ -1,7 +1,7 @@
 // UID map
 const uidToPageMap = {
     "jetsukii-klee.html": ["044527A0672681"], // UID untuk halaman Klee
-    "jetsukii-zeta.html": ["044527A0672681"]  // UID untuk halaman Zeta
+    "jetsukii-zeta.html": ["044527A0672681"],  // UID untuk halaman Zeta
     "eventjetsukii.html": ["044527A0672681"]  // UID untuk halaman calendar
 };
 
