@@ -34,7 +34,7 @@ h1 {
 /* Calendar Container */
 .calendar-container {
     margin: 20px 0;
-    border-radius: 8px;
+	border-radius: 8px;
 }
 
 /* Calendar Header */
@@ -62,7 +62,7 @@ h1 {
     grid-template-columns: repeat(7, 1fr);
     background-color: #fff;
     padding: 5px 0;
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .calendar-grid {
@@ -70,7 +70,7 @@ h1 {
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
     margin-top: 0px;
-    background-color: #fff;
+	background-color: #fff;
 }
 
 .calendar-cell {
@@ -103,7 +103,7 @@ h1 {
     background-color: #ff8496;
     color: white;
     font-weight: bold;
-    border-radius: 50%;
+	border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,10 +127,24 @@ h1 {
 .event-list p,
 .event-item {
     font-size: 14px;
-    color: #4B4E53;
+	 color: #4B4E53;
     background-color: #fff;
     border: 1px solid #ff8496;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.event-block {
+    padding: 10px;
+	font-size: 14px;
+	 color: #4B4E53;
+    margin: 10px 0;
+    border: 1px solid #ff8496;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.event-block div {
+    margin-bottom: 5px;
 }
