@@ -11,13 +11,58 @@ const monthNames = [
 ];
 
 const events = {
-    '2024-12-21': ['21-22 Dec: Comic Fiesta (CF) Malaysia - Booth Senyuki'],
-    '2024-12-22': ['21-22 Dec: Comic Fiesta (CF) Malaysia - Booth Senyuki'],
-    '2025-02-08': ['08-09 Feb: Mukashi - SPARK'],
-    '2025-02-09': ['08-09 Feb: Mukashi - SPARK'],
-    '2025-04-26': ['26-27 Apr: Indonesia Anime Conference (Inacon)'],
-    '2025-04-27': ['26-27 Apr: Indonesia Anime Conference (Inacon)']
+    '2024-12-21': [
+        {
+            date: '21-22 Desember',
+            name: 'Comic Fiesta (CF)',
+            location: 'Malaysia',
+            description: 'booth Senyuki',
+            info: 'https://www.instagram.com/comic_fiesta/'
+        }
+    ],
+    '2024-12-22': [
+        {
+            date: '21-22 Desember',
+            name: 'Comic Fiesta (CF)',
+            location: 'Malaysia',
+            description: 'booth Senyuki',
+            info: 'https://www.instagram.com/comic_fiesta/'
+        }
+    ],
+    '2025-02-08': [
+        {
+            date: '08-09 Februari',
+            name: 'Mukashi',
+            location: 'SPARK',
+            description: 'No Booth'
+        }
+    ],
+    '2025-02-09': [
+        {
+            date: '08-09 Februari',
+            name: 'Mukashi',
+            location: 'SPARK',
+            description: 'No Booth'
+        }
+    ],
+    '2025-04-26': [
+        {
+            date: '26-27 April',
+            name: 'Indonesia Anime Conference (Inacon)',
+            location: 'Indonesia',
+            description: '26-27 Apr'
+        }
+    ],
+    '2025-04-27': [
+        {
+            date: '26-27 April',
+            name: 'Indonesia Anime Conference (Inacon)',
+            location: 'Indonesia',
+            description: '26-27 Apr'
+        }
+    ]
 };
+
 
 // Initialize day names
 function initDayNames() {
@@ -72,15 +117,45 @@ function generateCalendar(year, month) {
     }
 }
 
-// Display event details
 function displayEventDetails(date) {
     eventList.innerHTML = '<h2>Event Details</h2>';
-    if (events[date]) {
-        events[date].forEach(event => {
-            const eventItem = document.createElement('div');
-            eventItem.classList.add('event-item');
-            eventItem.textContent = event;
-            eventList.appendChild(eventItem);
+    const eventData = events[date];
+
+    if (eventData) {
+        eventData.forEach(event => {
+            // Buat elemen event block
+            const eventBlock = document.createElement('div');
+            eventBlock.classList.add('event-block');
+
+            // Tambahkan elemen untuk setiap bagian (date, name, location, info)
+            const eventDate = document.createElement('div');
+            eventDate.textContent = event.date;
+            eventDate.style.fontWeight = 'bold';
+
+            const eventName = document.createElement('div');
+            eventName.textContent = event.name;
+
+            const eventLocation = document.createElement('div');
+            eventLocation.textContent = event.location;
+
+            const eventDescription = document.createElement('div');
+            eventDescription.textContent = event.description;
+
+            const eventInfo = document.createElement('a'); // Membuat hyperlink
+            eventInfo.href = event.info; // URL
+            eventInfo.textContent = 'More Info'; // Teks hyperlink
+            eventInfo.target = '_blank'; // Buka di tab baru
+            eventInfo.style.color = 'blue'; // Gaya opsional
+
+            // Gabungkan semua elemen ke dalam event block
+            eventBlock.appendChild(eventDate);
+            eventBlock.appendChild(eventName);
+            eventBlock.appendChild(eventLocation);
+            eventBlock.appendChild(eventDescription);
+            eventBlock.appendChild(eventInfo);
+
+            // Tambahkan event block ke dalam event list
+            eventList.appendChild(eventBlock);
         });
     } else {
         const noEventItem = document.createElement('div');
@@ -89,6 +164,7 @@ function displayEventDetails(date) {
         eventList.appendChild(noEventItem);
     }
 }
+
 
 // Initialize
 let currentDate = new Date();
