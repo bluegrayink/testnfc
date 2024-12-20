@@ -2,11 +2,13 @@
 const uidToPageMap = {
     "jetsukii-klee.html": ["044527A0672681"], // UID untuk halaman Klee
     "jetsukii-zeta.html": ["044527A0672681"]  // UID untuk halaman Zeta
+    "eventjetsukii.html": ["044527A0672681"]  // UID untuk halaman calendar
 };
 
 // Elements
 const kleeButton = document.getElementById("kleeButton");
 const zetaButton = document.getElementById("zetaButton");
+const calendarButton = document.getElementById("calendarButton");
 const statusDiv = document.getElementById("status");
 const scanButton = document.getElementById("scanButton");
 let targetPage = null; // Halaman yang dituju berdasarkan tombol
@@ -46,6 +48,12 @@ kleeButton.addEventListener("click", () => {
 // Tombol untuk membuka halaman Zeta
 zetaButton.addEventListener("click", () => {
     targetPage = "jetsukii-zeta.html"; // Set halaman target ke Zeta
+    startNFCScan(); // Mulai scan NFC
+});
+
+// Tombol untuk membuka halaman Calendar
+calendarButton.addEventListener("click", () => {
+    targetPage = "eventjetsukii.html"; // Set halaman target ke Zeta
     startNFCScan(); // Mulai scan NFC
 });
 
