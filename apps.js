@@ -1,26 +1,37 @@
 // UID map
-const VALID_UID = "044527A0672681"; // UID tunggal untuk akses ke semua halaman
+const uidToPageMap = {
+    "jetsukii-klee.html": ["044527A0672681"], // UID untuk halaman Klee
+    "jetsukii-zeta.html": ["044527A0672681"], // UID untuk halaman Zeta
+    "eventjetsukii.html": ["044527A0672681"], // UID untuk halaman kalender
+};
 
 // Elements
-const buttons = document.querySelectorAll("button[data-target]"); // Ambil semua tombol dengan data-target
+const kleeButton = document.getElementById("kleeButton");
+const zetaButton = document.getElementById("zetaButton");
+const calendarButton = document.getElementById("calendarButton");
 const statusDiv = document.getElementById("status");
+let targetPage = null; // Halaman yang dituju berdasarkan tombol
 
-// Helper function for updating status
-def setStatus(status) {
+// Helper functions for logging and status
+const setStatus = (status) => {
     statusDiv.textContent = status;
-}
+};
 
 // Function to sanitize UID (remove colons if present)
-const sanitizeUID = (uid) => uid.replace(/:/g, "").toUpperCase();
+const sanitizeUID = (uid) => {
+    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
+};
 
 // Function to validate UID and redirect
-const validateAndRedirect = (rawUid, targetPage) => {
-    const uid = sanitizeUID(rawUid);
+const validateAndRedirect = (rawUid) => {
+    const uid = sanitizeUID(rawUid); // Sanitize UID
+    const validUids = uidToPageMap[targetPage] || []; // UID valid untuk halaman target
 
-    if (uid === VALID_UID) {
+    if (validUids.includes(uid)) {
         setStatus("Access granted. Redirecting...");
         setTimeout(() => {
             localStorage.setItem("isLoggedIn", "true"); // Set login status
+            localStorage.setItem("targetPage", targetPage); // Simpan halaman tujuan
             window.location.href = targetPage; // Redirect ke halaman target
         }, 1000);
     } else {
@@ -28,8 +39,26 @@ const validateAndRedirect = (rawUid, targetPage) => {
     }
 };
 
+// Tombol untuk membuka halaman Klee
+kleeButton.addEventListener("click", () => {
+    targetPage = "jetsukii-klee.html"; // Set halaman target ke Klee
+    startNFCScan(); // Mulai scan NFC
+});
+
+// Tombol untuk membuka halaman Zeta
+zetaButton.addEventListener("click", () => {
+    targetPage = "jetsukii-zeta.html"; // Set halaman target ke Zeta
+    startNFCScan(); // Mulai scan NFC
+});
+
+// Tombol untuk membuka halaman Kalender
+calendarButton.addEventListener("click", () => {
+    targetPage = "eventjetsukii.html"; // Set halaman target ke Kalender
+    startNFCScan(); // Mulai scan NFC
+});
+
 // NFC scanning logic
-const startNFCScan = async (targetPage) => {
+const startNFCScan = async () => {
     // Periksa dukungan NFC sebelum melanjutkan
     if (!("NDEFReader" in window)) {
         setStatus("Your device or browser does not support NFC scanning.");
@@ -47,17 +76,9 @@ const startNFCScan = async (targetPage) => {
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            validateAndRedirect(serialNumber, targetPage);
+            validateAndRedirect(serialNumber);
         });
     } catch (error) {
         setStatus("Error: " + error.message);
     }
 };
-
-// Add event listeners to buttons
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        const targetPage = button.getAttribute("data-target"); // Ambil target halaman dari atribut data-target
-        startNFCScan(targetPage);
-    });
-});
