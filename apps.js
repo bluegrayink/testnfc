@@ -1,34 +1,23 @@
 // UID map
-const uidToPageMap = {
-    "jetsukii-klee.html": ["044527A0672681"], // UID untuk halaman Klee
-    "jetsukii-zeta.html": ["044527A0672681"],  // UID untuk halaman Zeta
-    "eventjetsukii.html": ["044527A0672681"]  // UID untuk halaman calendar
-};
+const VALID_UID = "044527A0672681"; // UID tunggal untuk akses ke semua halaman
 
 // Elements
-const kleeButton = document.getElementById("kleeButton");
-const zetaButton = document.getElementById("zetaButton");
-const calendarButton = document.getElementById("calendarButton");
+const buttons = document.querySelectorAll("button[data-target]"); // Ambil semua tombol dengan data-target
 const statusDiv = document.getElementById("status");
-const scanButton = document.getElementById("scanButton");
-let targetPage = null; // Halaman yang dituju berdasarkan tombol
 
-// Helper functions for logging and status
-const setStatus = (status) => {
+// Helper function for updating status
+def setStatus(status) {
     statusDiv.textContent = status;
-};
+}
 
 // Function to sanitize UID (remove colons if present)
-const sanitizeUID = (uid) => {
-    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
-};
+const sanitizeUID = (uid) => uid.replace(/:/g, "").toUpperCase();
 
 // Function to validate UID and redirect
-const validateAndRedirect = (rawUid) => {
-    const uid = sanitizeUID(rawUid); // Sanitize UID
-    const validUids = uidToPageMap[targetPage] || []; // UID valid untuk halaman target
+const validateAndRedirect = (rawUid, targetPage) => {
+    const uid = sanitizeUID(rawUid);
 
-    if (validUids.includes(uid)) {
+    if (uid === VALID_UID) {
         setStatus("Access granted. Redirecting...");
         setTimeout(() => {
             localStorage.setItem("isLoggedIn", "true"); // Set login status
@@ -39,26 +28,13 @@ const validateAndRedirect = (rawUid) => {
     }
 };
 
-// Tombol untuk membuka halaman Klee
-kleeButton.addEventListener("click", () => {
-    targetPage = "jetsukii-klee.html"; // Set halaman target ke Klee
-    startNFCScan(); // Mulai scan NFC
-});
-
-// Tombol untuk membuka halaman Zeta
-zetaButton.addEventListener("click", () => {
-    targetPage = "jetsukii-zeta.html"; // Set halaman target ke Zeta
-    startNFCScan(); // Mulai scan NFC
-});
-
-// Tombol untuk membuka halaman Calendar
-calendarButton.addEventListener("click", () => {
-    targetPage = "eventjetsukii.html"; // Set halaman target ke Zeta
-    startNFCScan(); // Mulai scan NFC
-});
-
 // NFC scanning logic
-const startNFCScan = async () => {
+const startNFCScan = async (targetPage) => {
+    // Periksa dukungan NFC sebelum melanjutkan
+    if (!("NDEFReader" in window)) {
+        setStatus("Your device or browser does not support NFC scanning.");
+        return;
+    }
 
     setStatus("Please scan your NFC card...");
 
@@ -67,14 +43,21 @@ const startNFCScan = async () => {
         await ndef.scan();
 
         ndef.addEventListener("readingerror", () => {
-            setStatus("Cannot read data from the NFC tag. Try another one?");
+            setStatus("Cannot read data from the NFC tag. Try holding your card closer.");
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            const scannedUID = sanitizeUID(serialNumber);
-            validateAndRedirect(scannedUID);
+            validateAndRedirect(serialNumber, targetPage);
         });
     } catch (error) {
         setStatus("Error: " + error.message);
     }
 };
+
+// Add event listeners to buttons
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const targetPage = button.getAttribute("data-target"); // Ambil target halaman dari atribut data-target
+        startNFCScan(targetPage);
+    });
+});
