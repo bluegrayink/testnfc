@@ -84,7 +84,7 @@ button {
      	width:  100px;
      	padding:  0px;
      	font-size:  16px;
-	color: #4B4E53;
+	color: #fff;
     	cursor: pointer;
     	border-radius: 15px;
     	margin-top: 20px;
@@ -93,7 +93,7 @@ button {
 
 button:hover {
     background-color: #4B4E53;
-    color: #fdfdfd;
+    color: #fff;
 }
 
 #logoutButton {
@@ -187,5 +187,5 @@ button:hover {
 
 .email-section span {
     font-size: 16px; /* Sesuaikan ukuran teks */
-    color: #4B4E53; /* Sesuaikan warna teks */
+    color: #fff; /* Sesuaikan warna teks */
 }
