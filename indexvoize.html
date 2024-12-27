@@ -4,63 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jetsukii web NFC</title>
+    <title>Voize Homepage</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    <script>
-        // Prevent viewing source code using Ctrl+U
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        // Redirect non-Android and non-iOS Safari users
-       window.onload = function() {
-            var userAgent = navigator.userAgent;
-
-            // Cek apakah pengguna menggunakan Safari di iPhone
-            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
-            // Cek apakah pengguna menggunakan browser di Android
-            var isAndroidBrowser = /Android/.test(userAgent);
-
-            if (!isSafariIphone && !isAndroidBrowser) {
-                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
-            }
-        };
-    </script>
 </head>
 <body style="background-color: #ffd0d7;">
-    <h1>Jetsukii Page</h1>
+    <h1>Voize Music Academy</h1>
     <div class="photo-gallery">
-        <img src="/testnfc/Photo/Jetsukii/indexjetsukii00.jpg" alt="index Jet" class="protected-img">
-        <h2>Hello! I am Jetsukii and I am a full time cosplayer, content creator and gamers. Thank you for your support!</h2>
+        <img src="/testnfc/Photo/Voize/Logo Voize.jpg" alt="index voize" class="protected-img">
+        <h2>VOIZE Music Academy adalah kelas vokal yang didukung oleh tim pengajar profesional yang berpengalaman dan masih aktif di industri musik Show dan Artist Performance.
+
+Kami fokus melatih dan membimbing perkembangan murid melalui sistem Recording untuk memudahkan memantau progress dari kegiatan belajar mengajar.</h2>
     </div>
-    <div class="business-collab">
-        <h2>For business and collaboration
-        <div class="email-section">
-            <a href="mailto:jetsukii.contact@gmail.com" target="_blank">
-            <img src="/testnfc/Photo/icon/email-envelope-line-gray-icon.png" alt="email" class="protected-img">
-            </a>
-                <span>jetsukii.contact@gmail.com</span></h2>
-    </div>
+    
     <div class="social-icons">
         <a href="https://www.instagram.com/voizemusicacademy/" target="_blank">
             <img src="/testnfc/Photo/icon/instagram-gray-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
-        </a>
-        <a href="https://www.tiktok.com/@jennifertheresia.jts" target="_blank">
-            <img src="/testnfc/Photo/icon/tiktok-gray-icon.png" alt="tiktok" class="protected-img" style="width:32px;height:32px;">
-        </a>
-        <a href="https://www.youtube.com/c/Jetsukii" target="_blank">
-            <img src="/testnfc/Photo/icon/youtube-app-gray-icon.png" alt="youtube" class="protected-img" style="width:32px;height:32px;">
-        </a>
-        <a href="https://discord.com/invite/wsk5UqyqPJ" target="_blank">
-            <img src="/testnfc/Photo/icon/discord-gray-icon.png" alt="discord" class="protected-img" style="width:32px;height:32px;">
-        </a>
-        <a href="https://m.facebook.com/JetsukiiCosplay" target="_blank">
-            <img src="/testnfc/Photo/icon/facebook-app-round-gray-icon.png" alt="facebook" class="protected-img" style="width:32px;height:32px;">
-        </a>
-        <a href="https://twitter.com/jetsukii" target="_blank">
-            <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
 </body>
