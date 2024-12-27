@@ -92,8 +92,8 @@ button {
 	}
 
 button:hover {
-    background-color: #4B4E53;
-    color: #fff;
+    background-color: #fff;
+    color: #5c98c2;
 }
 
 #logoutButton {
