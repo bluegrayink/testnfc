@@ -5,7 +5,7 @@ const uidToPageMap = {
 };
 
 // Elements
-const kontenButton = document.getElementById("konten");
+const kontenButton = document.getElementById("kontenButton");
 const calendarButton = document.getElementById("calendarButton");
 const statusDiv = document.getElementById("status");
 let targetPage = null; // Halaman yang dituju berdasarkan tombol
