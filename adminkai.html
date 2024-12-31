@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kai Liaa Web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main00.css">
+    <script>
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Redirect non-Android and non-iOS Safari users
+        window.onload = function() {
+            var userAgent = navigator.userAgent;
+
+            // Check if the user is on Safari on iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Check if the user is using a browser on Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
+</head>
+<body style="background-color: #ffd0d7;">
+    <h1>Admin Kai Liaa Page</h1>
+
+    <!-- Buttons with data-target attributes -->
+    <button id="viperButton" data-target="jetsukii-klee.html">Viper Konten</button>
+    <button id="mikasaButton" data-target="jetsukii-zeta.html">Mikasa Konten</button>
+    <button id="calendarButton" data-target="eventjetsukii.html">Calendar</button>
+
+    <!-- Status and logs for user interaction -->
+    <div id="status"></div>
+    <div id="log"></div>
+
+    <!-- Load JavaScript application logic -->
+    <script src="apps.js"></script>
+</body>
+</html>
