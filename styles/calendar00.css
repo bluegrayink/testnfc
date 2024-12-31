@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #b2cbf2;
+    background-color: #A5C8E4;
     color: #333;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #8ea2c1;
+    background-color: #7eb0d8;
     color: white;
     padding: 10px;
     font-size: 18px;
@@ -100,7 +100,7 @@ h1 {
 }
 
 .calendar-cell.event {
-    background-color: #8ea2c1;
+    background-color: #7eb0d8;
     color: white;
     font-weight: bold;
 	border-radius: 50%;
@@ -140,7 +140,7 @@ h1 {
 	font-size: 14px;
 	 color: #4B4E53;
     margin: 10px 0;
-    border: 1px solid #ff8496;
+    border: 1px solid #7eb0d8;
     border-radius: 8px;
     background-color: #fff;
 }
