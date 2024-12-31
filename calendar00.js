@@ -11,6 +11,22 @@ const monthNames = [
 ];
 
 const events = {
+    '2024-12-07': [
+        {
+            date: '07-08 Desember',
+            name: 'Motion IME',
+            location: 'Gambir Expo Kemayoran',
+            description: 'Booth with Rannunn'
+        }
+    ],
+    '2024-12-08': [
+        {
+            date: '07-08 Desember',
+            name: 'Motion IME',
+            location: 'Gambir Expo Kemayoran',
+            description: 'Booth with Rannunn'
+        }
+    ],
     '2025-02-08': [
         {
             date: '08-09 Februari',
