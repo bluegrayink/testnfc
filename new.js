@@ -6,7 +6,8 @@ const uidToPageMap = {
     "jetsukii-klee.html": ["E4E5A2B0", "04CC4CA0672681"],
     "jetsukii-zeta.html": ["54B0A4B0", "04E63CA1672681"],
     "lily.html": ["FEEA47BF", "7ED347BF"],
-    "eventjetsukii.html": ["04AF4FA0672681"]
+    "eventjetsukii.html": ["04AF4FA0672681"],
+    "aika.html": ["0460A2B0"]
 };
 
 // Elements
