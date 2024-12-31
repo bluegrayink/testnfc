@@ -16,7 +16,8 @@ const events = {
             date: '07-08 Desember',
             name: 'Motion IME',
             location: 'Gambir Expo Kemayoran',
-            description: 'Booth with Rannunn'
+            description: 'Booth with Rannunn',
+            info: 'https://www.instagram.com/p/DCjOa5Uy4F_/'
         }
     ],
     '2024-12-08': [
@@ -24,7 +25,8 @@ const events = {
             date: '07-08 Desember',
             name: 'Motion IME',
             location: 'Gambir Expo Kemayoran',
-            description: 'Booth with Rannunn'
+            description: 'Booth with Rannunn',
+            info: 'https://www.instagram.com/p/DCjOa5Uy4F_/'
         }
     ],
     '2025-02-08': [
