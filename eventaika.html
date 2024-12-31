@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar</title>
+    <link rel="stylesheet" href="../testnfc/styles/calendar.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verify login
+            if (!localStorage.getItem("isLoggedIn")) {
+                window.location.href = "indexaika.html";
+            }
+
+            // Disable right-click and drag events on images and videos
+            document.addEventListener('contextmenu', (e) => {
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <main class="container">
+        <h1>Event Calendar</h1>
+        <p class="description">
+            Hi semuanya, disini kalian dapat lihat jadwal event aku secara lengkap sebelum aku posting di sosial media aku.
+        </p>
+        <div class="calendar-container">
+            <div id="calendar-header" class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <span id="header-title"></span>
+                <button id="next-month">&gt;</button>
+            </div>
+            <div id="day-row" class="day-row"></div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+        </div>
+        <div id="event-list" class="event-list">
+            <h2>Event Details</h2>
+            <p></p>
+        </div>
+    </main>
+    <script src="calendar.js"></script>
+</body>
+</html>
