@@ -11,7 +11,8 @@ const uidToPageMap = {
     "eventaika.html": ["54B0A4B0"],
     "kailiaa-viper.html": ["F481A3B0"],
     "kailiaa-mikasa.html": ["B4C3A1B0"],
-    "eventkailiaa.html": ["B405A0B0"]
+    "eventkailiaa.html": ["B405A0B0"],
+    "mei-christmas.html": ["MEI123"]
 };
 
 // Elements
