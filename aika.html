@@ -41,10 +41,20 @@
 
     <script>
          document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexaika.html";
-            }
+        const referrer = document.referrer; 
+        const allowedReferrer = "indexaika.html"; 
+
+        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
+            alert("Unauthorized access. Redirecting to homepage...");
+            window.location.href = "indexaika.html"; 
+        }
+
+        const redirectTimeout = 1800000;
+
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexaika.html";
+        }, redirectTimeout);
 
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
@@ -52,14 +62,6 @@
                     e.preventDefault();
                 }
             });
-
-            // Waktu dalam milidetik (30 menit)
-            const redirectTimeout = 1800000;
-
-            // Arahkan pengguna ke halaman index.html
-            setTimeout(() => {
-                window.location.href = 'indexaika.html'; // Ganti dengan path ke halaman utama Anda
-            }, redirectTimeout);
 
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
