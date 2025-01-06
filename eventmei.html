@@ -7,18 +7,15 @@
     <link rel="stylesheet" href="../testnfc/styles/calendar.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        const referrer = document.referrer; // Mendapatkan URL asal
-        const allowedReferrer = "indexmei.html"; // Halaman asal yang diperbolehkan
+        const referrer = document.referrer; 
+        const allowedReferrers = ["indexmei.html", "adminmei.html"]; 
 
-        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            alert("Unauthorized access. Redirecting to homepage...");
-            window.location.href = "indexmei.html"; // Arahkan ke halaman utama
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
+            window.location.href = "indexmei.html"; 
         }
-
-        // Waktu dalam milidetik (30 menit)
         const redirectTimeout = 1800000;
 
-        // Arahkan pengguna ke halaman indexmiyuki.html setelah waktu habis
         setTimeout(() => {
             alert("Session expired. Redirecting to homepage...");
             window.location.href = "indexmei.html";
