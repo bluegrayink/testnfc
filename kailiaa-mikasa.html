@@ -40,13 +40,13 @@
     </style>
 
     <script>
-         document.addEventListener('DOMContentLoaded', () => {
-        // Periksa apakah halaman ini diakses melalui indexmiyuki.html
-        const referrer = document.referrer; // Mendapatkan URL asal
-        const allowedReferrer = "indexkai.html"; // Halaman asal yang diperbolehkan
+        document.addEventListener('DOMContentLoaded', () => {
+        const referrer = document.referrer; 
+        const allowedReferrers = ["indexkai.html", "adminkai.html"];
 
-        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            window.location.href = "indexkai.html"; // Arahkan ke halaman utama
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
+            window.location.href = "indexkai.html"; 
         }
 
         // Waktu dalam milidetik (30 menit)
