@@ -5,14 +5,15 @@ const uidToPageMap = {
     "gita.html": ["C37947BF"],
     "jetsukii-klee.html": ["04CC4CA0672681"],
     "jetsukii-zeta.html": ["04E63CA1672681"],
-    "lily.html": ["FEEA47BF", "7ED347BF"],
     "eventjetsukii.html": ["04AF4FA0672681"],
+    "lily.html": ["FEEA47BF", "7ED347BF"],
     "aika.html": ["0460A2B0"],
     "eventaika.html": ["54B0A4B0"],
     "kailiaa-viper.html": ["F481A3B0"],
     "kailiaa-mikasa.html": ["B4C3A1B0"],
     "eventkailiaa.html": ["B405A0B0"],
-    "mei-christmas.html": ["MEI123"]
+    "mei-christmas.html": ["MEI123"],
+    "eventmei.html": ["MEI123CAL"]
 };
 
 // Elements
