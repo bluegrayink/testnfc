@@ -46,7 +46,6 @@
         const allowedReferrer = "indexmei.html"; // Halaman asal yang diperbolehkan
 
         if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            alert("Unauthorized access. Redirecting to homepage...");
             window.location.href = "indexmei.html"; // Arahkan ke halaman utama
         }
 
