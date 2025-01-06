@@ -7,10 +7,23 @@
     <link rel="stylesheet" href="../testnfc/styles/calendar.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexjetsukii.html";
-            }
+        // Periksa apakah halaman ini diakses melalui indexmiyuki.html
+        const referrer = document.referrer; // Mendapatkan URL asal
+        const allowedReferrer = "indexjetsukii.html"; // Halaman asal yang diperbolehkan
+
+        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
+            alert("Unauthorized access. Redirecting to homepage...");
+            window.location.href = "indexjetsukii.html"; // Arahkan ke halaman utama
+        }
+
+        // Waktu dalam milidetik (30 menit)
+        const redirectTimeout = 1800000;
+
+        // Arahkan pengguna ke halaman indexmiyuki.html setelah waktu habis
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexjetsukii.html";
+        }, redirectTimeout);
 
             // Disable right-click and drag events on images and videos
             document.addEventListener('contextmenu', (e) => {
