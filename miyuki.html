@@ -46,7 +46,6 @@
         const allowedReferrer = "indexmiyuki.html"; // Halaman asal yang diperbolehkan
 
         if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            alert("Unauthorized access. Redirecting to homepage...");
             window.location.href = "indexmiyuki.html"; // Arahkan ke halaman utama
         }
 
