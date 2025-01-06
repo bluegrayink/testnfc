@@ -40,57 +40,62 @@
     </style>
 
     <script>
-         document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexmiyuki.html";
+    document.addEventListener('DOMContentLoaded', () => {
+        // Periksa apakah halaman ini diakses melalui indexmiyuki.html
+        const referrer = document.referrer; // Mendapatkan URL asal
+        const allowedReferrer = "indexmiyuki.html"; // Halaman asal yang diperbolehkan
+
+        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
+            alert("Unauthorized access. Redirecting to homepage...");
+            window.location.href = "indexmiyuki.html"; // Arahkan ke halaman utama
+        }
+
+        // Waktu dalam milidetik (30 menit)
+        const redirectTimeout = 1800000;
+
+        // Arahkan pengguna ke halaman indexmiyuki.html setelah waktu habis
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexmiyuki.html";
+        }, redirectTimeout);
+
+        // Disable right-click and drag events on images and videos
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
             }
-
-            // Disable right-click and drag events on images and videos
-            document.addEventListener('contextmenu', (e) => {
-                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                    e.preventDefault();
-                }
-            });
-
-		// Waktu dalam milidetik (30 menit)
-            const redirectTimeout = 1800000;
-
-            // Arahkan pengguna ke halaman index.html
-            setTimeout(() => {
-                window.location.href = 'indexmiyuki.html'; // Ganti dengan path ke halaman utama Anda
-            }, redirectTimeout);
-
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('dragstart', event => event.preventDefault());
-            });
-
-            const galleries = {
-                'photo-gallery': document.querySelector('.photo-gallery'),
-                'video-gallery': document.querySelector('.video-gallery'),
-                'audio-gallery': document.querySelector('.audio-gallery')
-            };
-
-            const showContent = (contentType) => {
-                Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-                const galleryToShow = galleries[contentType];
-                if (galleryToShow) {
-                    galleryToShow.classList.remove('hidden');
-                    galleryToShow.classList.add('animated');
-                }
-            };
-
-            document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
-            document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
-            document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
-
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                sessionStorage.removeItem("accessGranted");
-                localStorage.removeItem("isLoggedIn");
-                window.location.href = "indexmiyuki.html";
-            });
         });
-    </script>
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        const galleries = {
+            'photo-gallery': document.querySelector('.photo-gallery'),
+            'video-gallery': document.querySelector('.video-gallery'),
+            'audio-gallery': document.querySelector('.audio-gallery')
+        };
+
+        const showContent = (contentType) => {
+            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+            const galleryToShow = galleries[contentType];
+            if (galleryToShow) {
+                galleryToShow.classList.remove('hidden');
+                galleryToShow.classList.add('animated');
+            }
+        };
+
+        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+        document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+        document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            sessionStorage.removeItem("accessGranted");
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "indexmiyuki.html";
+        });
+    });
+</script>
 </head>
 
 <body style="background-color: #e3c7ff;">
