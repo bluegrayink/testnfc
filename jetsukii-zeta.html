@@ -38,63 +38,62 @@
             height: auto;
         }
     </style>
+     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Periksa status pengguna
+        const userStatus = localStorage.getItem("userStatus");
+        const referrer = document.referrer; 
+        const allowedReferrer = "indexjetsukii.html"; 
 
-    <script>
-         document.addEventListener('DOMContentLoaded', () => {
-        // Periksa apakah halaman ini diakses melalui indexmiyuki.html
-        const referrer = document.referrer; // Mendapatkan URL asal
-        const allowedReferrer = "indexjetsukii.html"; // Halaman asal yang diperbolehkan
-
-        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            window.location.href = "indexjetsukii.html"; // Arahkan ke halaman utama
+        if (userStatus !== "admin" && (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn"))) {
+            window.location.href = "indexjetsukii.html"; 
         }
 
-        // Waktu dalam milidetik (30 menit)
         const redirectTimeout = 1800000;
 
-        // Arahkan pengguna ke halaman indexmiyuki.html setelah waktu habis
-        setTimeout(() => {
-            alert("Session expired. Redirecting to homepage...");
-            window.location.href = "indexjetsukii.html";
-        }, redirectTimeout);
-
-            // Disable right-click and drag events on images and videos
-            document.addEventListener('contextmenu', (e) => {
-                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                    e.preventDefault();
-                }
-            });
-
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('dragstart', event => event.preventDefault());
-            });
-
-            const galleries = {
-                'photo-gallery': document.querySelector('.photo-gallery'),
-                'video-gallery': document.querySelector('.video-gallery'),
-                'audio-gallery': document.querySelector('.audio-gallery')
-            };
-
-            const showContent = (contentType) => {
-                Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-                const galleryToShow = galleries[contentType];
-                if (galleryToShow) {
-                    galleryToShow.classList.remove('hidden');
-                    galleryToShow.classList.add('animated');
-                }
-            };
-
-            document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
-            document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
-            document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
-
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                sessionStorage.removeItem("accessGranted");
-                localStorage.removeItem("isLoggedIn");
+        if (userStatus !== "admin") {
+            setTimeout(() => {
                 window.location.href = "indexjetsukii.html";
-            });
+            }, redirectTimeout);
+        }
+
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
         });
-    </script>
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        const galleries = {
+            'photo-gallery': document.querySelector('.photo-gallery'),
+            'video-gallery': document.querySelector('.video-gallery'),
+            'audio-gallery': document.querySelector('.audio-gallery')
+        };
+
+        const showContent = (contentType) => {
+            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+            const galleryToShow = galleries[contentType];
+            if (galleryToShow) {
+                galleryToShow.classList.remove('hidden');
+                galleryToShow.classList.add('animated');
+            }
+        };
+
+        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+        document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+        document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            sessionStorage.removeItem("accessGranted");
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("userStatus");
+            window.location.href = "indexjetsukii.html";
+        });
+    });
+</script>
 </head>
 
 <body style="background-color: #f6b278;">
