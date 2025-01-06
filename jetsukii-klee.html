@@ -41,22 +41,20 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Periksa status pengguna
-        const userStatus = localStorage.getItem("userStatus");
         const referrer = document.referrer; 
-        const allowedReferrer = "indexjetsukii.html"; 
+        const allowedReferrers = ["indexjetsukii.html", "adminjetsukii.html"];
 
-        if (userStatus !== "admin" && (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn"))) {
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
             window.location.href = "indexjetsukii.html"; 
         }
 
         const redirectTimeout = 1800000;
 
-        if (userStatus !== "admin") {
-            setTimeout(() => {
-                window.location.href = "indexjetsukii.html";
-            }, redirectTimeout);
-        }
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexjetsukii.html";
+        }, redirectTimeout);
 
         document.addEventListener('contextmenu', (e) => {
             if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
@@ -90,12 +88,10 @@
         document.getElementById("logoutButton").addEventListener("click", () => {
             sessionStorage.removeItem("accessGranted");
             localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("userStatus");
             window.location.href = "indexjetsukii.html";
         });
     });
 </script>
-
 </head>
 
 <body style="background-color: #ffd0d7;">
