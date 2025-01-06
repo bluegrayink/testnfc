@@ -41,25 +41,26 @@
 
     <script>
          document.addEventListener('DOMContentLoaded', () => {
-            // Verify login
-            if (!localStorage.getItem("isLoggedIn")) {
-                window.location.href = "indexlily.html";
-            }
+        const referrer = document.referrer; 
+        const allowedReferrer = "indexlily.html"; 
 
-            // Disable right-click and drag events on images and videos
+        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
+            alert("Unauthorized access. Redirecting to homepage...");
+            window.location.href = "indexlily.html"; 
+        }
+
+        const redirectTimeout = 1800000;
+
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexlily.html";
+        }, redirectTimeout);
+
             document.addEventListener('contextmenu', (e) => {
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
                     e.preventDefault();
                 }
             });
-
-        // Waktu dalam milidetik (30 menit)
-            const redirectTimeout = 1800000;
-
-            // Arahkan pengguna ke halaman indexlily.html
-            setTimeout(() => {
-                window.location.href = 'indexlily.html'; // Ganti dengan path ke halaman utama Anda
-            }, redirectTimeout);
 
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('dragstart', event => event.preventDefault());
