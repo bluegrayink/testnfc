@@ -10,7 +10,8 @@
         const referrer = document.referrer; 
         const allowedReferrers = ["indexjetsukii.html", "adminjetsukii.html"]; 
 
-        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
             window.location.href = "indexjetsukii.html"; 
         }
         const redirectTimeout = 1800000;
