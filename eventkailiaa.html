@@ -6,22 +6,20 @@
     <title>Event Calendar</title>
     <link rel="stylesheet" href="../testnfc/styles/calendarkai.css">
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        const referrer = document.referrer; // Mendapatkan URL asal
-        const allowedReferrer = "indexkai.html"; // Halaman asal yang diperbolehkan
+         document.addEventListener('DOMContentLoaded', () => {
+        const referrer = document.referrer; 
+        const allowedReferrers = ["indexkailiaa.html", "adminkailiaa.html"];
 
-        if (!referrer.includes(allowedReferrer) || !localStorage.getItem("isLoggedIn")) {
-            alert("Unauthorized access. Redirecting to homepage...");
-            window.location.href = "indexkai.html"; // Arahkan ke halaman utama
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
+            window.location.href = "indexkailiaa.html"; 
         }
 
-        // Waktu dalam milidetik (30 menit)
         const redirectTimeout = 1800000;
 
-        // Arahkan pengguna ke halaman indexmiyuki.html setelah waktu habis
         setTimeout(() => {
             alert("Session expired. Redirecting to homepage...");
-            window.location.href = "indexkai.html";
+            window.location.href = "indexkailiaa.html";
         }, redirectTimeout);
 
             // Disable right-click and drag events on images and videos
@@ -35,7 +33,7 @@
 </head>
 <body>
     <main class="container">
-        <h1>Event Calendar</h1>
+        <h1>Calendar Event</h1>
         <p class="description">
             Hi semuanya, disini kalian dapat lihat jadwal event aku secara lengkap sebelum aku posting di sosial media aku.
         </p>
