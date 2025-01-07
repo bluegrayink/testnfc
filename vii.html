@@ -5,75 +5,131 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Vii Cos</title>
+    <title>Vii</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    <script>
-         document.addEventListener('contextmenu', function(e) {
-                if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                    e.preventDefault();
-                }
-            });
 
-        // Menonaktifkan drag dan drop untuk semua gambar
+    <style>
+        .hidden {
+            display: none;
+        }
+
+         .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        div.animated {
+            position: absolute;
+            visibility: hidden;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(0);}
+            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const referrer = document.referrer; 
+        const allowedReferrers = ["indexvii.html", "adminvii.html"];
+
+        const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
+        if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
+            window.location.href = "indexvii.html"; 
+        }
+
+        const redirectTimeout = 1800000;
+
+        setTimeout(() => {
+            alert("Session expired. Redirecting to homepage...");
+            window.location.href = "indexvii.html";
+        }, redirectTimeout);
+
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', event => event.preventDefault());
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const photoGallery = document.querySelector('.photo-gallery');
-            const videoGallery = document.querySelector('.video-gallery');
-            
-            // Function to show specific content
-            function showContent(contentType) {
-                if (contentType === 'photo') {
-                    photoGallery.classList.remove('hidden');
-                    videoGallery.classList.add('hidden');
-                } else if (contentType === 'video') {
-                    photoGallery.classList.add('hidden');
-                    videoGallery.classList.remove('hidden');
-                }
+        const galleries = {
+            'photo-gallery': document.querySelector('.photo-gallery'),
+            'video-gallery': document.querySelector('.video-gallery'),
+            'audio-gallery': document.querySelector('.audio-gallery')
+        };
+
+        const showContent = (contentType) => {
+            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+            const galleryToShow = galleries[contentType];
+            if (galleryToShow) {
+                galleryToShow.classList.remove('hidden');
+                galleryToShow.classList.add('animated');
             }
+        };
 
-            document.getElementById("photoButton").addEventListener("click", () => {
-                showContent('photo');
-            });
+        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+        document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+        document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
-            document.getElementById("videoButton").addEventListener("click", () => {
-                showContent('video');
-            });
-
-            document.getElementById("logoutButton").addEventListener("click", () => {
-                // Clear login status
-                localStorage.removeItem("isLoggedIn");
-                // Redirect to login page
-                window.location.href = "index.html";
-            });
-
-            // Initial setup: Show photo gallery by default
-            showContent('photo');
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            sessionStorage.removeItem("accessGranted");
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "indexvii.html";
         });
-    </script>
+    });
+</script>
 </head>
 
-<body style="background-color: #c1e1ec;" oncontextmenu="return false;">
-    <h1>Vii Cos Profile</h1>
+<body style="background-color: #ffd0d7;">
+    <h1>Vii Profile</h1>
     <div>
         <button id="photoButton">Photo</button>
         <button id="videoButton">Video</button>
-    </div>
-    
-    <div class="photo-gallery">
-        <img src="/testnfc/Photo/Vii/PC1.jpg" alt="Faith Photo 1" class="protected-img">
-        <img src="/testnfc/Photo/Vii/PC2.jpg" alt="Faith Photo 2" class="protected-img">
+        <button id="audioButton">Audio</button>
     </div>
 
-    <div class="video-gallery hidden">
-        <video controls class="protected-video" oncontextmenu="return false;" onselectstart="return false;" onmousedown="return false;" controlsList="nodownload">
-        <source src="/testnfc/Video/Vii/Vid1.mp4" type="video/mp4">
-            
-        </video>
-    </div>
+    <div class="container">
+        <!-- Photo gallery -->
+        <div class="photo-gallery hidden">
+            <h1>Photobook 01</h1> 
+            <img src="/testnfc/Photo/Vii/pc01.jpg" alt="Photo Vii" class="protected-img">
+            <img src="/testnfc/Photo/Vii/pc02.jpg" alt="Photo Vii" class="protected-img">
+            <img src="/testnfc/Photo/Vii/pc03.jpg" alt="Photo Vii" class="protected-img">
+        </div>
 
-    <button id="logoutButton">Logout</button>
+        <!-- Video gallery -->
+        <div class="video-gallery hidden">
+            <h1>Video 01</h1> 
+            <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;">
+                <source src="/testnfc/Video/Jetsukii/vid01.mp4" type="video/mp4">
+            </video>
+            <h1>Video 02</h1> 
+            <video controls class="protected-video" controlsList="nodownload" oncontextmenu="return false;">
+                <source src="/testnfc/Video/Jetsukii/vid02.mp4" type="video/mp4">
+            </video>  
+        </div>
+
+        <!-- Audio gallery -->
+        <div class="audio-gallery hidden">
+            <h1>Audio 01</h1> 
+            <audio controls style="width: 300px; align: center;">
+                <source src="/testnfc/Audio/youdiantian.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
 </body>
 </html>
