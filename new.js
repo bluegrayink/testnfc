@@ -1,6 +1,7 @@
 // UID map
 const uidToPageMap = {
     "miyuki.html": ["175647BF", "F22F47BF", "996947BF", "97C447BF"],
+    "eventmiyuki.html": ["749D47BF"],
     "rune.html": ["CB9B4ABF", "1D044BBF"],
     "gita.html": ["C37947BF"],
     "jetsukii-klee.html": ["04CC4CA0672681"],
