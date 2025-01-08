@@ -69,6 +69,11 @@ function initDayNames() {
         const dayCell = document.createElement('div');
         dayCell.classList.add('calendar-cell', 'day-header');
         dayCell.textContent = day;
+
+         // Ubah warna untuk Sunday (index 6) menjadi merah
+        if (index === 6) { 
+            dayCell.style.color = 'red';
+        }
         dayRow.appendChild(dayCell);
     });
 }
@@ -94,6 +99,7 @@ function generateCalendar(year, month) {
         cell.textContent = day;
         
         const dayOfWeek = new Date(year, month, day).getDay();
+        
 
     // Highlight Sundays
     if (dayOfWeek === 0) { // 0 represents Sunday
