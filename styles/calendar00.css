@@ -5,9 +5,9 @@ body {
     background-color: #A5C8E4;
     color: #333;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    justify-content: center; /* Untuk memusatkan secara horizontal */
+    min-height: 100vh; /* Menjamin body setinggi layar */
+    flex-direction: row; /* Elemen akan tersusun secara horizontal */
 }
 
 /* Container Styling */
