@@ -75,40 +75,6 @@ function initDayNames() {
     });
 }
 
-const monthImages = [
-    "headerjan.jpg",   // Gambar untuk Januari
-    "headerfeb.jpg",  // Gambar untuk Februari
-    "march.jpg",     // Gambar untuk Maret
-    "april.jpg",     // Gambar untuk April
-    "may.jpg",       // Gambar untuk Mei
-    "june.jpg",      // Gambar untuk Juni
-    "july.jpg",      // Gambar untuk Juli
-    "august.jpg",    // Gambar untuk Agustus
-    "september.jpg", // Gambar untuk September
-    "october.jpg",   // Gambar untuk Oktober
-    "november.jpg",  // Gambar untuk November
-    "december.jpg"   // Gambar untuk Desember
-];
-
-function updateHeaderImage(monthIndex) {
-    const headerImage = document.getElementById("header-image");
-    headerImage.src = monthImages[monthIndex];
-}
-
-// Update bulan dan gambar saat navigasi
-function navigateMonth(direction) {
-    currentMonth += direction;
-
-    // Pastikan bulan dalam rentang 0-11
-    if (currentMonth < 0) currentMonth = 11;
-    if (currentMonth > 11) currentMonth = 0;
-
-    const monthText = document.getElementById("month-text");
-    monthText.textContent = monthNames[currentMonth]; // Update teks bulan
-
-    updateHeaderImage(currentMonth); // Update gambar header
-}
-
 // Generate calendar
 function generateCalendar(year, month) {
     headerTitle.textContent = `${monthNames[month]} ${year}`;
