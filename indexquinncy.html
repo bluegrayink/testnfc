@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quincy web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+    <script>
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Redirect non-Android and non-iOS Safari users
+       window.onload = function() {
+            var userAgent = navigator.userAgent;
+
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
+</head>
+<body style="background-color: #ffd0d7;">
+    <h1>Quinncy Page</h1>
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Quincy/indexquincy.jpg" alt="index Quinncy" class="protected-img">
+        <h2>Hello! I am Quinncy and I am a full time cosplayer, content creator and gamers. Thank you for your support!</h2>
+    </div>
+    <div class="business-collab">
+        <h2>For business and collaboration
+        <div class="email-section">
+            <a href="mailto:quinncycollabs@gmail.com" target="_blank">
+            <img src="/testnfc/Photo/icon/email-envelope-line-gray-icon.png" alt="email" class="protected-img">
+            </a>
+                <span>quinncycollabs@gmail.com</span></h2>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/prquinnn/" target="_blank">
+            <img src="/testnfc/Photo/icon/instagram-gray-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
+        </a>
+        <a href="https://www.tiktok.com/@prquinnn" target="_blank">
+            <img src="/testnfc/Photo/icon/tiktok-gray-icon.png" alt="tiktok" class="protected-img" style="width:32px;height:32px;">
+        </a>
+    </div>
+    <button id="scanButton">For Android</button>
+    <button id="iphoneButton">For iOS</button>
+
+    <!-- iPhone-specific input section -->
+    <div id="iphoneSection" style="display: none; margin-top: 20px;">
+        <label for="uidInput">Enter UID:</label>
+        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+        <button id="submitUidButton">Submit</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="log"></div>
+
+    <script src="new.js"></script>
+</body>
+</html>
