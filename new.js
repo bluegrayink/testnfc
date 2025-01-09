@@ -17,7 +17,10 @@ const uidToPageMap = {
     "eventmei.html": ["MEI123CAL"],
     "vii-photobook.html": ["447B47BF"],
     "faacrista-ellenjoe.html": ["FAA123"],
-    "eventfaacrista.html": ["FAA123CAL"]
+    "eventfaacrista.html": ["FAA123CAL"],
+    "akaei-runemei.html": ["AKAEI123R"],
+    "akaei-nikke.html": ["AKAEI123N"],
+    "eventakaei.html": ["AKAEI123C"]
 };
 
 // Elements
