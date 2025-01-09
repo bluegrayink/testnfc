@@ -21,7 +21,8 @@ const uidToPageMap = {
     "akaei-ruanmei.html": ["AKAEI123R"],
     "akaei-nikke.html": ["AKAEI123N"],
     "eventakaei.html": ["AKAEI123C"],
-    "quinncy-boa.html": ["264F47BF"]
+    "quinncy-boa.html": ["264F47BF"],
+    "eventquinncy.html":["9D0947BF"]
 };
 
 // Elements
