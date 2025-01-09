@@ -5,7 +5,6 @@ body {
     background-color: #ffd0d7;
     color: #333;
     display: flex;
-    justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
