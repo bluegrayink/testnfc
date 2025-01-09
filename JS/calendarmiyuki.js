@@ -16,7 +16,7 @@ const events = {
             date: '18-19 Januari',
             name: 'Event 01',
             location: 'Location',
-            description: 'information',
+            description: 'info'
         }
     ],
     '2025-01-19': [
@@ -24,7 +24,7 @@ const events = {
             date: '18-19 Januari',
             name: 'Event 01',
             location: 'Location',
-            description: 'information',
+            description: 'info'
         }
     ],
     '2025-02-08': [
@@ -69,11 +69,6 @@ function initDayNames() {
         const dayCell = document.createElement('div');
         dayCell.classList.add('calendar-cell', 'day-header');
         dayCell.textContent = day;
-
-         // Ubah warna untuk Sunday (index 6) menjadi merah
-        if (index === 6) { 
-            dayCell.style.color = 'red';
-        }
         dayRow.appendChild(dayCell);
     });
 }
@@ -99,7 +94,6 @@ function generateCalendar(year, month) {
         cell.textContent = day;
         
         const dayOfWeek = new Date(year, month, day).getDay();
-        
 
     // Highlight Sundays
     if (dayOfWeek === 0) { // 0 represents Sunday
