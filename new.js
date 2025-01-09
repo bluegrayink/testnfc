@@ -2,12 +2,12 @@
 const uidToPageMap = {
     "miyuki.html": ["175647BF", "F22F47BF", "996947BF", "97C447BF"],
     "eventmiyuki.html": ["749D47BF"],
-    "rune.html": ["CB9B4ABF", "1D044BBF"],
-    "gita.html": ["C37947BF"],
     "jetsukii-klee.html": ["04CC4CA0672681"],
     "jetsukii-zeta.html": ["04E63CA1672681"],
     "eventjetsukii.html": ["04AF4FA0672681"],
     "lily.html": ["FEEA47BF", "7ED347BF"],
+    "rune.html": ["CB9B4ABF", "1D044BBF"],
+    "gita.html": ["C37947BF"],
     "aika.html": ["0460A2B0"],
     "eventaika.html": ["54B0A4B0"],
     "kailiaa-viper.html": ["F481A3B0"],
@@ -20,7 +20,8 @@ const uidToPageMap = {
     "eventfaacrista.html": ["FAA123CAL"],
     "akaei-ruanmei.html": ["AKAEI123R"],
     "akaei-nikke.html": ["AKAEI123N"],
-    "eventakaei.html": ["AKAEI123C"]
+    "eventakaei.html": ["AKAEI123C"],
+    "quinncy-boa.html": ["264F47BF"]
 };
 
 // Elements
