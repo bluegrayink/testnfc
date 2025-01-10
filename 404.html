@@ -7,6 +7,12 @@
     
     <title>Web NFC Login</title>
     <link rel="stylesheet" href="../testnfc/styles/index.css">
+    <script>
+    const path = window.location.pathname;
+    if (!path.endsWith('/') && !path.includes('.')) {
+        window.location.replace(`${path}/`);
+    }
+    </script>
 </head>
 
 <body>
