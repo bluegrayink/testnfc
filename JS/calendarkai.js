@@ -64,11 +64,17 @@ const events = {
 
 // Initialize day names
 function initDayNames() {
-    dayRow.innerHTML = '';
-    daysOfWeek.forEach(day => {
+    dayRow.innerHTML = ''; // Kosongkan baris nama hari
+    daysOfWeek.forEach((day, index) => {
         const dayCell = document.createElement('div');
         dayCell.classList.add('calendar-cell', 'day-header');
         dayCell.textContent = day;
+
+        // Jika indeks adalah 6 (hari Minggu), tambahkan gaya warna merah
+        if (index === 6) {
+            dayCell.style.color = 'red';
+        }
+
         dayRow.appendChild(dayCell);
     });
 }
