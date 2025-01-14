@@ -113,6 +113,8 @@ function generateCalendar(year, month) {
         cell.addEventListener('click', () => displayEventDetails(date));
         calendarGrid.appendChild(cell);
     }
+
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 }
 
 function displayEventDetails(date) {
