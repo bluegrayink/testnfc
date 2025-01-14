@@ -179,6 +179,9 @@ document.getElementById('prev-month').addEventListener('click', () => {
         currentYear--;
     }
     generateCalendar(currentYear, currentMonth);
+
+    // Reset event box to default
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 });
 
 document.getElementById('next-month').addEventListener('click', () => {
@@ -188,4 +191,8 @@ document.getElementById('next-month').addEventListener('click', () => {
         currentYear++;
     }
     generateCalendar(currentYear, currentMonth);
+
+    // Reset event box to default
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 });
+
