@@ -3,6 +3,12 @@ const uidToPageMap = {
     "miyukitest.html": ["432F47BF", "704248BF", "476F47BF"],
 };
 
+const uidToImageMap = {
+    "476F47BF": "miyuki1A.jpg",
+    "704248BF": "miyuki2A.jpg",
+    "432F47BF": "miyuki3A.jpg",
+};
+
 // Elements
 const iphoneButton = document.getElementById("iphoneButton");
 const iphoneSection = document.getElementById("iphoneSection");
