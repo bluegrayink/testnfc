@@ -4,9 +4,9 @@ const uidToPageMap = {
 };
 
 const uidToImageMap = {
-    "476F47BF": "miyuki1A.jpg",
-    "704248BF": "miyuki2A.jpg",
-    "432F47BF": "miyuki3A.jpg",
+    "476F47BF": "../Photo/Miyuki/miyuki-nicole01.jpg",
+    "704248BF": "../Photo/Miyuki/miyuki-zeta01.jpg",
+    "432F47BF": "../Photo/Miyuki/miyuki-raora01.jpg",
 };
 
 // Elements
@@ -17,6 +17,8 @@ const uidInput = document.getElementById("uidInput");
 const statusDiv = document.getElementById("status");
 const scanButton = document.getElementById("scanButton");
 const logDiv = document.getElementById("log");
+const dynamicImage = document.getElementById("dynamicImage");
+
 
 // Helper functions for logging and status
 const ChromeSamples = {
@@ -77,13 +79,21 @@ submitUidButton.addEventListener("click", () => {
     }
 });
 
-// Check NFC support
-//if (!("NDEFReader" in window)) {
-  //  alert("Web NFC is not available. Use Chrome on Android.");
-    //window.location.href = "404.html";
-//}
+const updateImage = (rawUid) => {
+    const uid = sanitizeUID(rawUid);
+    const imagePath = uidToImageMap[uid];
 
-// NFC scanning logic
+    if (imagePath) {
+        dynamicImage.src = imagePath;
+        dynamicImage.alt = `Image for UID ${uid}`;
+        log(`Image updated for UID: ${uid}`);
+    } else {
+        dynamicImage.src = "";
+        dynamicImage.alt = "No image available";
+        log("Invalid UID. No image available.");
+    }
+};
+
 scanButton.addEventListener("click", async () => {
     log("Please scan your NFC card...");
 
