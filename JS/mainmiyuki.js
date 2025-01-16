@@ -4,9 +4,9 @@ const uidToPageMap = {
 };
 
 const uidToImageMap = {
-    "476F47BF": "/testnfc/Photo/Miyuki/miyuki-nicole01.jpg",
-    "704248BF": "/testnfc/Photo/Miyuki/miyuki-zeta01.jpg",
-    "432F47BF": "/testnfc/Photo/Miyuki/miyuki-raora01.jpg",
+    "476F47BF": "../Photo/Miyuki/miyuki-nicole01.jpg",
+    "704248BF": "../Photo/Miyuki/miyuki-zeta01.jpg",
+    "432F47BF": "../Photo/Miyuki/miyuki-raora01.jpg",
 };
 
 // Elements
