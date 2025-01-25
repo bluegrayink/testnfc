@@ -11,6 +11,22 @@ const monthNames = [
 ];
 
 const events = {
+    '2025-01-18': [
+        {
+            date: '18-19 Januari',
+            name: 'Event 01',
+            location: 'Location',
+            description: 'info'
+        }
+    ],
+    '2025-01-19': [
+        {
+            date: '18-19 Januari',
+            name: 'Event 01',
+            location: 'Location',
+            description: 'info'
+        }
+    ],
     '2025-02-08': [
         {
             date: '08-09 Februari',
@@ -48,11 +64,17 @@ const events = {
 
 // Initialize day names
 function initDayNames() {
-    dayRow.innerHTML = '';
-    daysOfWeek.forEach(day => {
+    dayRow.innerHTML = ''; // Kosongkan baris nama hari
+    daysOfWeek.forEach((day, index) => {
         const dayCell = document.createElement('div');
         dayCell.classList.add('calendar-cell', 'day-header');
         dayCell.textContent = day;
+
+        // Jika indeks adalah 6 (hari Minggu), tambahkan gaya warna merah
+        if (index === 6) {
+            dayCell.style.color = 'red';
+        }
+
         dayRow.appendChild(dayCell);
     });
 }
@@ -97,6 +119,8 @@ function generateCalendar(year, month) {
         cell.addEventListener('click', () => displayEventDetails(date));
         calendarGrid.appendChild(cell);
     }
+
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 }
 
 function displayEventDetails(date) {
@@ -163,6 +187,9 @@ document.getElementById('prev-month').addEventListener('click', () => {
         currentYear--;
     }
     generateCalendar(currentYear, currentMonth);
+
+    // Reset event box to default
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 });
 
 document.getElementById('next-month').addEventListener('click', () => {
@@ -172,4 +199,7 @@ document.getElementById('next-month').addEventListener('click', () => {
         currentYear++;
     }
     generateCalendar(currentYear, currentMonth);
+
+    // Reset event box to default
+    eventList.innerHTML = '<h2>Event Details</h2><div class="event-item">No events on this day.</div>';
 });
