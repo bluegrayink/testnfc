@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar Event</title>
-    <link rel="stylesheet" href="../testnfc/styles/calendarmiyuki.css">
+    <link rel="stylesheet" href="../testnfc/styles/calendar.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
         const referrer = document.referrer; 
-        const allowedReferrers = ["indexmiyuki.html", "adminmiyuki.html"]; 
+        const allowedReferrers = ["indexayudesu.html", "adminayudesu.html"]; 
 
         const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
         if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
-            window.location.href = "indexmiyuki.html"; 
+            window.location.href = "indexayudesu.html"; 
         }
         const redirectTimeout = 1800000;
 
         setTimeout(() => {
             alert("Session expired. Redirecting to homepage...");
-            window.location.href = "indexmiyuki.html";
+            window.location.href = "indexayudesu.html";
         }, redirectTimeout);
 
             document.addEventListener('contextmenu', (e) => {
