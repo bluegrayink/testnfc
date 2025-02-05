@@ -98,7 +98,7 @@ function generateCalendar(year, month) {
         const cell = document.createElement('div');
         cell.classList.add('calendar-cell');
         cell.textContent = day;
-
+        
         const dayOfWeek = new Date(year, month, day).getDay();
 
     // Highlight Sundays
