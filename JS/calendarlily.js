@@ -11,6 +11,22 @@ const monthNames = [
 ];
 
 const events = {
+    '2025-01-18': [
+        {
+            date: '18-19 Januari',
+            name: 'Event 01',
+            location: 'Location',
+            description: 'info'
+        }
+    ],
+    '2025-01-19': [
+        {
+            date: '18-19 Januari',
+            name: 'Event 01',
+            location: 'Location',
+            description: 'info'
+        }
+    ],
     '2025-02-08': [
         {
             date: '08-09 Februari',
