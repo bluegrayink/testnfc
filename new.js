@@ -1,4 +1,4 @@
-// UID map
+kool // UID map
 const uidToPageMap = {
     "miyuki.html": ["175647BF", "F22F47BF", "996947BF", "97C447BF"],
     "eventmiyuki.html": ["749D47BF"],
@@ -24,8 +24,8 @@ const uidToPageMap = {
     "eventakaei.html": ["AKAEI123C"],
     "quinncy-boa.html": ["264F47BF"],
     "eventquinncy.html":["9D0947BF"],
-    "ayudesu-sparkle.html": ["F2DC46BF","AYU123S"],
-    "eventayudesu.html": ["50A947BF","AYU123E"]
+    "ayudesu-sparkle.html": ["B670A340","AYU123S"],
+    "eventayudesu.html": ["C6D39E40","AYU123E"]
 };
 
 // Elements
