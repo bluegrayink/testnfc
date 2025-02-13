@@ -81,6 +81,16 @@
             }
         };
 
+        function loadImage() {
+            const params = new URLSearchParams(window.location.search);
+            const imgSrc = params.get("img");
+            if (imgSrc) {
+                document.getElementById("displayImage").src = "/testnfc/Photo/Miyuki/" + imgSrc;
+            } else {
+                document.getElementById("displayImage").alt = "Gambar tidak ditemukan";
+            }
+        }
+	    
         document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
         document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
         document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
@@ -109,7 +119,7 @@
         <h1>Photocard 01</h1> 
          <img src="/testnfc/Photo/Miyuki/PC1.jpg" alt="Miyuki Photo" class="protected-img">
 	<h1>Special Photocard</h1>
-	  <img id="dynamicImage" src="" alt="Miyuki Photo" class="protected-img">
+	<img id="displayImage" src="" alt="Memuat gambar..." style="max-width:100%; height:auto;">
     </div>
 
     <!-- Video gallery -->
