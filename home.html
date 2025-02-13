@@ -1,0 +1,28 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script>
+        function scanNFC() {
+            let simulatedUID = prompt("Masukkan UID NFC:"); 
+            let pageMap = {
+                "123ASD": "konten.html?img=img01.jpg",
+                "123ERT": "konten.html?img=img02.jpg"
+            };
+
+            if (pageMap[simulatedUID]) {
+                window.location.href = pageMap[simulatedUID];
+            } else {
+                alert("UID tidak dikenal!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Home</h1>
+    <button onclick="scanNFC()">Scan NFC</button>
+</body>
+</html>
