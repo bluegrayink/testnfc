@@ -10,7 +10,7 @@
             const params = new URLSearchParams(window.location.search);
             const imgSrc = params.get("img");
             if (imgSrc) {
-                document.getElementById("displayImage").src = "Photo/" + imgSrc;
+                document.getElementById("displayImage").src = "/testnfc/Photo/Lily/" + imgSrc;
             } else {
                 document.getElementById("displayImage").alt = "Gambar tidak ditemukan";
             }
