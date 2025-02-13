@@ -12,10 +12,12 @@
                     const ndef = new NDEFReader();
                     await ndef.scan();
                     ndef.addEventListener("reading", event => {
-                        const uid = event.serialNumber;
+                        const uid = event.serialNumber.toUpperCase();
+                        console.log("UID NFC Terbaca:", uid);
+
                         let pageMap = {
-                            "FE:EA:47:BF": "konten.html?img=PC1.jpg",
-                            "73:D3:47:BF": "konten.html?img=PC2.jpg"
+                            "FEEA47BF": "konten.html?img=PC1.jpg",
+                            "73D347BF": "konten.html?img=PC2.jpg"
                         };
 
                         if (pageMap[uid]) {
