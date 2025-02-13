@@ -6,17 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <script>
-        function scanNFC() {
-            let simulatedUID = prompt("Masukkan UID NFC:"); 
-            let pageMap = {
-                "FEEA47BF": "konten.html?PC1.jpg",
-                "73D347BF": "konten.html?PC2.jpg"
-            };
+        async function scanNFC() {
+            if ("NDEFReader" in window) {
+                try {
+                    const ndef = new NDEFReader();
+                    await ndef.scan();
+                    ndef.addEventListener("reading", event => {
+                        const uid = event.serialNumber;
+                        let pageMap = {
+                            "FEEA47BF": "konten.html?img=PC1.jpg",
+                            "73D347BF": "konten.html?img=PC2.jpg"
+                        };
 
-            if (pageMap[simulatedUID]) {
-                window.location.href = pageMap[simulatedUID];
+                        if (pageMap[uid]) {
+                            window.location.href = pageMap[uid];
+                        } else {
+                            alert("UID tidak dikenal!");
+                        }
+                    });
+                } catch (error) {
+                    alert("Gagal membaca NFC: " + error);
+                }
             } else {
-                alert("UID tidak dikenal!");
+                alert("Perangkat tidak mendukung NFC");
             }
         }
     </script>
