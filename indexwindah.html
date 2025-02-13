@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Windah web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main00.css">
+    <script>
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Redirect non-Android and non-iOS Safari users
+       window.onload = function() {
+            var userAgent = navigator.userAgent;
+
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
+</head>
+<body style="background-color: #5c98c2;">
+    <div class="photo-gallery">
+        <img src="/testnfc/Photo/Kai/indexkai.png" alt="index Kai" class="protected-img">
+        <h2>Hello! I am Windah and I am a full time content creator and gamers. Thank you for your support!</h2>
+    </div>
+     <div class="business-collab">
+        <h2>For business and collaboration
+        <div class="email-section">
+            <a href="https://wa.me/6285882592466" target="_blank">
+            <img src="/testnfc/Photo/icon/whatsapp-white-icon.png" alt="wa" class="protected-img">
+            </a>
+                <span>windahbasudara.business@gmail.com</span></h2>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/windahbasudara/" target="_blank" >
+            <img src="/testnfc/Photo/icon/instagram-white-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
+        </a>
+        <a href="https://youtube.com/@windahbasudara" target="_blank">
+            <img src="/testnfc/Photo/icon/youtube-app-white-icon.png" alt="youtube" class="protected-img" style="width:32px;height:32px;">
+        </a>
+        <a href="https://discord.com/invite/motionime" target="_blank">
+            <img src="/testnfc/Photo/icon/discord-white-icon.png" alt="discord" class="protected-img" style="width:32px;height:32px;">
+        </a>
+        <a href="https://www.facebook.com/share/19xhVAZjfg/" target="_blank">
+            <img src="/testnfc/Photo/icon/facebook-app-round-white-icon.png" alt="facebook" class="protected-img" style="width:32px;height:32px;">
+        </a>
+    </div>
+    <button id="scanButton">For Android</button>
+    <button id="iphoneButton">For iOS</button>
+
+    <!-- iPhone-specific input section -->
+    <div id="iphoneSection" style="display: none; margin-top: 20px;">
+        <label for="uidInput">Enter UID:</label>
+        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+        <button id="submitUidButton">Submit</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="log"></div>
+
+    <script src="new.js"></script>
+</body>
+</html>
