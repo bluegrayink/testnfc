@@ -1,0 +1,24 @@
+<!-- konten.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konten</title>
+    <script>
+        function loadImage() {
+            const params = new URLSearchParams(window.location.search);
+            const imgSrc = params.get("img");
+            if (imgSrc) {
+                document.getElementById("displayImage").src = "Photo/" + imgSrc;
+            } else {
+                document.getElementById("displayImage").alt = "Gambar tidak ditemukan";
+            }
+        }
+    </script>
+</head>
+<body onload="loadImage()">
+    <h1>Konten</h1>
+    <img id="displayImage" src="" alt="Memuat gambar..." style="max-width:100%; height:auto;">
+</body>
+</html>
