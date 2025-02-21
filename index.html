@@ -1,50 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Web NFC Login</title>
-    <link rel="stylesheet" href="../testnfc/styles/index.css">
-    <script>
-        // Prevent viewing source code using Ctrl+U
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        // Redirect non-Android and non-iOS Safari users
-       window.onload = function() {
-            var userAgent = navigator.userAgent;
-
-            // Cek apakah pengguna menggunakan Safari di iPhone
-            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
-            // Cek apakah pengguna menggunakan browser di Android
-            var isAndroidBrowser = /Android/.test(userAgent);
-
-            if (!isSafariIphone && !isAndroidBrowser) {
-                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
-            }
-        };
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Scanner</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Web NFC Login</h1>
-
-    <button id="scanButton">For Android</button>
-    <button id="iphoneButton">For iOS</button>
-
-    <!-- iPhone-specific input section -->
-    <div id="iphoneSection" style="display: none; margin-top: 20px;">
-        <label for="uidInput">Enter UID:</label>
-        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
-        <button id="submitUidButton">Submit</button>
+    <div class="container">
+        <h1>Scan NFC untuk Menampilkan Gambar</h1>
+        <button id="scanBtn">Mulai Scan NFC</button>
     </div>
 
-    <div id="status"></div>
-    <div id="log"></div>
+    <script>
+        document.getElementById("scanBtn").addEventListener("click", async () => {
+            try {
+                const ndef = new NDEFReader();
+                await ndef.scan();
+                console.log("Scanning NFC...");
 
-    <script src="new.js"></script>
+                ndef.addEventListener("reading", (event) => {
+                    const decoder = new TextDecoder();
+                    let nfcData = decoder.decode(event.message.records[0].data);
+                    console.log("NFC Data: ", nfcData);
+
+                    // Simpan NFC data ke localStorage & pindah ke halaman display
+                    localStorage.setItem("nfcData", nfcData);
+                    window.location.href = "display.html";
+                });
+            } catch (error) {
+                console.error("NFC scan failed: ", error);
+            }
+        });
+    </script>
 </body>
 </html>
