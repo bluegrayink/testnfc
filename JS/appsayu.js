@@ -1,7 +1,7 @@
 // UID map
 const uidToPageMap = {
     "ayudesu-sparkle.html": ["44E1FE92","74A80793"], 
-    "eventayudesu.html": ["44E1FE92","74A80793"], 
+    "eventayudesu.html": ["44E1FE92","74A80793"]
 };
 
 // Elements
