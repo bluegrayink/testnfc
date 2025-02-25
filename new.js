@@ -24,7 +24,7 @@ const uidToPageMap = {
     "eventakaei.html": ["AKAEI123C"],
     "quinncy-boa.html": ["264F47BF"],
     "eventquinncy.html":["9D0947BF"],
-    "ayudesu-sparkle.html": ["B670A340","AYU123S"],
+    "ayudesu-sparkle.html": ["34D90393","AYU123S"],
     "eventayudesu.html": ["C6D39E40","AYU123E"]
 };
 
