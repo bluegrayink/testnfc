@@ -96,7 +96,7 @@ button:hover {
     color: #fdfdfd;
 }
 
-#indexButton {
+.indexBtn{
 width:  150px;
 }
 
