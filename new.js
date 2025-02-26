@@ -1,4 +1,3 @@
-
 const uidToPageMap = {
     "miyuki.html": ["175647BF", "F22F47BF", "996947BF", "97C447BF"],
     "eventmiyuki.html": ["749D47BF"],
@@ -6,7 +5,7 @@ const uidToPageMap = {
     "jetsukii-zeta.html": ["04E63CA1672681"],
     "eventjetsukii.html": ["04AF4FA0672681"],
     "lily.html": ["FEEA47BF"],
-    "eventlily.html" : ["7ED347BF"], 
+    "eventlily.html": ["7ED347BF"],
     "rune.html": ["CB9B4ABF", "1D044BBF"],
     "gita.html": ["C37947BF"],
     "aika.html": ["0460A2B0"],
@@ -39,68 +38,34 @@ const logDiv = document.getElementById("log");
 
 // Helper functions for logging and status
 const ChromeSamples = {
-    log: function () {
-        const line = Array.from(arguments)
-            .map(arg => (typeof arg === "string" ? arg : JSON.stringify(arg)))
-            .join(" ");
-        logDiv.innerHTML += line + "<br>";
+    log: function (message) {
+        logDiv.innerHTML += message + "<br>";
     },
     setStatus: function (status) {
         statusDiv.textContent = status;
     }
 };
 
-// Alias for logging
 const log = ChromeSamples.log;
 
 // Function to sanitize UID (remove colons if present)
-const sanitizeUID = (uid) => {
-    return uid.replace(/:/g, "").toUpperCase(); // Remove ":" and convert to uppercase
-};
+const sanitizeUID = (uid) => uid.replace(/:/g, "").toUpperCase();
 
 // Function to validate UID and redirect
 const validateAndRedirect = (rawUid) => {
-    const uid = sanitizeUID(rawUid); // Sanitize UID
-    let redirectTo = null;
-
-    for (const [page, uids] of Object.entries(uidToPageMap)) {
-        if (uids.includes(uid)) {
-            redirectTo = page;
-            break;
-        }
-    }
+    const uid = sanitizeUID(rawUid);
+    let redirectTo = Object.keys(uidToPageMap).find(page => uidToPageMap[page].includes(uid));
 
     if (redirectTo) {
         ChromeSamples.setStatus("Access granted. Redirecting...");
         setTimeout(() => {
-            localStorage.setItem("isLoggedIn", "true"); // Set login status
-            window.location.href = redirectTo; // Redirect to respective page
+            localStorage.setItem("isLoggedIn", "true");
+            window.location.href = redirectTo;
         }, 1000);
     } else {
         ChromeSamples.setStatus("Access denied: Invalid UID.");
     }
 };
-
-// Show input section for iPhone
-iphoneButton.addEventListener("click", () => {
-    iphoneSection.style.display = "block";
-});
-
-// Handle UID submission
-submitUidButton.addEventListener("click", () => {
-    const rawUid = uidInput.value.trim();
-    if (rawUid) {
-        validateAndRedirect(rawUid);
-    } else {
-        ChromeSamples.setStatus("Please enter a valid UID.");
-    }
-});
-
-// Check NFC support
-//if (!("NDEFReader" in window)) {
-  //  alert("Web NFC is not available. Use Chrome on Android.");
-    //window.location.href = "404.html";
-//}
 
 // NFC scanning logic
 scanButton.addEventListener("click", async () => {
@@ -116,11 +81,11 @@ scanButton.addEventListener("click", async () => {
         });
 
         ndef.addEventListener("reading", ({ serialNumber }) => {
-            const scannedUID = Array.from(new Uint8Array(serialNumber.split(':').map(val => parseInt(val, 16))))
-                .map(b => b.toString(16).padStart(2, "0"))
-                .join("")
-                .toUpperCase();
-
+            if (!serialNumber) {
+                log("No serial number detected!");
+                return;
+            }
+            const scannedUID = sanitizeUID(serialNumber);
             log(`Scanned UID: ${scannedUID}`);
             validateAndRedirect(scannedUID);
         });
@@ -128,3 +93,22 @@ scanButton.addEventListener("click", async () => {
         log("Error: " + error.message);
     }
 });
+
+// Show input section for iPhone
+if (iphoneButton) {
+    iphoneButton.addEventListener("click", () => {
+        iphoneSection.style.display = "block";
+    });
+}
+
+// Handle UID submission
+if (submitUidButton) {
+    submitUidButton.addEventListener("click", () => {
+        const rawUid = uidInput.value.trim();
+        if (rawUid) {
+            validateAndRedirect(rawUid);
+        } else {
+            ChromeSamples.setStatus("Please enter a valid UID.");
+        }
+    });
+}
