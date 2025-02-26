@@ -77,14 +77,14 @@ h2 {
 button {
             background:  transparent;
             height:  40px;
-             border:  2px solid #fff;
+             border:  2px solid #4B4E53;
              display:  inline-block;
              float:  none;
              text-align:  center;
              width:  100px;
              padding:  0px;
              font-size:  16px;
-        color: #fff;
+        color: #4B4E53;
             cursor: pointer;
             border-radius: 15px;
             margin-top: 20px;
