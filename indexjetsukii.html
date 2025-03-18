@@ -53,17 +53,6 @@
                 document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
             }
         };
-
-       document.getElementById("moreButton").addEventListener("click", () => {
-    const moreInfo = document.querySelector('.more-info');
-    
-    if (moreInfo.classList.contains('hidden')) {
-        moreInfo.classList.remove('hidden');
-        moreInfo.style.visibility = "visible"; // Pastikan elemen terlihat
-        moreInfo.classList.add('animated');
-    }
-});
-
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
@@ -100,9 +89,7 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-
-    <button id="moreButton">Find More!</button>
-    <div class="container hidden" id="moreContent">
+    <h2>--- Find More ---</h2>
             <button id="scanButton"><b>Android</b></button>
             <button id="iphoneButton"><b>iOS</b></button>
         <!-- iPhone-specific input section -->
@@ -114,7 +101,6 @@
         </div>
         <div id="status"></div>
         <div id="log"></div>
-    </div>
     <script src="new.js"></script>
 </body>
 </html>
