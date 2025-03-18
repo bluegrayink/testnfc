@@ -54,20 +54,16 @@
             }
         };
 
-        const galleries = {
-            'more-info': document.querySelector('.more-info')
-        };
+       document.getElementById("moreButton").addEventListener("click", () => {
+    const moreInfo = document.querySelector('.more-info');
+    
+    if (moreInfo.classList.contains('hidden')) {
+        moreInfo.classList.remove('hidden');
+        moreInfo.style.visibility = "visible"; // Pastikan elemen terlihat
+        moreInfo.classList.add('animated');
+    }
+});
 
-        const showContent = (contentType) => {
-            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-            const galleryToShow = galleries[contentType];
-            if (galleryToShow) {
-                galleryToShow.classList.remove('hidden');
-                galleryToShow.classList.add('animated');
-            }
-        };
-
-        document.getElementById("moreButton").addEventListener("click", () => showContent('more-info'));
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
