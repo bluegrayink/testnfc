@@ -53,6 +53,21 @@
                 document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
             }
         };
+
+        const galleries = {
+            'more-info': document.querySelector('.more-info')
+        };
+
+        const showContent = (contentType) => {
+            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+            const galleryToShow = galleries[contentType];
+            if (galleryToShow) {
+                galleryToShow.classList.remove('hidden');
+                galleryToShow.classList.add('animated');
+            }
+        };
+
+        document.getElementById("moreButton").addEventListener("click", () => showContent('more-info'));
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
@@ -89,11 +104,13 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-    
-    <div class="container">
-        <button id="scanButton"><b>Android</b></button>
-        <button id="iphoneButton"><b>iOS</b></button>
 
+    <button id="moreButton">Find More!</button>
+    <div class="container">
+        <div class="more-info" hidden>
+            <button id="scanButton"><b>Android</b></button>
+            <button id="iphoneButton"><b>iOS</b></button>
+        </div>
         <!-- iPhone-specific input section -->
         <div id="iphoneSection" style="display: none; margin-top: 20px;">
             <h2>Scan QR code in the card for check the UID</h2>
