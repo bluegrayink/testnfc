@@ -72,16 +72,17 @@
         </a>
     </div>
     <h2>--- Find More! ---</h2>
-    <button id="scanButton">Android</button>
-    <button id="iphoneButton">iOS</button>
+    <button id="scanButton"><b>Android</b></button>
+    <button id="iphoneButton"><b>iOS</b></button>
 
+     <!-- Android Section -->
     <div id="androidSection" style="display: none; margin-top: 20px;">
-        <h2>Android NFC Scanner</h2>
-        <p>Scan your NFC card by placing it near your device.</p>
+        <h2>Tap your NFC card to scan</h2>
     </div>
-
+    
+    <!-- iPhone Section -->
     <div id="iphoneSection" style="display: none; margin-top: 20px;">
-        <h2>Scan the QR code in the card to check the UID</h2>
+        <h2>Scan the QR code in the card for check the UID</h2>
         <label for="uidInput">Enter UID:</label>
         <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
         <button id="submitUidButton">Submit</button>
@@ -89,6 +90,5 @@
 
     <div id="status"></div>
     <div id="log"></div>
-    
 </body>
 </html>
