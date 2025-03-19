@@ -198,7 +198,9 @@ width:  150px;
 }
 
 .extraButtons {
-        justify-content: center;
+    display: flex;
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: center; /* Menengahkan secara vertikal (opsional) */
     margin: 20px auto;
 }
 
