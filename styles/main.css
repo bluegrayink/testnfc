@@ -196,3 +196,15 @@ width:  150px;
     font-size: 16px; /* Sesuaikan ukuran teks */
     color: #4B4E53; /* Sesuaikan warna teks */
 }
+
+.extraButtons {
+    justify-content: center; /* Meratakan elemen secara horizontal */
+    margin: 20px auto;
+}
+
+.labelUID {
+    display: flex; /* Gunakan flexbox untuk menyusun ikon dan teks */
+    justify-content: center; /* Meratakan elemen secara horizontal */
+    align-items: center; /* Meratakan elemen secara vertikal */
+    gap: 8px; /* Menambahkan jarak antara ikon dan teks */
+}
