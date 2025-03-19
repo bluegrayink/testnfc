@@ -38,12 +38,20 @@
     </style>
     
   <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("mainButton").addEventListener("click", function() {
-            document.getElementById("extraButtons").classList.toggle("hidden");
-            document.getElementById("extraButtons").classList.add("animated");
-            });
-        });
+     document.addEventListener("DOMContentLoaded", function() {
+        const extraButtons = document.getElementById("extraButtons");
+
+        const toggleExtraButtons = () => {
+            // Sembunyikan semua elemen yang seharusnya tidak tampil
+            extraButtons.classList.add("hidden");
+
+            // Tampilkan elemen yang dipilih
+            extraButtons.classList.remove("hidden");
+            extraButtons.classList.add("animated");
+        };
+
+        document.getElementById("mainButton").addEventListener("click", toggleExtraButtons);
+    });
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
