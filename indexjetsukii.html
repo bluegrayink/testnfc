@@ -7,31 +7,35 @@
     <title>Jetsukii web NFC</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
-        // Prevent viewing source code using Ctrl+U
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'u') {
                 e.preventDefault();
             }
         });
 
-        // Redirect non-Android and non-iOS Safari users
-       window.onload = function() {
+        window.onload = function() {
             var userAgent = navigator.userAgent;
-
-            // Cek apakah pengguna menggunakan Safari di iPhone
             var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
-            // Cek apakah pengguna menggunakan browser di Android
             var isAndroidBrowser = /Android/.test(userAgent);
 
             if (!isSafariIphone && !isAndroidBrowser) {
                 document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
             }
         };
+ 
+        document.getElementById('scanButton').addEventListener('click', function() {
+            document.getElementById('androidSection').style.display = 'block';
+            document.getElementById('iphoneSection').style.display = 'none';
+        });
+
+        document.getElementById('iphoneButton').addEventListener('click', function() {
+            document.getElementById('iphoneSection').style.display = 'block';
+            document.getElementById('androidSection').style.display = 'none';
+        });
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
-
     <div class="photo-gallery">
         <img src="/testnfc/Photo/Jetsukii/indexjetsukii00.jpg" alt="index Jet" class="protected-img">
         <h2>Hello! I am Jetsukii and I am a full-time cosplayer, content creator, and gamer. Thank you for your support!</h2>
@@ -67,19 +71,24 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-        <h2>--- Find More! ---</h2>
-        <button id="scanButton"><b>Android</b></button>
-        <button id="iphoneButton"><b>iOS</b></button>
+    <h2>--- Find More! ---</h2>
+    <button id="scanButton">Android</button>
+    <button id="iphoneButton">iOS</button>
 
-    <!-- iPhone-specific input section -->
+    <div id="androidSection" style="display: none; margin-top: 20px;">
+        <h2>Android NFC Scanner</h2>
+        <p>Scan your NFC card by placing it near your device.</p>
+    </div>
+
     <div id="iphoneSection" style="display: none; margin-top: 20px;">
-        <h2>Scan the QR code in the card for check the UID</h2>
+        <h2>Scan the QR code in the card to check the UID</h2>
         <label for="uidInput">Enter UID:</label>
         <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
         <button id="submitUidButton">Submit</button>
     </div>
+
     <div id="status"></div>
     <div id="log"></div>
-    <script src="new.js"></script>
+    
 </body>
 </html>
