@@ -31,24 +31,22 @@ const uidToPageMap = {
 const iphoneButton = document.getElementById("iphoneButton");
 const androidButton = document.getElementById("scanButton");
 const iphoneSection = document.getElementById("iphoneSection");
+const androidSection = document.getElementById("androidSection");
 const submitUidButton = document.getElementById("submitUidButton");
 const uidInput = document.getElementById("uidInput");
 const statusDiv = document.getElementById("status");
 const logDiv = document.getElementById("log");
 
-// Helper functions for logging and status
-const ChromeSamples = {
-    log: function (message) {
-        logDiv.innerHTML += message + "<br>";
-    },
-    setStatus: function (status) {
-        statusDiv.textContent = status;
-    }
+// Helper functions
+const setStatus = (status) => {
+    statusDiv.textContent = status;
 };
 
-const log = ChromeSamples.log;
+const log = (message) => {
+    logDiv.innerHTML += message + "<br>";
+};
 
-// Function to sanitize UID (remove colons if present)
+// Function to sanitize UID
 const sanitizeUID = (uid) => uid.replace(/:/g, "").toUpperCase();
 
 // Function to validate UID and redirect
@@ -57,15 +55,37 @@ const validateAndRedirect = (rawUid) => {
     let redirectTo = Object.keys(uidToPageMap).find(page => uidToPageMap[page].includes(uid));
 
     if (redirectTo) {
-        ChromeSamples.setStatus("Access granted. Redirecting...");
+        setStatus("Access granted. Redirecting...");
         setTimeout(() => {
             localStorage.setItem("isLoggedIn", "true");
             window.location.href = redirectTo;
         }, 1000);
     } else {
-        ChromeSamples.setStatus("Access denied: Invalid UID.");
+        setStatus("Access denied: Invalid UID.");
     }
 };
+
+// Show iPhone section when the iPhone button is clicked
+iphoneButton.addEventListener("click", () => {
+    iphoneSection.style.display = "block";
+    androidSection.style.display = "none"; // Hide Android section
+});
+
+// Show Android section when the Android button is clicked
+androidButton.addEventListener("click", () => {
+    androidSection.style.display = "block";
+    iphoneSection.style.display = "none"; // Hide iPhone section
+});
+
+// Handle UID submission for iPhone users
+submitUidButton.addEventListener("click", () => {
+    const rawUid = uidInput.value.trim();
+    if (rawUid) {
+        validateAndRedirect(rawUid);
+    } else {
+        setStatus("Please enter a valid UID.");
+    }
+});
 
 // NFC scanning logic for Android
 androidButton.addEventListener("click", async () => {
@@ -91,20 +111,5 @@ androidButton.addEventListener("click", async () => {
         });
     } catch (error) {
         log("Error: " + error.message);
-    }
-});
-
-// Show input section for iPhone
-iphoneButton.addEventListener("click", () => {
-    iphoneSection.style.display = "block";
-});
-
-// Handle UID submission for iPhone
-submitUidButton.addEventListener("click", () => {
-    const rawUid = uidInput.value.trim();
-    if (rawUid) {
-        validateAndRedirect(rawUid);
-    } else {
-        ChromeSamples.setStatus("Please enter a valid UID.");
     }
 });
