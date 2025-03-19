@@ -18,6 +18,7 @@
         }
         
         div.animated {
+            display: flex;
             position: absolute;
             visibility: hidden;
             animation-name: fadeIn;
@@ -39,7 +40,7 @@
   <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("mainButton").addEventListener("click", function() {
-            document.getElementById("extraButtons").classList.remove("hidden");
+            document.getElementById("extraButtons").classList.toggle("hidden");
             document.getElementById("extraButtons").classList.add("animated");
             });
         });
@@ -81,7 +82,7 @@
     </div>
     <button id="mainButton">Find More</button>
     <div class="container">
-        <div class="extraButtons hidden">
+        <div id="extraButtons" class="hidden">
             <button id="scanButton"><b>Android</b></button>
             <button id="iphoneButton"><b>iOS</b></button>
          </div>
