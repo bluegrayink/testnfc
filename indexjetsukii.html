@@ -32,7 +32,22 @@
         }
     </style>
     
-   
+   <script>
+       const galleries = {
+            'photo-gallery': document.querySelector('.photo-gallery')
+        };
+
+        const showContent = (contentType) => {
+            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
+            const galleryToShow = galleries[contentType];
+            if (galleryToShow) {
+                galleryToShow.classList.remove('hidden');
+                galleryToShow.classList.add('animated');
+            }
+        };
+
+        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+   </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
@@ -68,21 +83,23 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-        <h2>--- Find More ---</h2>
-    <div class="social-icons">
-         <button id="scanButton"><b>Android</b></button>
-        <button id="iphoneButton"><b>iOS</b></button>
-     </div>
+    <button id="photoButton">Find More</button>
+    <div class="container">
+        <div class="photo-gallery hidden">
+             <button id="scanButton"><b>Android</b></button>
+            <button id="iphoneButton"><b>iOS</b></button>
+         </div>
             
-        <!-- iPhone-specific input section -->
-        <div id="iphoneSection" style="display: none; margin-top: 20px;">
-            <h2>Scan QR code in the card for check the UID</h2>
-            <label for="uidInput">Enter UID:</label>
-            <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
-            <button id="submitUidButton">Submit</button>
-        </div>
+            <!-- iPhone-specific input section -->
+            <div id="iphoneSection" style="display: none; margin-top: 20px;">
+                <h2>Scan QR code in the card for check the UID</h2>
+                <label for="uidInput">Enter UID:</label>
+                <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+                <button id="submitUidButton">Submit</button>
+            </div>
         <div id="status"></div>
         <div id="log"></div>
+    </div>
     <script src="new.js"></script>
 </body>
 </html>
