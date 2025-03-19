@@ -29,11 +29,11 @@ const uidToPageMap = {
 
 // Elements
 const iphoneButton = document.getElementById("iphoneButton");
+const androidButton = document.getElementById("scanButton");
 const iphoneSection = document.getElementById("iphoneSection");
 const submitUidButton = document.getElementById("submitUidButton");
 const uidInput = document.getElementById("uidInput");
 const statusDiv = document.getElementById("status");
-const scanButton = document.getElementById("scanButton");
 const logDiv = document.getElementById("log");
 
 // Helper functions for logging and status
@@ -67,8 +67,8 @@ const validateAndRedirect = (rawUid) => {
     }
 };
 
-// NFC scanning logic
-scanButton.addEventListener("click", async () => {
+// NFC scanning logic for Android
+androidButton.addEventListener("click", async () => {
     log("Please scan your NFC card...");
 
     try {
@@ -95,20 +95,16 @@ scanButton.addEventListener("click", async () => {
 });
 
 // Show input section for iPhone
-if (iphoneButton) {
-    iphoneButton.addEventListener("click", () => {
-        iphoneSection.style.display = "block";
-    });
-}
+iphoneButton.addEventListener("click", () => {
+    iphoneSection.style.display = "block";
+});
 
-// Handle UID submission
-if (submitUidButton) {
-    submitUidButton.addEventListener("click", () => {
-        const rawUid = uidInput.value.trim();
-        if (rawUid) {
-            validateAndRedirect(rawUid);
-        } else {
-            ChromeSamples.setStatus("Please enter a valid UID.");
-        }
-    });
-}
+// Handle UID submission for iPhone
+submitUidButton.addEventListener("click", () => {
+    const rawUid = uidInput.value.trim();
+    if (rawUid) {
+        validateAndRedirect(rawUid);
+    } else {
+        ChromeSamples.setStatus("Please enter a valid UID.");
+    }
+});
