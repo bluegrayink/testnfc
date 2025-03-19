@@ -38,6 +38,7 @@
     </style>
     
    <script>
+    document.addEventListener('DOMContentLoaded', () => {
        const galleries = {
             'photo-gallery': document.querySelector('.photo-gallery')
         };
@@ -52,6 +53,7 @@
         };
 
         document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+      });
    </script>
 </head>
 <body style="background-color: #ffd0d7;">
