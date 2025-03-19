@@ -1,42 +1,41 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <script>
-        async function scanNFC() {
-            if ("NDEFReader" in window) {
-                try {
-                    const ndef = new NDEFReader();
-                    await ndef.scan();
-                    ndef.addEventListener("reading", event => {
-                        const uid = event.serialNumber.toUpperCase();
-                        console.log("UID NFC Terbaca:", uid);
-
-                        let pageMap = {
-                            "FEEA47BF": "konten.html?img=PC1.jpg",
-                            "73D347BF": "konten.html?img=PC2.jpg"
-                        };
-
-                        if (pageMap[uid]) {
-                            window.location.href = pageMap[uid];
-                        } else {
-                            alert("UID tidak dikenal!");
-                        }
-                    });
-                } catch (error) {
-                    alert("Gagal membaca NFC: " + error);
-                }
-            } else {
-                alert("Perangkat tidak mendukung NFC");
-            }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jetsukii Web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+    <style>
+        .hidden {
+            display: none;
         }
-    </script>
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Home</h1>
-    <button onclick="scanNFC()">Scan NFC</button>
+<body style="background-color: #ffd0d7;">
+    <h1>Jetsukii Page</h1>
+    <div class="container">
+        <button id="mainButton">Find More</button>
+        <div id="extraButtons" class="hidden">
+            <button id="androidButton"><b>Android</b></button>
+            <button id="iosButton"><b>iOS</b></button>
+        </div>
+    </div>
+    <script>
+        document.getElementById("mainButton").addEventListener("click", function() {
+            document.getElementById("extraButtons").classList.toggle("hidden");
+        });
+    </script>
 </body>
 </html>
