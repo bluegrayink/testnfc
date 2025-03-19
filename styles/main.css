@@ -159,7 +159,6 @@ width:  150px;
         }
 
 .container {
-            position: relative;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
@@ -198,6 +197,7 @@ width:  150px;
 }
 
 .extraButtons {
+    display: inline-block;
     justify-content: center; /* Menengahkan secara horizontal */
     align-items: center; /* Menengahkan secara vertikal (opsional) */
     margin: 20px auto;
