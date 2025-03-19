@@ -7,22 +7,6 @@
     <title>Jetsukii web NFC</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
     <script>
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-            }
-        });
-
-        window.onload = function() {
-            var userAgent = navigator.userAgent;
-            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
-            var isAndroidBrowser = /Android/.test(userAgent);
-
-            if (!isSafariIphone && !isAndroidBrowser) {
-                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
-            }
-        };
- 
         document.getElementById('scanButton').addEventListener('click', function() {
             document.getElementById('androidSection').style.display = 'block';
             document.getElementById('iphoneSection').style.display = 'none';
