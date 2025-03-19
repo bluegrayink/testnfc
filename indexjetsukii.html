@@ -6,34 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jetsukii web NFC</title>
     <link rel="stylesheet" href="../testnfc/styles/main.css">
-    <style>
-        .hidden {
-            display: none;
-        }
+    <script>
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .animated {
-            position: relative;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
+        // Redirect non-Android and non-iOS Safari users
+       window.onload = function() {
+            var userAgent = navigator.userAgent;
 
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(-10px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
+            // Cek apakah pengguna menggunakan Safari di iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Cek apakah pengguna menggunakan browser di Android
+            var isAndroidBrowser = /Android/.test(userAgent);
 
-        img, video {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
@@ -73,26 +67,18 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
+<button id="scanButton"><b>Android</b></button>
+     <button id="iphoneButton"><b>iOS</b></button>
 
-    <div class="container">
-        <button id="mainButton">Find More</button>
-
-        <div id="extraButtons" class="hidden">
-            <button id="scanButton"><b>Android</b></button>
-            <button id="iphoneButton"><b>iOS</b></button>
-        </div>
-
-        <div id="iphoneSection" class="hidden" style="margin-top: 20px; gap: 8px;">
-            <h2>Scan QR code in the card to check the UID</h2>
-            <label for="uidInput">Enter UID:</label>
-            <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
-            <button id="submitUidButton">Submit</button>
-        </div>
-
-        <div id="status"></div>
-        <div id="log"></div>
+    <!-- iPhone-specific input section -->
+    <div id="iphoneSection" style="display: none; margin-top: 20px;">
+        <h2>Scan the QR code in the card for check the UID</h2>
+        <label for="uidInput">Enter UID:</label>
+        <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+        <button id="submitUidButton">Submit</button>
     </div>
-
+    <div id="status"></div>
+    <div id="log"></div>
     <script src="new.js"></script>
 </body>
 </html>
