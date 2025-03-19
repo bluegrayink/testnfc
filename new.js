@@ -28,14 +28,15 @@ const uidToPageMap = {
 };
 
 // Elements
-const iphoneButton = document.getElementById("iphoneButton");
-const androidButton = document.getElementById("scanButton");
-const iphoneSection = document.getElementById("iphoneSection");
-const androidSection = document.getElementById("androidSection");
-const submitUidButton = document.getElementById("submitUidButton");
-const uidInput = document.getElementById("uidInput");
-const statusDiv = document.getElementById("status");
-const logDiv = document.getElementById("log");
+    const iphoneButton = document.getElementById("iphoneButton");
+    const androidButton = document.getElementById("scanButton");
+    const iphoneSection = document.getElementById("iphoneSection");
+    const androidSection = document.getElementById("androidSection");
+    const submitUidButton = document.getElementById("submitUidButton");
+    const uidInput = document.getElementById("uidInput");
+    const statusDiv = document.getElementById("status");
+    const logDiv = document.getElementById("log");
+
 
 // Helper functions
 const setStatus = (status) => {
@@ -65,51 +66,59 @@ const validateAndRedirect = (rawUid) => {
     }
 };
 
-// Show iPhone section when the iPhone button is clicked
-iphoneButton.addEventListener("click", () => {
-    iphoneSection.style.display = "block";
-    androidSection.style.display = "none"; // Hide Android section
-});
+// Show iPhone section when iPhone button is clicked
+    iphoneButton.addEventListener("click", () => {
+        console.log("iPhone button clicked");
+        iphoneSection.style.display = "block";
+        androidSection.style.display = "none";
+    });
 
-// Show Android section when the Android button is clicked
-androidButton.addEventListener("click", () => {
-    androidSection.style.display = "block";
-    iphoneSection.style.display = "none"; // Hide iPhone section
-});
+    // Show Android section when Android button is clicked
+    androidButton.addEventListener("click", () => {
+        console.log("Android button clicked");
+        androidSection.style.display = "block";
+        iphoneSection.style.display = "none";
+    });
 
-// Handle UID submission for iPhone users
-submitUidButton.addEventListener("click", () => {
-    const rawUid = uidInput.value.trim();
-    if (rawUid) {
-        validateAndRedirect(rawUid);
-    } else {
-        setStatus("Please enter a valid UID.");
-    }
-});
+    // Handle UID submission for iPhone users
+    submitUidButton.addEventListener("click", () => {
+        const rawUid = uidInput.value.trim();
+        console.log("Submitted UID:", rawUid);
+        if (rawUid) {
+            validateAndRedirect(rawUid);
+        } else {
+            setStatus("Please enter a valid UID.");
+        }
+    });
 
-// NFC scanning logic for Android
-androidButton.addEventListener("click", async () => {
-    log("Please scan your NFC card...");
+    // NFC scanning logic for Android
+    androidButton.addEventListener("click", async () => {
+        log("Please scan your NFC card...");
 
-    try {
-        const ndef = new NDEFReader();
-        await ndef.scan();
-        log("<i>&gt; Scan started &lt;</i>");
+        try {
+            const ndef = new NDEFReader();
+            await ndef.scan();
+            log("<i>&gt; Scan started &lt;</i>");
+            console.log("NFC scan started");
 
-        ndef.addEventListener("readingerror", () => {
-            log("Cannot read data from the NFC tag. Try another one?");
-        });
+            ndef.addEventListener("readingerror", () => {
+                log("Cannot read data from the NFC tag. Try another one?");
+                console.log("NFC reading error");
+            });
 
-        ndef.addEventListener("reading", ({ serialNumber }) => {
-            if (!serialNumber) {
-                log("No serial number detected!");
-                return;
-            }
-            const scannedUID = sanitizeUID(serialNumber);
-            log(`Scanned UID: ${scannedUID}`);
-            validateAndRedirect(scannedUID);
-        });
-    } catch (error) {
-        log("Error: " + error.message);
-    }
-});
+            ndef.addEventListener("reading", ({ serialNumber }) => {
+                if (!serialNumber) {
+                    log("No serial number detected!");
+                    console.log("No serial number detected");
+                    return;
+                }
+                const scannedUID = sanitizeUID(serialNumber);
+                log(`Scanned UID: ${scannedUID}`);
+                console.log("Scanned UID:", scannedUID);
+                validateAndRedirect(scannedUID);
+            });
+        } catch (error) {
+            log("Error: " + error.message);
+            console.error("NFC error:", error);
+        }
+    });
