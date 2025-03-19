@@ -37,24 +37,11 @@
         }
     </style>
     
-   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-       const galleries = {
-            'photo-gallery': document.querySelector('.photo-gallery')
-        };
-
-        const showContent = (contentType) => {
-            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-            const galleryToShow = galleries[contentType];
-            if (galleryToShow) {
-                galleryToShow.classList.remove('hidden');
-                galleryToShow.classList.add('animated');
-            }
-        };
-
-        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
-      });
-   </script>
+  <script>
+        document.getElementById("mainButton").addEventListener("click", function() {
+            document.getElementById("extraButtons").classList.toggle("hidden");
+        });
+    </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
@@ -90,9 +77,9 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-    <button id="photoButton">Find More</button>
+    <button id="mainButton">Find More</button>
     <div class="container">
-        <div class="photo-gallery hidden">
+        <div id="extraButtons" class="hidden">
              <button id="scanButton"><b>Android</b></button>
             <button id="iphoneButton"><b>iOS</b></button>
          </div>
