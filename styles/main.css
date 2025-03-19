@@ -198,15 +198,7 @@ width:  150px;
 }
 
 .extraButtons {
-    display: flex;
     justify-content: center; /* Menengahkan secara horizontal */
     align-items: center; /* Menengahkan secara vertikal (opsional) */
     margin: 20px auto;
-}
-
-.labelUID {
-    display: flex; /* Gunakan flexbox untuk menyusun ikon dan teks */
-    justify-content: center; /* Meratakan elemen secara horizontal */
-    align-items: center; /* Meratakan elemen secara vertikal */
-    gap: 8px; /* Menambahkan jarak antara ikon dan teks */
 }
