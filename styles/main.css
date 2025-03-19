@@ -15,6 +15,7 @@ h1 {
 h2 {
     margin-left: 0px;
     margin-top: 0px;
+    margin-bottom: 0px;
     font-size: 1em;
     color: #4B4E53; 
 }
@@ -170,11 +171,13 @@ width:  150px;
     border: none; /* Hilangkan garis default di sekitar tautan */
     margin: 0;
     padding: 5px;
+    margin-bottom: 20px;
 }
 
 .business-collab {
     text-align: center; /* Meratakan teks ke tengah */
     font-family: Arial, sans-serif; /* Sesuaikan dengan font Anda */
+    margin-bottom: 20px;
 }
 
 .email-section {
