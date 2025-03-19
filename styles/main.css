@@ -197,8 +197,7 @@ width:  150px;
     color: #4B4E53; /* Sesuaikan warna teks */
 }
 
-.extraButtons {
-    justify-content: center; /* Meratakan elemen secara horizontal */
+.extraButtons {
     margin: 20px auto;
 }
 
