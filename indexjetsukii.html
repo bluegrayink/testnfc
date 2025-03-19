@@ -11,24 +11,22 @@
             display: none;
         }
 
-         .container {
+        .container {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
+            text-align: center;
         }
         
-        div.animated {
-            display: flex;
-            position: absolute;
-            visibility: hidden;
-            animation-name: fadeIn;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
+        .animated {
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
         }
 
         @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(0);}
-            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+            from {opacity: 0; transform: translateY(-10px);}
+            to {opacity: 1; transform: translateY(0);}
         }
 
         img, video {
@@ -36,38 +34,25 @@
             height: auto;
         }
     </style>
-    
-  <script>
-     document.addEventListener("DOMContentLoaded", function() {
-        const extraButtons = document.getElementById("extraButtons");
-
-        const toggleExtraButtons = () => {
-            // Sembunyikan semua elemen yang seharusnya tidak tampil
-            extraButtons.classList.add("hidden");
-
-            // Tampilkan elemen yang dipilih
-            extraButtons.classList.remove("hidden");
-            extraButtons.classList.add("animated");
-        };
-
-        document.getElementById("mainButton").addEventListener("click", toggleExtraButtons);
-    });
-    </script>
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Jetsukii Page</h1>
+
     <div class="photo-gallery">
         <img src="/testnfc/Photo/Jetsukii/indexjetsukii00.jpg" alt="index Jet" class="protected-img">
-        <h2>Hello! I am Jetsukii and I am a full time cosplayer, content creator and gamers. Thank you for your support!</h2>
+        <h2>Hello! I am Jetsukii and I am a full-time cosplayer, content creator, and gamer. Thank you for your support!</h2>
     </div>
+
     <div class="business-collab">
-        <h2>For business and collaboration
+        <h2>For business and collaboration</h2>
         <div class="email-section">
             <a href="mailto:jetsukii.contact@gmail.com" target="_blank">
-            <img src="/testnfc/Photo/icon/email-envelope-line-gray-icon.png" alt="email" class="protected-img">
+                <img src="/testnfc/Photo/icon/email-envelope-line-gray-icon.png" alt="email" class="protected-img">
             </a>
-                <span>jetsukii.contact@gmail.com</span></h2>
+            <span>jetsukii.contact@gmail.com</span>
+        </div>
     </div>
+
     <div class="social-icons">
         <a href="https://www.instagram.com/jetsukii/" target="_blank">
             <img src="/testnfc/Photo/icon/instagram-gray-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
@@ -88,23 +73,26 @@
             <img src="/testnfc/Photo/icon/x-social-media-gray-icon.png" alt="x-twitter" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-    <button id="mainButton">Find More</button>
+
     <div class="container">
-        <div class="toggleExtraButtons hidden">
+        <button id="mainButton">Find More</button>
+
+        <div id="extraButtons" class="hidden">
             <button id="scanButton"><b>Android</b></button>
             <button id="iphoneButton"><b>iOS</b></button>
-         </div>
-            
-            <!-- iPhone-specific input section -->
-            <div id="iphoneSection" style="display: none; margin-top: 20px; gap: 8px;">
-                <h2>Scan QR code in the card for check the UID</h2>
-                <label for="uidInput">Enter UID:</label>
-                <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
-                <button id="submitUidButton">Submit</button>
-            </div>
+        </div>
+
+        <div id="iphoneSection" class="hidden" style="margin-top: 20px; gap: 8px;">
+            <h2>Scan QR code in the card to check the UID</h2>
+            <label for="uidInput">Enter UID:</label>
+            <input type="text" id="uidInput" placeholder="Enter your NFC UID here">
+            <button id="submitUidButton">Submit</button>
+        </div>
+
         <div id="status"></div>
         <div id="log"></div>
     </div>
+
     <script src="new.js"></script>
 </body>
 </html>
