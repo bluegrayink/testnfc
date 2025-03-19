@@ -39,8 +39,8 @@
   <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("mainButton").addEventListener("click", function() {
-            document.getElementById("extraButtons").classList.toggle("hidden");
-document.getElementById("extraButtons").classList.add("animated");
+            document.getElementById("extraButtons").classList.remove("hidden");
+            document.getElementById("extraButtons").classList.add("animated");
             });
         });
     </script>
@@ -81,7 +81,7 @@ document.getElementById("extraButtons").classList.add("animated");
     </div>
     <button id="mainButton">Find More</button>
     <div class="container">
-        <div id="extraButtons" class="hidden">
+        <div class="extraButtons hidden">
             <button id="scanButton"><b>Android</b></button>
             <button id="iphoneButton"><b>iOS</b></button>
          </div>
