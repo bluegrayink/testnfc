@@ -198,7 +198,7 @@ width:  150px;
 }
 
 .extraButtons {
-    display: inline-block;
+        justify-content: center;
     margin: 20px auto;
 }
 
