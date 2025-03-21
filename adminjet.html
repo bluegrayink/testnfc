@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFC Login</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        button { display: block; margin: 10px auto; padding: 10px; font-size: 16px; }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jetsukii Web NFC</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+<style>
         #buttonContainer { display: none; }
         #uidInputContainer { display: none; }
     </style>
+    <script>
+        // Prevent viewing source code using Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+            }
+        });
+
+        // Redirect non-Android and non-iOS Safari users
+        window.onload = function() {
+            var userAgent = navigator.userAgent;
+
+            // Check if the user is on Safari on iPhone
+            var isSafariIphone = /iPhone/.test(userAgent) && /Safari/.test(userAgent);
+            // Check if the user is using a browser on Android
+            var isAndroidBrowser = /Android/.test(userAgent);
+
+            if (!isSafariIphone && !isAndroidBrowser) {
+                document.body.innerHTML = "<h1>Website ini hanya dapat diakses melalui Safari di iPhone atau browser di Android.</h1>";
+            }
+        };
+    </script>
 </head>
-<body>
-    <h1>NFC Login</h1>
-    <p id="status">Please select your platform:</p>
-    
-    <button id="androidButton">Android</button>
+<body style="background-color: #ffd0d7;">
+    <h1>Admin Jetsukii Page</h1>
+
+<button id="androidButton">Android</button>
     <button id="iosButton">iOS</button>
-    
+
     <div id="uidInputContainer">
         <input type="text" id="uidInput" placeholder="Enter UID">
         <button id="submitUID">Submit</button>
@@ -28,7 +49,12 @@
         <button id="zetaButton">Go to Zeta</button>
         <button id="calendarButton">Go to Event</button>
     </div>
-    
-    <script src="adminjet.js"></script>
+
+    <!-- Status and logs for user interaction -->
+    <div id="status"></div>
+    <div id="log"></div>
+
+    <!-- Load JavaScript application logic -->
+    <script src="../testnfc/JS/adminjet.js"></script>
 </body>
 </html>
