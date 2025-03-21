@@ -5,34 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        button {
-            display: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #buttonContainer {
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        button { display: block; margin: 10px auto; padding: 10px; font-size: 16px; }
+        #buttonContainer { display: none; }
+        #uidInputContainer { display: none; }
     </style>
 </head>
 <body>
-    <h2>NFC Login System</h2>
-    <p id="status">Please scan your NFC card...</p>
+    <h1>NFC Login</h1>
+    <p id="status">Please select your platform:</p>
     
     <button id="androidButton">Android</button>
     <button id="iosButton">iOS</button>
     
+    <div id="uidInputContainer">
+        <input type="text" id="uidInput" placeholder="Enter UID">
+        <button id="submitUID">Submit</button>
+    </div>
+    
     <div id="buttonContainer">
-        <button id="kleeButton">Go to Klee Page</button>
-        <button id="zetaButton">Go to Zeta Page</button>
-        <button id="calendarButton">Go to Calendar Page</button>
+        <button id="kleeButton">Go to Klee</button>
+        <button id="zetaButton">Go to Zeta</button>
+        <button id="calendarButton">Go to Event</button>
     </div>
     
     <script src="adminjet.js"></script>
