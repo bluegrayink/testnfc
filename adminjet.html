@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            display: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #buttonContainer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>NFC Login System</h2>
+    <p id="status">Please scan your NFC card...</p>
+    
+    <button id="androidButton">Android</button>
+    <button id="iosButton">iOS</button>
+    
+    <div id="buttonContainer">
+        <button id="kleeButton">Go to Klee Page</button>
+        <button id="zetaButton">Go to Zeta Page</button>
+        <button id="calendarButton">Go to Calendar Page</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
