@@ -4,6 +4,9 @@ const validUIDs = ["044527A0672681"];
 // Elements
 const androidButton = document.getElementById("androidButton");
 const iosButton = document.getElementById("iosButton");
+const uidInputContainer = document.getElementById("uidInputContainer");
+const uidInput = document.getElementById("uidInput");
+const submitUID = document.getElementById("submitUID");
 const buttonContainer = document.getElementById("buttonContainer");
 const kleeButton = document.getElementById("kleeButton");
 const zetaButton = document.getElementById("zetaButton");
@@ -20,35 +23,19 @@ const sanitizeUID = (uid) => {
     return uid.replace(/:/g, "").toUpperCase();
 };
 
-// Function to validate UID and show platform buttons
+// Function to validate UID
 const validateUID = (rawUid) => {
     const uid = sanitizeUID(rawUid);
     if (validUIDs.includes(uid)) {
-        setStatus("Access granted. Please select your platform.");
-        androidButton.style.display = "block";
-        iosButton.style.display = "block";
+        setStatus("Access granted. You can now navigate.");
+        buttonContainer.style.display = "block";
+        uidInputContainer.style.display = "none";
     } else {
-        setStatus("Access denied: Invalid NFC.");
+        setStatus("Access denied: Invalid UID.");
     }
 };
 
-// Function to show navigation buttons after platform selection
-const showNavigationButtons = () => {
-    buttonContainer.style.display = "block";
-    androidButton.style.display = "none";
-    iosButton.style.display = "none";
-};
-
-// Event listeners for platform selection
-androidButton.addEventListener("click", showNavigationButtons);
-iosButton.addEventListener("click", showNavigationButtons);
-
-// Event listeners for direct page navigation
-kleeButton.addEventListener("click", () => window.location.href = "jetsukii-klee.html");
-zetaButton.addEventListener("click", () => window.location.href = "jetsukii-zeta.html");
-calendarButton.addEventListener("click", () => window.location.href = "eventjetsukii.html");
-
-// NFC scanning logic
+// Function to start NFC scan for Android
 const startNFCScan = async () => {
     if (!("NDEFReader" in window)) {
         setStatus("Your device or browser does not support NFC scanning.");
@@ -73,5 +60,15 @@ const startNFCScan = async () => {
     }
 };
 
-// Start NFC scan automatically on load
-startNFCScan();
+// Event listeners
+androidButton.addEventListener("click", startNFCScan);
+iosButton.addEventListener("click", () => {
+    uidInputContainer.style.display = "block";
+    setStatus("Please enter your UID:");
+});
+submitUID.addEventListener("click", () => validateUID(uidInput.value));
+
+// Event listeners for direct page navigation
+kleeButton.addEventListener("click", () => window.location.href = "jetsukii-klee.html");
+zetaButton.addEventListener("click", () => window.location.href = "jetsukii-zeta.html");
+calendarButton.addEventListener("click", () => window.location.href = "eventjetsukii.html");
