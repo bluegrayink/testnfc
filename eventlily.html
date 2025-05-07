@@ -8,7 +8,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
         const referrer = document.referrer; 
-        const allowedReferrers = ["indexlily.html", "adminlily.html"]; 
+        const allowedReferrers = ["vesaliuslily.html", "indexlily.html", "adminlily.html"]; 
 
         const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
         if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
