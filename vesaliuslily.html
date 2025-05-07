@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Profile Page</title>
     <link rel="stylesheet" href="styles/main.css">
+<style>
+        #buttonContainer { display: none; }
+        #uidInputContainer { display: none; }
+    </style>
     <script>
         // Prevent viewing source code using Ctrl+U
         document.addEventListener('keydown', (e) => {
@@ -31,16 +35,17 @@
 </head>
 <body style="background-color: #ffd0d7;">
     <h1>Welcome, Vesalius Lily</h1>
-
-    <!-- Buttons with data-target attributes -->
-    <button id="kontenButton" data-target="lily.html">Konten 01</button>
-    <button id="calendarButton" data-target="eventlily.html">Calendar</button>
+    
+    <div id="buttonContainer">
+        <button id="kontenButton">Konten 01</button>
+        <button id="calendarButton">Calendar</button>
+    </div>
 
     <!-- Status and logs for user interaction -->
     <div id="status"></div>
     <div id="log"></div>
 
     <!-- Load JavaScript application logic -->
-    <script src="JS/appslily.js"></script>
+    <script src="JS/adminjet.js"></script>
 </body>
 </html>
