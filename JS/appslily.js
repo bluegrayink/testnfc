@@ -7,7 +7,6 @@ const statusDiv = document.getElementById("status");
 // Langsung tampilkan tombol saat halaman dimuat
 window.addEventListener("DOMContentLoaded", () => {
     buttonContainer.style.display = "block";
-    statusDiv.textContent = "Welcome! Choose an option below.";
 });
 
 // Event listeners untuk navigasi
