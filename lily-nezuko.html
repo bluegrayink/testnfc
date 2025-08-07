@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Vesalius Lily</title>
+    <link rel="stylesheet" href="../testnfc/styles/main.css">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+         .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        div.animated {
+            position: absolute;
+            visibility: hidden;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(0);}
+            to {opacity: 1; transform: translateY(20px); visibility: visible;}
+        }
+
+        img,  {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const referrer = document.referrer; 
+    
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', event => event.preventDefault());
+        });
+
+        const galleries = {
+            'photo-gallery': document.querySelector('.photo-gallery')
+        };
+
+    });
+</script>
+</head>
+
+<body style="background-color: #ffd0d7;">
+    <h1>Nezuko</h1>
+    <div class="container">
+        <!-- Photo gallery -->
+        <div class="photo-gallery hidden">
+            <h1>Nikke</h1> 
+            <img src="/testnfc/Photo/Akaei/nikke01.jpg" alt="Akaei Nikke" class="protected-img">
+            <img src="/testnfc/Photo/Akaei/nikke02.jpg" alt="Akaei Nikke" class="protected-img">
+            <img src="/testnfc/Photo/Akaei/nikke03.jpg" alt="Akaei Nikke" class="protected-img">
+            <img src="/testnfc/Photo/Akaei/nikke04.jpg" alt="Akaei Nikke" class="protected-img">
+            <img src="/testnfc/Photo/Akaei/nikke05.jpg" alt="Akaei Nikke" class="protected-img">
+            <img src="/testnfc/Photo/Akaei/nikke06.jpg" alt="Akaei Nikke" class="protected-img">
+        </div>
+
+    </div>
+</body>
+</html>
