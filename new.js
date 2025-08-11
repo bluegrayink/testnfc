@@ -6,7 +6,7 @@ const uidToPageMap = {
     "eventjetsukii.html": ["04AF4FA0672681"],
     "vesaliuslily.html": ["FEEA47BF", "7ED347BF"],
     "eventlily.html": ["LILY00"],
-    "lily-nezuko.html": ["NEZUKO00"],
+    "lily-nezuko.html": ["NEZUKO00","B6F9B619","B67CB619","16F0B119","C60BB119","D603C019","06A4B219","36BAAE19","B630301A","062FB619","2656B519"],
     "aika.html": ["0460A2B0", "AIKA123"],
     "eventaika.html": ["54B0A4B0", "AIKA123CAL"],
     "kailiaa-viper.html": ["F481A3B0"],
